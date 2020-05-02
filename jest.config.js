@@ -25,6 +25,7 @@ module.exports = {
     '<rootDir>/lib/**/*.{js,jsx}',
     '!**/node_modules/**',
     '!**/vendor/**',
+    '!<rootDir>/lib/index.js',
   ],
 
   // The directory where Jest should output its coverage files
