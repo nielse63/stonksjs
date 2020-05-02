@@ -1,0 +1,44 @@
+{
+  "name": "stonks-core",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@alpacahq/alpaca-trade-api": "^1.2.9",
+    "date-fns": "^2.11.1",
+    "dotenv": "^8.2.0",
+    "pivotrade": "^1.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "^25.5.1",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jest": "^23.8.2",
+    "husky": "^4.2.5",
+    "jest": "^25.5.3",
+    "lint-staged": "^10.2.2",
+    "prettier": "^2.0.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix"
+    ],
+    "*.json": [
+      "prettier --write"
+    ]
+  }
+}

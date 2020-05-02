@@ -1,0 +1,4 @@
+*.js
+data/
+output/
+__mocks__/
