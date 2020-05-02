@@ -13,7 +13,9 @@
     "@alpacahq/alpaca-trade-api": "^1.2.9",
     "date-fns": "^2.11.1",
     "dotenv": "^8.2.0",
-    "pivotrade": "^1.0.2"
+    "moving-averages": "^4.0.5",
+    "pivotrade": "^1.0.2",
+    "technicalindicators": "^3.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
