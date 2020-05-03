@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('./config/env');
 const logger = require('./lib/helpers/logger');
 const validateOptions = require('./lib/helpers/validateOptions');
 const tradableAssets = require('./lib/trade/assets');

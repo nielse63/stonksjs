@@ -24,5 +24,12 @@ module.exports = {
         'no-console': 'off',
       },
     },
+    {
+      files: ['bin/**/*'],
+      rules: {
+        'no-console': 'off',
+        'import/no-extraneous-dependencies': 'off',
+      },
+    },
   ],
 };

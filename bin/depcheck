@@ -1,0 +1,50 @@
+#!/usr/bin/env node
+const depcheck = require('depcheck');
+const _ = require('lodash');
+const path = require('path');
+const logger = require('../lib/helpers/logger');
+
+const root = path.resolve(__dirname, '..');
+
+const options = {
+  ignoreBinPackage: false, // ignore the packages with bin entry
+  skipMissing: false, // skip calculation of missing dependencies
+  ignoreDirs: [
+    'coverage',
+    'dist',
+    'bower_components',
+  ],
+  parsers: {
+    '*.js': depcheck.parser.es6,
+  },
+  detectors: [
+    depcheck.detector.requireCallExpression,
+    depcheck.detector.importDeclaration,
+  ],
+  specials: [
+    // the target special parsers
+    depcheck.special.eslint,
+    depcheck.special.prettier,
+    depcheck.special.husky,
+    depcheck.special['lint-staged'],
+    depcheck.special.jest,
+    depcheck.special.bin,
+    depcheck.special.babel,
+  ],
+};
+
+depcheck(root, options, (unused) => {
+  if (unused.dependencies.length) {
+    logger.error('Unused dependencies:', unused.dependencies);
+    process.exit(1);
+  }
+  const unusedDevDependencies = _.without(
+    unused.devDependencies,
+    'depcheck', 'prettier', 'jest',
+  );
+  if (unusedDevDependencies.length) {
+    logger.warn('Unused devDependencies:', unusedDevDependencies);
+    process.exit();
+  }
+  logger.success('depcheck complete');
+});
