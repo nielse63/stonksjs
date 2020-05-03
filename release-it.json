@@ -2,9 +2,11 @@
   "hooks": {
     "before:init": ["npm run lint"],
     "after:git:release": "echo After git push, before github release",
-    "after:release": "echo Successfully released ${name} v${version} to ${repo.repository}."
+    "after:release": "echo Successfully released ${name} v${version} to ${repo.repository}.",
+    "after:bump": "npx auto-changelog -p"
   },
   "git": {
+    "changelog": "npx auto-changelog --stdout",
     "addUntrackedFiles": true,
     "commit": true,
     "tag": true
