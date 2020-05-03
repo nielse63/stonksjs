@@ -1,6 +1,6 @@
 {
   "name": "stonksjs",
-  "version": "0.0.0",
+  "version": "1.0.0-0",
   "description": "Algotrading tools in node",
   "main": "lib/index.js",
   "files": [
@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "start": "node index.js",
+    "lint": "eslint .",
     "test": "jest --coverage",
     "release": "dotenv release-it"
   },
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
+    "@release-it/conventional-changelog": "^1.1.4",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^25.5.1",
     "depcheck": "^0.9.2",
