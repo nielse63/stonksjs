@@ -1,6 +1,6 @@
 {
   "name": "stonksjs",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Algotrading tools in node",
   "main": "lib/index.js",
   "files": [
@@ -9,7 +9,8 @@
   ],
   "scripts": {
     "start": "node index.js",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "release": "release-it"
   },
   "keywords": [],
   "author": "",
@@ -34,7 +35,8 @@
     "husky": "^4.2.5",
     "jest": "^25.5.3",
     "lint-staged": "^10.2.2",
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "release-it": "^13.5.7"
   },
   "husky": {
     "hooks": {
@@ -48,5 +50,10 @@
     "*.json": [
       "prettier --write"
     ]
+  },
+  "release-it": {
+    "github": {
+      "release": true
+    }
   }
 }
