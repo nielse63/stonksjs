@@ -4,7 +4,7 @@ const isWeekend = require('date-fns/isWeekend');
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //
-exports.trade = functions.pubsub
+exports.initTrade = functions.pubsub
   .schedule('every 30 minutes from 09:30 to 15:30')
   .timeZone('America/New_York')
   .onRun(async () => {
