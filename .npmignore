@@ -1,0 +1,4 @@
+functions/
+bin/
+*.test.js
+*.spec.js

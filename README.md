@@ -1,4 +1,4 @@
-# Stonks
+# stonksjs
 
 > Algotrading tools in node
 
@@ -9,8 +9,8 @@
 ## Installation
 
 ```bash
-git clone https://github.com/nielse63/stonks.git
-cd stonks
+git clone https://github.com/nielse63/stonksjs.git
+cd stonksjs
 npm ci
 ```
 
