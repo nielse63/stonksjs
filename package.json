@@ -8,7 +8,7 @@
     "config/"
   ],
   "scripts": {
-    "start": "node index.js",
+    "start": "node lib/index.js",
     "lint": "eslint .",
     "test": "jest --coverage",
     "release": "dotenv release-it"

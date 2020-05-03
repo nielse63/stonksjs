@@ -9,7 +9,8 @@
     "changelog": "npx auto-changelog --stdout",
     "addUntrackedFiles": true,
     "commit": true,
-    "tag": true
+    "tag": true,
+    "requireCleanWorkingDir": false
   },
   "npm": {
     "publish": true
