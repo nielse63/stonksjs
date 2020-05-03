@@ -1,7 +1,7 @@
 {
-  "name": "stonks-core",
+  "name": "stonks",
   "version": "1.0.0",
-  "description": "",
+  "description": "Algotrading tools in node",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
