@@ -1,6 +1,7 @@
 {
   "files.exclude": {
-    "**/*.log*": false
+    "**/*.log*": false,
+    "**/coverage": true
   },
   "search.exclude": {
     "**/coverage": true,

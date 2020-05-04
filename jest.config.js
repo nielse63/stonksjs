@@ -1,12 +1,21 @@
 // For a detailed explanation regarding each configuration property, visit:
 // https://jestjs.io/docs/en/configuration.html
 
+const coverageReporters = process.env.CI ? [
+  'json',
+  'text-summary',
+  'lcov',
+] : [
+  'text-summary',
+  'html',
+];
+
 module.exports = {
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 
   // Stop running tests after `n` failures
-  // bail: 0,
+  bail: 1,
 
   // Respect "browser" field in package.json when resolving modules
   // browser: false,
@@ -37,12 +46,7 @@ module.exports = {
   // ],
 
   // A list of reporter names that Jest uses when writing coverage reports
-  coverageReporters: [
-    'json',
-    'text-summary',
-    'lcov',
-    'html',
-  ],
+  coverageReporters,
 
   // An object that configures minimum threshold enforcement for coverage results
   // coverageThreshold: undefined,

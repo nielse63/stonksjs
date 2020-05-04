@@ -25,7 +25,8 @@ module.exports = {
   getPositions() {
     return Promise.resolve(positions);
   },
-  getPosition() {
+  getPosition(symbol) {
+    if (!symbol) return Promise.resolve(null);
     return Promise.resolve(positions[0]);
   },
 };
