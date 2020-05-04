@@ -1,3 +1,6 @@
 *.js
 data/
 output/
+output/
+tmp/
+.tmp/

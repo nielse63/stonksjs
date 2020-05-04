@@ -1,5 +1,11 @@
 {
   "files.exclude": {
     "**/*.log*": false
+  },
+  "search.exclude": {
+    "**/coverage": true,
+    "**/dist": true,
+    "**/.tmp": true,
+    "**/tmp": true
   }
 }

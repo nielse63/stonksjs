@@ -58,3 +58,8 @@ firebase deploy --only functions
 
 - [Google Cloud scheduled jobs](https://console.cloud.google.com/cloudscheduler?project=stonks-1157d)
 - [Firebase functions](https://console.firebase.google.com/u/0/project/stonks-1157d/functions/list)
+- [TradingView Chart](https://www.tradingview.com/chart/fLQfUIkK/)
+- [Alpaca Node API](https://github.com/alpacahq/alpaca-trade-api-js)
+- [alphacate](https://www.npmjs.com/package/alphacate)
+- [Building a day trading bot](https://medium.com/automation-generation/build-a-day-trading-algorithm-and-run-it-in-the-cloud-for-free-805450150668)
+- [pivotrade](https://github.com/vardaro/pivotrade)

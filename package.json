@@ -2,19 +2,44 @@
   "name": "stonksjs",
   "version": "1.0.0",
   "description": "Algotrading tools in node",
-  "main": "lib/index.js",
+  "main": "index.js",
   "files": [
     "lib/",
-    "config/"
+    "config/",
+    "index.js"
   ],
+  "directories": {
+    "lib": "lib/",
+    "doc": "README.md"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nielse63/stonksjs.git"
+  },
+  "homepage": "https://github.com/nielse63/stonksjs#readme",
+  "bugs": {
+    "url": "https://github.com/nielse63/stonksjs/issues"
+  },
+  "keywords": [
+    "alpaca",
+    "algotrading",
+    "stocks"
+  ],
+  "engines": {
+    "node": "^13.12.0",
+    "npm": "^6.14.4"
+  },
   "scripts": {
-    "start": "node lib/index.js",
-    "lint": "eslint .",
+    "start": "node index.js",
+    "lint": "eslint . --fix",
     "test": "jest --coverage",
     "release": "dotenv release-it"
   },
-  "keywords": [],
-  "author": "",
+  "author": {
+    "name": "Erik Nielsen",
+    "email": "erik@312development.com",
+    "url": "https://github.com/nielse63/"
+  },
   "license": "ISC",
   "dependencies": {
     "@alpacahq/alpaca-trade-api": "^1.2.9",

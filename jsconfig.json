@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "commonjs",
+    "target": "es6"
+  },
+  "include": ["lib/**/*", "config/**/*", "functions/**/*"],
+  "exclude": ["node_modules/", "**/node_modules", "**/coverage"],
+  "moduleResolution": "node"
+}
