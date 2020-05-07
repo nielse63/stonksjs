@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
+export CI='true'
 COMMIT_MESSAGE="${1}"
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
@@ -34,4 +35,4 @@ git push --force
 
 # deploy functions
 cd ..
-firebase deploy --only functions
+npx firebase deploy --only functions
