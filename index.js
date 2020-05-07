@@ -1,3 +1,6 @@
 const stonks = require('./lib');
 
-stonks();
+stonks().then((results) => {
+  /* eslint-disable no-console */
+  console.log({ results });
+});
