@@ -12,10 +12,10 @@
     "node": "10"
   },
   "dependencies": {
-    "date-fns": "^2.12.0",
-    "firebase-admin": "^8.10.0",
+    "date-fns": "^2.13.0",
+    "firebase-admin": "^8.12.0",
     "firebase-functions": "^3.6.1",
-    "stonksjs": "^1.0.0"
+    "stonksjs": "^1.0.1"
   },
   "devDependencies": {
     "firebase-functions-test": "^0.2.0"
