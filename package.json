@@ -1,6 +1,6 @@
 {
   "name": "stonksjs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Algotrading tools in node",
   "main": "index.js",
   "files": [
