@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+set -e
+
+COMMIT_MESSAGE="${1}"
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+if [ $CURRENT_BRANCH != 'master' ]; then
+  echo 'Not on master'
+  exit 1
+fi
+
+if [ -z "$COMMIT_MESSAGE" ]; then
+  echo 'Commit message empty'
+  exit 1
+fi
+
+git add .
+git commit -m "$COMMIT_MESSAGE"
+
+npm run changelog
+git add CHANGELOG.md
+git commit --amend --no-edit
+git push
+
+# follow prompts to release on npm and github
+npm run release -- --ci --increment
+
+# update the version of stonksjs in the functions folder
+cd functions
+npm upgrade
+git add .
+git commit -m 'chore: upgrading stonksjs version'
+git push --force
+
+# deploy functions
+cd ..
+firebase deploy --only functions

@@ -33,6 +33,7 @@
     "start": "node index.js",
     "lint": "eslint . --fix",
     "test": "jest --coverage",
+    "changelog": "auto-changelog",
     "release": "dotenv release-it"
   },
   "author": {
