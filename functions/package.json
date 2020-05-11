@@ -17,7 +17,7 @@
     "express": "^4.17.1",
     "firebase-admin": "^8.12.1",
     "firebase-functions": "^3.6.1",
-    "stonksjs": "^1.0.8"
+    "stonksjs": "^1.0.9"
   },
   "devDependencies": {
     "firebase-functions-test": "^0.2.0"
