@@ -1,11 +1,25 @@
 const functions = require('firebase-functions');
 const isWeekend = require('date-fns/isWeekend');
+const express = require('express');
+const cors = require('cors');
+
+const app = express();
+app.use(cors({ origin: true }));
+
+app.post('/webhook', (req, res) => {
+  res.json(req.body);
+});
+
+// Take the text parameter passed to this HTTP endpoint and insert it into the
+// Realtime Database under the path /messages/:pushId/original
+exports.tradingViewWebhook = functions.https.onRequest(app);
+
 
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //
 exports.initTrade = functions.pubsub
-  .schedule('every 5 minutes from 09:30 to 15:30')
+  .schedule('every 15 minutes from 09:30 to 15:30')
   .timeZone('America/New_York')
   .onRun(async () => {
     if (isWeekend(new Date())) {
@@ -26,10 +40,3 @@ exports.initTrade = functions.pubsub
     }
     return null;
   });
-
-// Take the text parameter passed to this HTTP endpoint and insert it into the
-// Realtime Database under the path /messages/:pushId/original
-exports.tradingViewWebook = functions.https.onRequest(async (req, res) => {
-  // console.log({ req });
-  res.json({ messge: 'success', request: req });
-});
