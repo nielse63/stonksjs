@@ -16,7 +16,7 @@ if [ -z "$COMMIT_MESSAGE" ]; then
 fi
 
 git add .
-git commit -m "$COMMIT_MESSAGE"
+git commit -m "$COMMIT_MESSAGE" --allow-empty
 
 npm run changelog
 git add CHANGELOG.md
