@@ -19,7 +19,7 @@ exports.tradingViewWebhook = functions.https.onRequest(app);
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //
 exports.initTrade = functions.pubsub
-  .schedule('every 5 minutes from 09:30 to 15:30')
+  .schedule('every 5 minutes from 09:30 to 15:55')
   .timeZone('America/New_York')
   .onRun(async () => {
     if (isWeekend(new Date())) {
