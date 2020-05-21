@@ -1,36 +1,40 @@
 require('dotenv').config();
 const Alpaca = require('@alpacahq/alpaca-trade-api');
-const { SMA } = require('technicalindicators');
+const { EMA } = require('technicalindicators');
 const _ = require('lodash');
-const scrape = require('./scrape');
+// const scrape = require('./scrape');
 
 const ONE_MINUTE = 1000 * 60;
 
 class Algo {
   constructor() {
     this.timeout = ONE_MINUTE;
+    this.buyOrders = [];
     this.symbols = [
       // stocks
-      // 'AMZN',
+      'AMZN',
       // 'GOOGL',
-      // 'AAPL',
-      // 'TSLA',
-      // 'MSFT',
+      'AAPL',
+      'TSLA',
+      'MSFT',
       // 'OKTA',
+      // 'SUN',
+      // 'QCOM',
+      // 'TWTR',
 
       // funds
-      'XLK',
-      'XLI',
-      'SPLG',
-      'SPMD',
-      'SPSM',
-      'STIP',
-      'USRT',
-      'IEUR',
-      'HDV',
-      'ILTB',
-      'IAGG',
-      'AGG',
+      // 'XLK',
+      // 'XLI',
+      // 'SPLG',
+      // 'SPMD',
+      // 'SPSM',
+      // 'STIP',
+      // 'USRT',
+      // 'IEUR',
+      // 'HDV',
+      // 'ILTB',
+      // 'IAGG',
+      // 'AGG',
     ];
     this.data = {};
     this.alpaca = new Alpaca({
@@ -43,12 +47,12 @@ class Algo {
 
   async getAvailableAmount() {
     this.account = await this.alpaca.getAccount();
-    const { cash } = this.account;
-    return cash / this.symbols.length;
+    const { buying_power: cash } = this.account;
+    return cash / this.symbols.length / 2;
   }
 
   calcMovingAverage(period, values) {
-    return SMA.calculate({ period, values });
+    return EMA.calculate({ period, values });
   }
 
   async parseBarResponse(object) {
@@ -88,15 +92,11 @@ class Algo {
   }
 
   shouldBuy(symbol) {
-    // const { positions, lastClose, maFast } = this.data[symbol];
-    // return positions <= 0 && lastClose >= _.last(maFast);
     const { lastClose, maFast } = this.data[symbol];
     return lastClose >= _.last(maFast);
   }
 
   shouldSell(symbol) {
-    // const { trend } = this.data[symbol];
-    // return trend < 0;
     const { positions, lastClose, maFast } = this.data[symbol];
     return positions > 0 && lastClose < _.last(maFast);
   }
@@ -121,15 +121,37 @@ class Algo {
     }
     console.log(`buy ${qty} shares of ${symbol} @ ${lastClose}`);
     try {
-      await this.alpaca.createOrder({
+      const order = await this.alpaca.createOrder({
         symbol,
         qty,
         side: 'buy',
-        type: 'stop_limit',
+        type: 'stop',
         time_in_force: 'day',
-        limit_price: lastClose,
-        stop_price: lastClose * 0.99,
+        // limit_price: lastClose * 1.01,
+        stop_price: lastClose,
       });
+      this.buyOrders.push(order.id);
+      let intervalCount = 0;
+      const buyInterval = setInterval(async () => {
+        if (intervalCount > 2) {
+          clearInterval(buyInterval);
+          return;
+        }
+        intervalCount += 1;
+        const lastOrder = await this.alpaca.getOrder(order.id);
+        if (lastOrder.status === 'filled') {
+          clearInterval(buyInterval);
+          console.log(`placing stop-limit sell for ${symbol}`);
+          await this.alpaca.createOrder({
+            symbol,
+            qty,
+            side: 'sell',
+            type: 'stop',
+            time_in_force: 'day',
+            stop_price: lastClose * 0.995,
+          });
+        }
+      }, 500);
     } catch (error) {
       console.error(error);
     }
@@ -138,6 +160,13 @@ class Algo {
   async sell(symbol) {
     console.log(`liquidate ${symbol}`);
     try {
+      const orders = await this.alpaca.getOrders({
+        status: 'open',
+      });
+      const ordersForSymbol = orders.filter((order) => order.symbol === symbol);
+      const promises = ordersForSymbol
+        .map((order) => this.alpaca.cancelOrder(order.id));
+      await Promise.all(promises);
       await this.alpaca.closePosition(symbol);
     } catch (error) {
       if (error.statusCode !== 404) {
@@ -170,24 +199,34 @@ class Algo {
       }
 
       // close all positions if within 15 minutes of market close
-      if (this.timeToClose < ONE_MINUTE * 5) {
+      if (this.timeToClose < ONE_MINUTE * 15) {
         console.log('closing time');
+        await this.alpaca.cancelAllOrders();
         // await this.alpaca.closeAllPositions();
         return;
       }
 
+      console.log('***************************************');
       console.log(`Running at ${(new Date()).toISOString()}`);
 
-      // cancel open orders
-      await this.alpaca.cancelAllOrders();
+      // cancel open buy orders
+      // await this.alpaca.cancelAllOrders();
+      const orders = await this.alpaca.getOrders({
+        status: 'open',
+      });
+      orders.forEach(async (order) => {
+        if (order.side === 'buy') {
+          await this.alpaca.cancelOrder(order.id);
+        }
+      });
 
       // get movers
       this.positions = await this.alpaca.getPositions();
       const positionSymbols = this.positions.map(({ symbol }) => symbol);
-      const movers = await scrape(5);
+      // const movers = await scrape(5);
       this.symbols = [...new Set([
         ...this.symbols,
-        ...movers,
+        // ...movers,
         ...positionSymbols,
       ])].filter(Boolean);
       _.pull(this.symbols, 'NOW');
@@ -208,7 +247,6 @@ class Algo {
         return Promise.resolve();
       });
       await Promise.all(promises);
-      console.log('***************************************');
     };
 
     start().then(() => {
