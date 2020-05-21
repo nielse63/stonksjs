@@ -8,7 +8,7 @@ module.exports = {
     node: true,
   },
   rules: {
-    'no-console': ['error', { allow: ['warn', 'error'] }],
+    'no-console': 'off',
     'class-methods-use-this': 'off',
     'no-restricted-globals': 'warn',
     'no-underscore-dangle': 'off',

@@ -26,13 +26,13 @@ git push
 # follow prompts to release on npm and github
 npm run release -- --ci --increment
 
-# update the version of stonksjs in the functions folder
-cd functions
-npm upgrade
-git add .
-git commit -m 'chore: upgrading stonksjs version'
-git push --force
+# # update the version of stonksjs in the functions folder
+# cd functions
+# npm upgrade
+# git add .
+# git commit -m 'chore: upgrading stonksjs version'
+# git push --force
 
-# deploy functions
-cd ..
-npx firebase deploy --only functions
+# # deploy functions
+# cd ..
+# npx firebase deploy --only functions
