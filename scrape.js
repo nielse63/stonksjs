@@ -1,7 +1,7 @@
 const rp = require('request-promise');
 const cheerio = require('cheerio');
 
-const url = 'https://finviz.com/screener.ashx?v=111&s=ta_topgainers&f=an_recom_buybetter,sh_price_1to10,ta_sma20_pa10&ft=3&o=-change';
+const url = 'https://finviz.com/screener.ashx?v=111&s=ta_topgainers&f=an_recom_buybetter,sh_price_1to10,ta_sma20_pa&ft=3&o=-change';
 
 const scraper = async (maxLimit = 20) => {
   try {
@@ -44,7 +44,12 @@ const scraper = async (maxLimit = 20) => {
       data.push(object);
     })
     /* eslint-enable */
-    const symbols = data.map(({ Ticker }) => Ticker);
+    const symbols = data
+      .filter((object) => {
+        const change = parseFloat(object.Change.replace('%', ''));
+        return change > 0;
+      })
+      .map(({ Ticker }) => Ticker);
     return symbols;
   } catch (error) {
     console.error(error);

@@ -1,6 +1,6 @@
 require('dotenv').config();
 const Alpaca = require('@alpacahq/alpaca-trade-api');
-const { EMA } = require('technicalindicators');
+const { SMA } = require('technicalindicators');
 const _ = require('lodash');
 const scrape = require('./scrape');
 
@@ -44,11 +44,11 @@ class Algo {
   async getAvailableAmount() {
     this.account = await this.alpaca.getAccount();
     const { cash } = this.account;
-    return cash / this.symbols.length / 2;
+    return cash / this.symbols.length;
   }
 
   calcMovingAverage(period, values) {
-    return EMA.calculate({ period, values });
+    return SMA.calculate({ period, values });
   }
 
   async parseBarResponse(object) {
@@ -125,10 +125,11 @@ class Algo {
         symbol,
         qty,
         side: 'buy',
-        type: 'market',
+        type: 'stop_limit',
         time_in_force: 'day',
+        limit_price: lastClose,
+        stop_price: lastClose * 0.99,
       });
-      // console.log(order);
     } catch (error) {
       console.error(error);
     }
@@ -150,8 +151,14 @@ class Algo {
       // check time
       const clock = await this.alpaca.getClock();
       const { is_open: isOpen } = clock;
-      const closingTime = new Date(clock.next_close.substring(0, clock.next_close.length - 6));
-      const currTime = new Date(clock.timestamp.substring(0, clock.timestamp.length - 6));
+      const closingTime = new Date(clock.next_close.substring(
+        0,
+        clock.next_close.length - 6,
+      ));
+      const currTime = new Date(clock.timestamp.substring(
+        0,
+        clock.timestamp.length - 6,
+      ));
       this.timeToClose = Math.abs(closingTime - currTime);
 
       // return if market isn't open
@@ -165,16 +172,19 @@ class Algo {
       // close all positions if within 15 minutes of market close
       if (this.timeToClose < ONE_MINUTE * 5) {
         console.log('closing time');
-        await this.alpaca.closeAllPositions();
+        // await this.alpaca.closeAllPositions();
         return;
       }
 
       console.log(`Running at ${(new Date()).toISOString()}`);
 
+      // cancel open orders
+      await this.alpaca.cancelAllOrders();
+
       // get movers
       this.positions = await this.alpaca.getPositions();
       const positionSymbols = this.positions.map(({ symbol }) => symbol);
-      const movers = await scrape(10);
+      const movers = await scrape(5);
       this.symbols = [...new Set([
         ...this.symbols,
         ...movers,
