@@ -1,6 +1,6 @@
 require('dotenv').config();
 const Alpaca = require('@alpacahq/alpaca-trade-api');
-const { EMA } = require('technicalindicators');
+const { SMA } = require('technicalindicators');
 const _ = require('lodash');
 // const scrape = require('./scrape');
 
@@ -13,14 +13,14 @@ class Algo {
     this.symbols = [
       // stocks
       'AMZN',
-      // 'GOOGL',
+      'GOOGL',
       'AAPL',
       'TSLA',
       'MSFT',
-      // 'OKTA',
-      // 'SUN',
-      // 'QCOM',
-      // 'TWTR',
+      'OKTA',
+      'SUN',
+      'QCOM',
+      'TWTR',
 
       // funds
       // 'XLK',
@@ -52,7 +52,7 @@ class Algo {
   }
 
   calcMovingAverage(period, values) {
-    return EMA.calculate({ period, values });
+    return SMA.calculate({ period, values });
   }
 
   async parseBarResponse(object) {
@@ -62,8 +62,8 @@ class Algo {
       this.data[symbol] = {
         close: [],
         lastClose: 0,
-        maFast: [],
-        // maSlow: [],
+        maFast: 0,
+        maSlow: 0,
         response: data,
         // trend: 0,
         positions: 0,
@@ -72,8 +72,8 @@ class Algo {
       this.data[symbol].close = close;
       // const quote = await this.alpaca.lastQuote(symbol);
       this.data[symbol].lastClose = _.last(close);
-      this.data[symbol].maFast = this.calcMovingAverage(5, close);
-      // this.data[symbol].maSlow = this.calcMovingAverage(12, close);
+      this.data[symbol].maFast = _.last(this.calcMovingAverage(50, close));
+      this.data[symbol].maSlow = _.last(this.calcMovingAverage(200, close));
       // const isTrendingUp = _.last(this.data[symbol].maFast) > _.last(this.data[symbol].maSlow);
       // this.data[symbol].trend = isTrendingUp ? 1 : -1;
       try {
@@ -92,19 +92,19 @@ class Algo {
   }
 
   shouldBuy(symbol) {
-    const { lastClose, maFast } = this.data[symbol];
-    return lastClose >= _.last(maFast);
+    const { maFast, maSlow } = this.data[symbol];
+    return maFast >= maSlow;
   }
 
   shouldSell(symbol) {
-    const { positions, lastClose, maFast } = this.data[symbol];
-    return positions > 0 && lastClose < _.last(maFast);
+    const { positions, maSlow, maFast } = this.data[symbol];
+    return positions > 0 && maFast < maSlow;
   }
 
   async getBars() {
     const limit = 100;
     const bars = await this.alpaca.getBars(
-      '1Min',
+      '15Min',
       this.symbols,
       { limit },
     );
@@ -202,6 +202,7 @@ class Algo {
       if (this.timeToClose < ONE_MINUTE * 15) {
         console.log('closing time');
         await this.alpaca.cancelAllOrders();
+        process.exit();
         // await this.alpaca.closeAllPositions();
         return;
       }
