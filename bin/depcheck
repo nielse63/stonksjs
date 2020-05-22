@@ -2,7 +2,6 @@
 const depcheck = require('depcheck');
 const _ = require('lodash');
 const path = require('path');
-const logger = require('../lib/helpers/logger');
 
 const root = path.resolve(__dirname, '..');
 
@@ -35,7 +34,7 @@ const options = {
 
 depcheck(root, options, (unused) => {
   if (unused.dependencies.length) {
-    logger.error('Unused dependencies:', unused.dependencies);
+    console.error('Unused dependencies:', unused.dependencies);
     process.exit(1);
   }
   const unusedDevDependencies = _.without(
@@ -43,8 +42,8 @@ depcheck(root, options, (unused) => {
     'depcheck', 'prettier', 'jest',
   );
   if (unusedDevDependencies.length) {
-    logger.warn('Unused devDependencies:', unusedDevDependencies);
+    console.warn('Unused devDependencies:', unusedDevDependencies);
     process.exit();
   }
-  logger.success('depcheck complete');
+  console.log('depcheck complete');
 });

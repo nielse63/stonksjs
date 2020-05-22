@@ -8,5 +8,6 @@
     "**/dist": true,
     "**/.tmp": true,
     "**/tmp": true
-  }
+  },
+  "cSpell.customUserDictionaries": ["algotrader", "backtest", "grademark"]
 }

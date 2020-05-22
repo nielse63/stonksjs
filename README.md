@@ -22,44 +22,9 @@ Create a `.env` based on [`.env.sample`]('.env.sample), then run:
 npm start
 ```
 
-### Backtesting
+## Features/Design
 
-Strategies are backtested on [TradingView](https://www.tradingview.com/chart/APPS/DDEbDFFu-EMA-Crossover-Backtest/).
-
-## Roadmap/To-Dos
-
-A features and issues can be added and tracked on the [Projects](https://github.com/nielse63/stonks/projects) pages of this repo.
-
-## Releases
-
-```bash
-# commit changes
-git commit -am '...'
-
-# generate changelog
-npx auto-changelog
-git add CHANGELOG.md
-git commit -m 'chore: Updated changelog'
-git push
-
-# follow prompts to release on npm and github
-npm run release
-
-# update the version of stonksjs in the functions folder
-cd functions
-npm i -S stonkjs@latest
-
-# deploy functions
-cd ..
-firebase deploy --only functions
-```
-
-## Resources/Links
-
-- [Google Cloud scheduled jobs](https://console.cloud.google.com/cloudscheduler?project=stonks-1157d)
-- [Firebase functions](https://console.firebase.google.com/u/0/project/stonks-1157d/functions/list)
-- [TradingView Chart](https://www.tradingview.com/chart/fLQfUIkK/)
-- [Alpaca Node API](https://github.com/alpacahq/alpaca-trade-api-js)
-- [alphacate](https://www.npmjs.com/package/alphacate)
-- [Building a day trading bot](https://medium.com/automation-generation/build-a-day-trading-algorithm-and-run-it-in-the-cloud-for-free-805450150668)
-- [pivotrade](https://github.com/vardaro/pivotrade)
+- Executes on the command line on a remote server or your local machine
+- Creates a stock universe based on pre-set parameters instead of opinions, emotions, or the latest
+  trends
+- Automatically backtests strategies before execution - if it's not a winner, don't invest

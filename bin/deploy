@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -e
+
+root=$(realpath $(dirname $(dirname $0)))
+remote_dir="/var/www/stonks"
+env_file="${root}/.env"
+
+if ! [ -f "${env_file}" ]; then
+  exit
+fi
+
+source "${env_file}"
+
+rsync -avzrlpt \
+  --exclude='.git' \
+  --exclude='node_modules' \
+  --exclude='tmp' \
+  --exclude='data' \
+  --exclude='*.md' \
+  --exclude='*.log' \
+  --del \
+  -e ssh "${root}/" \
+  $SSH_USER@$SSH_HOST:$remote_dir
+
+ssh $SSH_USER@$SSH_HOST $remote_dir/bin/prod

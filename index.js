@@ -1,260 +1,268 @@
 require('dotenv').config();
+// const debug = require('debug')('stonks:index');
+const algotrader = require('algotrader');
+const { formatISO, toDate } = require('date-fns');
 const Alpaca = require('@alpacahq/alpaca-trade-api');
-const { SMA } = require('technicalindicators');
+const dataForge = require('data-forge');
 const _ = require('lodash');
-// const scrape = require('./scrape');
+require('data-forge-indicators');
+const { backtest, analyze } = require('grademark');
+const getMovers = require('./scripts/scrape-movers');
 
-const ONE_MINUTE = 1000 * 60;
+const debug = (...args) => {
+  console.log(...args);
+};
 
-class Algo {
-  constructor() {
-    this.timeout = ONE_MINUTE;
-    this.buyOrders = [];
-    this.symbols = [
-      // stocks
-      'AMZN',
-      'GOOGL',
-      'AAPL',
-      'TSLA',
-      'MSFT',
-      'OKTA',
-      'SUN',
-      'QCOM',
-      'TWTR',
+// api docs: https://github.com/torreyleonard/algotrader/blob/master/docs/ROBINHOOD.md
+const { Robinhood } = algotrader;
+const {
+  User,
+  Order,
+  Instrument,
+} = Robinhood;
+const MAX_SERIES_INTERVALS = 100;
+const SMA_INTERVALS = {
+  fast: 5,
+  slow: 12,
+};
+const alpaca = new Alpaca({
+  keyId: process.env.ALPACA_API_KEY,
+  secretKey: process.env.ALPACA_API_SECRET,
+  paper: process.env.ALPACA_PAPER_TRADING,
+  usePolygon: false,
+});
+const rhUser = new User(
+  process.env.ROBINHOOD_USERNAME,
+  process.env.ROBINHOOD_PASSWORD,
+  process.env.ROBINHOOD_DEVICE_TOKEN,
+  {
+    doNotSaveToDisk: false,
+    serializedUserFile: null,
+  },
+);
 
-      // funds
-      // 'XLK',
-      // 'XLI',
-      // 'SPLG',
-      // 'SPMD',
-      // 'SPSM',
-      // 'STIP',
-      // 'USRT',
-      // 'IEUR',
-      // 'HDV',
-      // 'ILTB',
-      // 'IAGG',
-      // 'AGG',
-    ];
-    this.data = {};
-    this.alpaca = new Alpaca({
-      keyId: process.env.ALPACA_API_KEY,
-      secretKey: process.env.ALPACA_API_SECRET,
-      paper: true,
-      usePolygon: false,
+/**
+ 1. authenticate w/ broker
+ 2. get current portfolio
+ 3. run strategy against cuirent portfolio, selling if necessary
+ 3. get buying power
+ 4. get list of new stocks to test
+ 5. backtest new stocks w/ current buying power
+ 6. based on results, buy new stocks
+ */
+
+// const getUser = async () => {
+//   await rhUser.authenticate();
+//   return rhUser;
+// };
+
+const cancelOpenOrders = async (user) => {
+  const output = await user.cancelOpenOrders();
+  return output;
+};
+
+// const getPortfolio = async (user) => {
+//   const portfolio = await user.getPortfolio();
+//   const symbols = portfolio.getSymbols();
+//   return symbols;
+// };
+
+const getBuyingPower = async (user) => {
+  const buyingPower = await user.getBuyingPower();
+  return buyingPower;
+};
+
+const parseBars = (barsArray) => {
+  const series = new dataForge.DataFrame(barsArray)
+    .transformSeries({
+      startEpochTime: (value) => toDate(value * 1000),
+    })
+    .setIndex('startEpochTime')
+    .renameSeries({
+      startEpochTime: 'time',
+      openPrice: 'open',
+      highPrice: 'high',
+      lowPrice: 'low',
+      closePrice: 'close',
     });
-  }
 
-  async getAvailableAmount() {
-    this.account = await this.alpaca.getAccount();
-    const { buying_power: cash } = this.account;
-    return cash / this.symbols.length / 2;
-  }
+  const smaFast = series
+    .deflate((bar) => bar.close)
+    .sma(SMA_INTERVALS.fast);
+  const smaSlow = series
+    .deflate((bar) => bar.close)
+    .sma(SMA_INTERVALS.slow);
 
-  calcMovingAverage(period, values) {
-    return SMA.calculate({ period, values });
-  }
+  return series
+    .withSeries('smaFast', smaFast)
+    .skip(SMA_INTERVALS.fast)
+    .withSeries('smaSlow', smaSlow)
+    .skip(SMA_INTERVALS.slow)
+    .toArray();
+};
 
-  async parseBarResponse(object) {
-    this.positions = await this.alpaca.getPositions();
+const getAllBars = async (symbols) => {
+  debug('getting symbols');
+  const barsRaw = await alpaca.getBars(
+    'day',
+    symbols,
+    { limit: MAX_SERIES_INTERVALS },
+  );
+  const output = Object.entries(barsRaw).reduce((object, [symbol, bars]) => {
+    const parsedBars = parseBars(bars);
+    return {
+      ...object,
+      [symbol]: parsedBars,
+    };
+  }, {});
+  return output;
+};
 
-    Object.entries(object).forEach(async ([symbol, data]) => {
-      this.data[symbol] = {
-        close: [],
-        lastClose: 0,
-        maFast: 0,
-        maSlow: 0,
-        response: data,
-        // trend: 0,
-        positions: 0,
+const strategy = {
+  entryRule: (enterPosition, args) => {
+    if (args.bar.smaFast > args.bar.smaSlow) { // Buy when price is below average.
+      enterPosition();
+    }
+  },
+  exitRule: (exitPosition, args) => {
+    if (args.bar.smaFast < args.bar.smaSlow) {
+      exitPosition(); // Sell when price is above average.
+    }
+  },
+  stopLoss: (args) => args.entryPrice * (5 / 100),
+};
+
+const runBacktest = (barsObject, startingCapital) => {
+  const output = Object.entries(barsObject).reduce((object, [symbol, bars]) => {
+    const lastBar = _.last(bars);
+    const { smaFast, smaSlow } = lastBar;
+    if (smaFast < smaSlow) {
+      return {
+        ...object,
+        [symbol]: {
+          bars,
+          trades: [],
+          analysis: {},
+          shouldBuy: false,
+          shouldSell: true,
+        },
       };
-      const close = data.map(({ closePrice }) => closePrice);
-      this.data[symbol].close = close;
-      // const quote = await this.alpaca.lastQuote(symbol);
-      this.data[symbol].lastClose = _.last(close);
-      this.data[symbol].maFast = _.last(this.calcMovingAverage(50, close));
-      this.data[symbol].maSlow = _.last(this.calcMovingAverage(200, close));
-      // const isTrendingUp = _.last(this.data[symbol].maFast) > _.last(this.data[symbol].maSlow);
-      // this.data[symbol].trend = isTrendingUp ? 1 : -1;
-      try {
-        // this.data[symbol].positions = await this.alpaca.getPosition(symbol);
-        const position = this.positions.find((obj) => obj.symbol === symbol);
-        if (position) {
-          this.data[symbol].positions = parseFloat(position.qty);
-        }
-      } catch (error) {
-        if (error.statusCode !== 404) {
-          console.error(error);
-        }
-      }
+    }
+
+    const inputSeries = new dataForge.DataFrame(bars);
+    const trades = backtest(strategy, inputSeries);
+    const analysis = analyze(startingCapital, trades);
+    const shouldBuy = analysis.profitPct > 20;
+    return {
+      ...object,
+      [symbol]: {
+        bars,
+        trades: trades.toArray(),
+        analysis,
+        shouldBuy,
+        shouldSell: false,
+      },
+    };
+  }, {});
+  return output;
+};
+
+const executeBuys = async (barsObject, buyingPower) => {
+  Object.entries(barsObject)
+    .forEach(async ([symbol, data]) => {
+      const { shouldBuy } = data;
+      if (!shouldBuy) return;
+      const instrument = await Instrument.getBySymbol(symbol);
+      const quote = await instrument.getQuote(rhUser);
+      const close = quote.getLast();
+      const quantity = Math.floor((buyingPower / quote.getLast()));
+      debug(`buying ${quantity} shares of ${symbol} @ ${close}`);
+      const order = new Order(rhUser, {
+        instrument,
+        quote,
+        type: 'market',
+        timeInForce: 'gfd',
+        trigger: 'immediate',
+        quantity,
+        side: 'buy',
+      });
+      await order.submit();
     });
-    await Promise.resolve();
-  }
+};
 
-  shouldBuy(symbol) {
-    const { maFast, maSlow } = this.data[symbol];
-    return maFast >= maSlow;
+const executeSell = async () => {
+  const portfolio = await rhUser.getPortfolio();
+  console.log(portfolio);
+  const symbols = portfolio.getSymbols();
+  if (!symbols.length) {
+    debug('no existing positions to backtest');
+    return;
   }
+  const buyingPower = await getBuyingPower(rhUser);
+  const bars = await getAllBars(symbols);
+  const barsObject = runBacktest(bars, buyingPower);
+  Object.entries(barsObject)
+    .forEach(async ([symbol, { shouldSell }]) => {
+      if (!shouldSell) return;
+      const instrument = await Instrument.getBySymbol(symbol);
+      const quote = await instrument.getQuote(rhUser);
+      const quantity = portfolio.getQuantity(symbol);
+      debug(`selling ${quantity} shares of ${symbol}`);
+      const order = new Order(rhUser, {
+        instrument,
+        quote,
+        type: 'market',
+        timeInForce: 'gfd',
+        trigger: 'immediate',
+        quantity,
+        side: 'sell',
+      });
+      await order.submit();
+    });
+};
 
-  shouldSell(symbol) {
-    const { positions, maSlow, maFast } = this.data[symbol];
-    return positions > 0 && maFast < maSlow;
-  }
-
-  async getBars() {
-    const limit = 100;
-    const bars = await this.alpaca.getBars(
-      '15Min',
-      this.symbols,
-      { limit },
-    );
-    await this.parseBarResponse(bars);
-  }
-
-  async buy(symbol) {
-    const availableCash = await this.getAvailableAmount();
-    const { lastClose } = this.data[symbol];
-    const qty = Math.floor(availableCash / lastClose);
-    if (qty <= 0) {
-      console.log(`qty of ${symbol} <= 0`);
+const run = async () => {
+  try {
+    debug(`running stonks @ ${formatISO(new Date())}`);
+    const clock = await alpaca.getClock();
+    if (!clock.is_open) {
+      debug(`market not open - next open ${clock.next_open}`);
       return;
     }
-    console.log(`buy ${qty} shares of ${symbol} @ ${lastClose}`);
-    try {
-      const order = await this.alpaca.createOrder({
-        symbol,
-        qty,
-        side: 'buy',
-        type: 'stop',
-        time_in_force: 'day',
-        // limit_price: lastClose * 1.01,
-        stop_price: lastClose,
-      });
-      this.buyOrders.push(order.id);
-      let intervalCount = 0;
-      const buyInterval = setInterval(async () => {
-        if (intervalCount > 2) {
-          clearInterval(buyInterval);
-          return;
-        }
-        intervalCount += 1;
-        const lastOrder = await this.alpaca.getOrder(order.id);
-        if (lastOrder.status === 'filled') {
-          clearInterval(buyInterval);
-          console.log(`placing stop-limit sell for ${symbol}`);
-          await this.alpaca.createOrder({
-            symbol,
-            qty,
-            side: 'sell',
-            type: 'stop',
-            time_in_force: 'day',
-            stop_price: lastClose * 0.995,
-          });
-        }
-      }, 500);
-    } catch (error) {
-      console.error(error);
-    }
+    await rhUser.authenticate();
+    debug('cancelling open orders');
+    await cancelOpenOrders(rhUser);
+    const buyingPower = await getBuyingPower(rhUser);
+    // const portfolioSymbols = await getPortfolio(rhUser);
+    // const portfoioBacktestResults = await runForSymbols(portfolioSymbols, { filterSell: true });
+    await executeSell();
+    // const portfolioBars = await getAllBars(portfolioSymbols);
+    // const backtestResults = runBacktest(allBars, backtestCapital);
+    // console.log(portfoioBacktestResults);
+
+    const newStocks = await getMovers();
+    const initialCapital = buyingPower / 10;
+    const newStockSymbols = newStocks
+      .slice(0, 10)
+      .filter(({ price }) => price < initialCapital)
+      .map(({ symbol }) => symbol);
+    const symbols = newStockSymbols.filter(Boolean);
+    const backtestCapital = buyingPower / symbols.length;
+    const allBars = await getAllBars(symbols);
+    const backtestResults = runBacktest(allBars, backtestCapital);
+    // trade
+    const buySymbolQty = Object.values(backtestResults)
+      .filter(({ shouldBuy }) => shouldBuy).length;
+    const buyCapital = buyingPower / buySymbolQty;
+    await executeBuys(backtestResults, buyCapital);
+    debug(`success ${formatISO(new Date())}`);
+  } catch (error) {
+    console.error(error);
   }
+};
 
-  async sell(symbol) {
-    console.log(`liquidate ${symbol}`);
-    try {
-      const orders = await this.alpaca.getOrders({
-        status: 'open',
-      });
-      const ordersForSymbol = orders.filter((order) => order.symbol === symbol);
-      const promises = ordersForSymbol
-        .map((order) => this.alpaca.cancelOrder(order.id));
-      await Promise.all(promises);
-      await this.alpaca.closePosition(symbol);
-    } catch (error) {
-      if (error.statusCode !== 404) {
-        console.error(error);
-      }
-    }
-  }
-
-  run() {
-    const start = async () => {
-      // check time
-      const clock = await this.alpaca.getClock();
-      const { is_open: isOpen } = clock;
-      const closingTime = new Date(clock.next_close.substring(
-        0,
-        clock.next_close.length - 6,
-      ));
-      const currTime = new Date(clock.timestamp.substring(
-        0,
-        clock.timestamp.length - 6,
-      ));
-      this.timeToClose = Math.abs(closingTime - currTime);
-
-      // return if market isn't open
-      if (!isOpen) {
-        const openTime = new Date(clock.next_open.substring(0, clock.next_close.length - 6));
-        this.timeToClose = Math.floor((openTime - currTime) / 1000 / 60);
-        console.log(`${this.timeToClose} minutes til next market open.`);
-        return;
-      }
-
-      // close all positions if within 15 minutes of market close
-      if (this.timeToClose < ONE_MINUTE * 15) {
-        console.log('closing time');
-        await this.alpaca.cancelAllOrders();
-        process.exit();
-        // await this.alpaca.closeAllPositions();
-        return;
-      }
-
-      console.log('***************************************');
-      console.log(`Running at ${(new Date()).toISOString()}`);
-
-      // cancel open buy orders
-      // await this.alpaca.cancelAllOrders();
-      const orders = await this.alpaca.getOrders({
-        status: 'open',
-      });
-      orders.forEach(async (order) => {
-        if (order.side === 'buy') {
-          await this.alpaca.cancelOrder(order.id);
-        }
-      });
-
-      // get movers
-      this.positions = await this.alpaca.getPositions();
-      const positionSymbols = this.positions.map(({ symbol }) => symbol);
-      // const movers = await scrape(5);
-      this.symbols = [...new Set([
-        ...this.symbols,
-        // ...movers,
-        ...positionSymbols,
-      ])].filter(Boolean);
-      _.pull(this.symbols, 'NOW');
-      console.log(`trading ${this.symbols.toString()}`);
-
-      // get bars data
-      await this.getBars();
-
-      // execute
-      const promises = this.symbols.map((symbol) => {
-        if (this.shouldBuy(symbol)) {
-          return this.buy(symbol);
-        } if (this.shouldSell(symbol)) {
-          return this.sell(symbol);
-        }
-        console.log(`holding ${symbol}`);
-
-        return Promise.resolve();
-      });
-      await Promise.all(promises);
-    };
-
-    start().then(() => {
-      this.interval = setInterval(start, this.timeout);
-    });
-  }
-}
-
-const algo = new Algo();
-algo.run();
+debug(`starting script in ${process.env.NODE_ENV}`);
+const ONE_MINUTE = 60 * 1000;
+setInterval(async () => {
+  await run();
+}, ONE_MINUTE * 15);
