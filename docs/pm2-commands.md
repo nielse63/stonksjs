@@ -151,4 +151,17 @@
     autoinstall
     examples                                                     display pm2 usage examples
     *
+
+pm2 deploy <configuration_file> <environment> <command>
+
+  Commands:
+    setup                run remote setup commands
+    update               update deploy to the latest release
+    revert [n]           revert to [n]th last deployment or 1
+    curr[ent]            output current release commit
+    prev[ious]           output previous release commit
+    exec|run <cmd>       execute the given <cmd>
+    list                 list previous deploy commits
+    [ref]                deploy to [ref], the "ref" setting, or latest tag
+
 ```

@@ -5,21 +5,26 @@ root=$(realpath $(dirname $(dirname $0)))
 remote_dir="/var/www/stonks"
 env_file="${root}/.env"
 
+cd "${root}"
+
 if ! [ -f "${env_file}" ]; then
   exit
 fi
 
 source "${env_file}"
+cp "${root}/.env" "${root}.env.production"
 
 rsync -avzrlpt \
-  --exclude='.git' \
-  --exclude='node_modules' \
-  --exclude='tmp' \
-  --exclude='data' \
-  --exclude='*.md' \
-  --exclude='*.log' \
-  --del \
-  -e ssh "${root}/" \
-  $SSH_USER@$SSH_HOST:$remote_dir
+  # --exclude='.git' \
+  # --exclude='node_modules' \
+  # --exclude='tmp' \
+  # --exclude='data' \
+  # --exclude='*.md' \
+  # --exclude='*.log' \
+  # --del \
+  -e ssh "${root}/.env.production" \
+  $SSH_USER@$SSH_HOST:"$remote_dir/.env"
 
-ssh $SSH_USER@$SSH_HOST $remote_dir/bin/prod
+rm "${root}.env.production"
+
+# ssh $SSH_USER@$SSH_HOST $remote_dir/bin/prod

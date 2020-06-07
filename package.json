@@ -27,9 +27,9 @@
   },
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
-    "start:prod": "pm2 start",
+    "start:prod": "pm2-runtime start ecosystem.config.js",
     "lint": "eslint . --fix",
-    "test": "jest --coverage"
+    "test": "jest --passWithNoTests"
   },
   "author": {
     "name": "Erik Nielsen",
@@ -79,7 +79,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "bin/pre-commit"
+      "pre-commit": "bin/pre-commit",
+      "pre-push": "npm test"
     }
   },
   "lint-staged": {

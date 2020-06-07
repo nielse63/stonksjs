@@ -1,7 +1,7 @@
-const cheerio = require('cheerio');
-const axios = require('axios');
 const assert = require('assert');
 const path = require('path');
+const cheerio = require('cheerio');
+const axios = require('axios');
 const fs = require('fs-extra');
 const { URLS } = require('../lib/constants');
 const parseYahooFinanceTable = require('../lib/parse-yahoo-finance-table');

@@ -1,0 +1,16 @@
+version: '3'
+services:
+  node:
+    image: 'node:13.12.0'
+    user: 'root'
+    # restart: always
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+      - NPM_CONFIG_PREFIX=/home/node/.npm-global
+      - PATH=$PATH:/home/node/.npm-global/bin
+    volumes:
+      - ./:/home/node/app
+    expose:
+      - '8081'
+    command: 'npm start'

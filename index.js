@@ -1,4 +1,5 @@
-require('dotenv').config();
+// require('dotenv').config();
+const env = require('./config/env');
 // const debug = require('debug')('stonks:index');
 const algotrader = require('algotrader');
 const { formatISO, toDate } = require('date-fns');
@@ -26,15 +27,15 @@ const SMA_INTERVALS = {
   slow: 12,
 };
 const alpaca = new Alpaca({
-  keyId: process.env.ALPACA_API_KEY,
-  secretKey: process.env.ALPACA_API_SECRET,
-  paper: process.env.ALPACA_PAPER_TRADING,
+  keyId: env.ALPACA_API_KEY,
+  secretKey: env.ALPACA_API_SECRET,
+  paper: env.ALPACA_PAPER_TRADING,
   usePolygon: false,
 });
 const rhUser = new User(
-  process.env.ROBINHOOD_USERNAME,
-  process.env.ROBINHOOD_PASSWORD,
-  process.env.ROBINHOOD_DEVICE_TOKEN,
+  env.ROBINHOOD_USERNAME,
+  env.ROBINHOOD_PASSWORD,
+  env.ROBINHOOD_DEVICE_TOKEN,
   {
     doNotSaveToDisk: false,
     serializedUserFile: null,
@@ -261,7 +262,7 @@ const run = async () => {
   }
 };
 
-debug(`starting script in ${process.env.NODE_ENV}`);
+// debug(`starting script in ${env.NODE_ENV}`);
 const ONE_MINUTE = 60 * 1000;
 setInterval(async () => {
   await run();
