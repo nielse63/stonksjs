@@ -10,7 +10,6 @@ module.exports = {
     error_file: path.resolve(__dirname, 'logs/stonks.stderr.log'),
     out_file: path.resolve(__dirname, 'logs/stonks.stdout.log'),
   }],
-
   deploy: {
     production: {
       user: process.env.SSH_USER,
@@ -18,8 +17,8 @@ module.exports = {
       ref: 'origin/master',
       repo: 'https://github.com/nielse63/stonksjs.git',
       path: process.env.SSH_ROOT,
-      'pre-deploy-local': 'npm test',
-      'post-deploy': 'docker-compose up -d',
+      'pre-deploy-local': 'npm test && bin/test',
+      'post-deploy': 'npm ci --production && docker-compose up -d',
       // 'post-deploy': 'npm ci --production && pm2 reload ecosystem.config.js --env production',
       'pre-setup': '',
     },

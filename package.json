@@ -30,8 +30,7 @@
     "start:prod": "pm2-runtime start ecosystem.config.js",
     "lint": "eslint . --fix",
     "test": "jest --passWithNoTests",
-    "deploy": "pm2 deploy production",
-    "postdeploy": "bin/deploy"
+    "deploy": "pm2 deploy production"
   },
   "author": {
     "name": "Erik Nielsen",
@@ -73,6 +72,7 @@
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jest": "^23.13.2",
+    "globby": "^11.0.1",
     "husky": "^4.2.5",
     "jest": "^25.5.4",
     "lint-staged": "^10.2.9",

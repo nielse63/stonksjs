@@ -1,13 +1,13 @@
 require('dotenv').config();
 const debug = require('debug')('stonks:env');
 
-// process.on('beforeExit', (code) => {
-//   console.log('Process beforeExit event with code: ', code);
-// });
+process.on('beforeExit', (code) => {
+  if (code) console.log('Process beforeExit event with code: ', code);
+});
 
-// process.on('exit', (code) => {
-//   console.log('Process exit event with code: ', code);
-// });
+process.on('exit', (code) => {
+  if (code) console.log('Process exit event with code: ', code);
+});
 
 // process.on('uncaughtException', (err, origin) => {
 //   console.log('uncaughtException', { err, origin });
@@ -24,10 +24,13 @@ process.on('uncaughtExceptionMonitor', (err, origin) => {
 
 function handle(signal) {
   debug(`Received ${signal}`);
+  process.exit(signal);
 }
 
 process.on('SIGINT', handle);
 process.on('SIGTERM', handle);
+
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 if (process.env.ALPACA_PAPER_TRADING === undefined) {
   process.env.ALPACA_PAPER_TRADING = true;
@@ -50,6 +53,6 @@ requiredKeys.forEach((key) => {
   }
 });
 
-console.log(process.env);
+// console.log(process.env);
 
 module.exports = process.env;

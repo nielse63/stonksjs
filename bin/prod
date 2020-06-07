@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-set -e
-
-# steps to deploy
-# 1. ssh $SSH_USER@$SSH_HOST
-# 2. cd /var/www/stonks/
-# 3. npm ci (if necessary)
-# 4. npm run start:prod
-echo 'NODE_ENV=production' >> .env

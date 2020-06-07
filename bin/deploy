@@ -11,10 +11,17 @@ if ! [ -f "${env_file}" ]; then
   exit
 fi
 
+source "$USER/.bash_profile"
 source "${env_file}"
 cp "${root}/.env" "${root}/.env.production"
+echo  'NODE_ENV=production' >> "${root}/.env.production"
 
 rsync -avzrlpt \
+  --exclude=.git \
+  --exclude=node_modules \
+  --exclude=data \
+  --exclude=tmp \
+  --exclude=*.md \
   -e ssh "${root}/.env.production" \
   $SSH_USER@$SSH_HOST:"$remote_dir/current/.env"
 
