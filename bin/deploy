@@ -12,19 +12,10 @@ if ! [ -f "${env_file}" ]; then
 fi
 
 source "${env_file}"
-cp "${root}/.env" "${root}.env.production"
+cp "${root}/.env" "${root}/.env.production"
 
 rsync -avzrlpt \
-  # --exclude='.git' \
-  # --exclude='node_modules' \
-  # --exclude='tmp' \
-  # --exclude='data' \
-  # --exclude='*.md' \
-  # --exclude='*.log' \
-  # --del \
   -e ssh "${root}/.env.production" \
-  $SSH_USER@$SSH_HOST:"$remote_dir/.env"
+  $SSH_USER@$SSH_HOST:"$remote_dir/current/.env"
 
-rm "${root}.env.production"
-
-# ssh $SSH_USER@$SSH_HOST $remote_dir/bin/prod
+rm "${root}/.env.production"

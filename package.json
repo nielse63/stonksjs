@@ -29,7 +29,9 @@
     "start": "cross-env NODE_ENV=production node index.js",
     "start:prod": "pm2-runtime start ecosystem.config.js",
     "lint": "eslint . --fix",
-    "test": "jest --passWithNoTests"
+    "test": "jest --passWithNoTests",
+    "deploy": "pm2 deploy production",
+    "postdeploy": "bin/deploy"
   },
   "author": {
     "name": "Erik Nielsen",

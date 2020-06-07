@@ -3,7 +3,7 @@ services:
   node:
     image: 'node:13.12.0'
     user: 'root'
-    # restart: always
+    restart: always
     working_dir: /home/node/app
     environment:
       - NODE_ENV=production
