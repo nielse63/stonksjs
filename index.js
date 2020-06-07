@@ -1,9 +1,19 @@
+const schedule = require('node-schedule');
 const sma = require('./lib/sma');
 
-(async () => {
-  console.log(`running stonks in ${process.env.NODE_ENV} mode`);
-  await sma();
-  setInterval(async () => {
+const rule = new schedule.RecurrenceRule();
+rule.minute = 30;
+const job = schedule.scheduleJob(rule, async () => {
+  console.log('created new sma job');
+  try {
     await sma();
-  }, 1000 * 60 * 15);
-})();
+  } catch (error) {
+    console.error(error);
+    job.cancel();
+    process.exit(error.code || 1);
+  }
+});
+
+// (async () => {
+//   await sma();
+// })();

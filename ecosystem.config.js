@@ -7,6 +7,7 @@ module.exports = {
     script: 'npm',
     args: 'start',
     watch: false,
+    instances: 1,
     error_file: path.resolve(__dirname, 'logs/stonks.stderr.log'),
     out_file: path.resolve(__dirname, 'logs/stonks.stdout.log'),
   }],

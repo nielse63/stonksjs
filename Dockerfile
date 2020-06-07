@@ -1,4 +1,4 @@
-FROM node:13.12.0 AS stonks
+FROM node:13.12.0
 
 ENV NODE_ENV production
 ENV NPM_CONFIG_PREFIX /home/node/.npm-global
@@ -29,7 +29,7 @@ COPY . /var/www/stonks
 RUN npm ci --production
 
 EXPOSE 8081
-RUN chmod +x /var/www/stonks/docker-entrypoint.sh
-ENTRYPOINT ["/var/www/stonks/docker-entrypoint.sh"]
+# RUN chmod +x /var/www/stonks/docker-entrypoint.sh
+# ENTRYPOINT ["/var/www/stonks/docker-entrypoint.sh"]
 
 CMD "npm start"
