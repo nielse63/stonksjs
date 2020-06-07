@@ -1,19 +1,22 @@
-version: '3'
+version: '3.8'
 services:
   node:
     image: 'node:13.12.0'
     user: 'root'
-    restart: always
+    # restart: on-failure
     working_dir: /home/node/app
-    build:
-      context: .
+    # build:
+    #   context: .
     container_name: stonks-docker
     environment:
       - NODE_ENV=production
       - NPM_CONFIG_PREFIX=/home/node/.npm-global
       - PATH=$PATH:/home/node/.npm-global/bin
+      - DEBUG=stonks:*
     volumes:
       - ./:/home/node/app
     expose:
       - '8081'
-    command: 'npm start'
+    command: 'npm run start:docker'
+    # entrypoint: ./docker-entrypoint.sh
+    # env_file: ./.env

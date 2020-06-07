@@ -5,4 +5,4 @@
 3. `cd /var/www/stonks/`
 4. `nvm use`
 5. `npm ci` (if necessary)
-6. `npm run start:prod`
+6. `npm run start:docker`

@@ -13,17 +13,19 @@ const sendMail = async (text) => {
     },
   });
   const message = await transporter.sendMail({
-    from: '"Trading Bot" <d8e3bd225f-76c27a@inbox.mailtrap.io>', // sender address
-    to: process.env.ROBINHOOD_USERNAME, // list of receivers
-    subject: 'Error', // Subject line
+    from: `"Trading Bot" <${process.env.MAILTRAP_EMAIL}>`, // sender address
+    to: process.env.ROBINHOOD_USERNAME,
+    subject: 'Error',
     text,
   });
   console.log(message);
 };
 
 process.on('beforeExit', async (code) => {
-  await sendMail(`Process exit event with code: ${code}`);
-  console.trace('Process exit event with code: ', code);
+  if (code) {
+    await sendMail(`Process exit event with code: ${code}`);
+    console.trace('Process exit event with code: ', code);
+  }
 });
 
 // process.on('uncaughtException', (err, origin) => {
@@ -65,12 +67,17 @@ const requiredKeys = [
   'ROBINHOOD_USERNAME',
   'ROBINHOOD_PASSWORD',
   'ROBINHOOD_DEVICE_TOKEN',
+  'MAILTRAP_EMAIL',
+  'MAILTRAP_USER',
+  'MAILTRAP_PASSWORD',
 ];
 requiredKeys.forEach((key) => {
   if (process.env[key] === undefined) {
     throw new Error(`${key} is a required environment key`);
   }
+  // console.log(key, process.env[key]);
 });
+// process.exit();
 
 // console.log(process.env);
 

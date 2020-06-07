@@ -2,4 +2,7 @@
 set -e
 
 cd /var/www/stonks
-docker-compose up --build -d
+docker-compose up \
+  --build \
+  --detach \
+  --remove-orphans
