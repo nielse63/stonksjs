@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x]
+        node-version: [13.x]
 
     steps:
       - uses: actions/checkout@v2
@@ -27,6 +27,13 @@ jobs:
       - run: npm run lint
       # - run: npm run build --if-present
       - run: npm test -- --coverage
-      #   env: # Or as an environment variable
-      #     ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }}
-      #     ALPACA_API_SECRET: ${{ secrets.ALPACA_API_SECRET }}
+        env: # Or as an environment variable
+          ROBINHOOD_USERNAME: ${{ secrets.ROBINHOOD_USERNAME }}
+          ROBINHOOD_PASSWORD: ${{ secrets.ROBINHOOD_PASSWORD }}
+          ROBINHOOD_DEVICE_TOKEN: ${{ secrets.ROBINHOOD_DEVICE_TOKEN }}
+          ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }}
+          ALPACA_API_SECRET: ${{ secrets.ALPACA_API_SECRET }}
+          ALPACA_PAPER_TRADING: ${{ secrets.ALPACA_PAPER_TRADING }}
+          MAILTRAP_EMAIL: ${{ secrets.MAILTRAP_EMAIL }}
+          MAILTRAP_USER: ${{ secrets.MAILTRAP_USER }}
+          MAILTRAP_PASSWORD: ${{ secrets.MAILTRAP_PASSWORD }}

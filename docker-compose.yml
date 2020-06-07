@@ -12,6 +12,7 @@ services:
       - NODE_ENV=production
       - NPM_CONFIG_PREFIX=/home/node/.npm-global
       - PATH=$PATH:/home/node/.npm-global/bin
+      - DEBUG=stonks:*
     volumes:
       - ./:/home/node/app
     expose:

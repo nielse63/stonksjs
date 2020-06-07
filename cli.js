@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const ema = require('./lib/ema');
 const sma = require('./lib/sma');
 
