@@ -1,20 +1,39 @@
 require('dotenv').config();
 const debug = require('debug')('stonks:env');
+const nodemailer = require('nodemailer');
 
-process.on('beforeExit', (code) => {
-  if (code) console.log('Process beforeExit event with code: ', code);
-});
 
-process.on('exit', (code) => {
-  if (code) console.log('Process exit event with code: ', code);
+const sendMail = async (text) => {
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.mailtrap.io',
+    port: 2525,
+    auth: {
+      user: process.env.MAILTRAP_USER,
+      pass: process.env.MAILTRAP_PASSWORD,
+    },
+  });
+  const message = await transporter.sendMail({
+    from: '"Trading Bot" <d8e3bd225f-76c27a@inbox.mailtrap.io>', // sender address
+    to: process.env.ROBINHOOD_USERNAME, // list of receivers
+    subject: 'Error', // Subject line
+    text,
+  });
+  console.log(message);
+};
+
+process.on('beforeExit', async (code) => {
+  await sendMail(`Process exit event with code: ${code}`);
+  console.trace('Process exit event with code: ', code);
 });
 
 // process.on('uncaughtException', (err, origin) => {
 //   console.log('uncaughtException', { err, origin });
 // });
 
-process.on('uncaughtExceptionMonitor', (err, origin) => {
+process.on('uncaughtExceptionMonitor', async (err, origin) => {
+  const string = JSON.stringify({ err, origin }, null, '  ');
   debug('uncaughtExceptionMonitor', { err, origin });
+  await sendMail(string);
 });
 
 // process.on('unhandledRejection', (reason, promise) => {
@@ -22,13 +41,13 @@ process.on('uncaughtExceptionMonitor', (err, origin) => {
 //   // Application specific logging, throwing an error, or other logic here
 // });
 
-function handle(signal) {
-  debug(`Received ${signal}`);
-  process.exit(signal);
-}
+// function handle(signal) {
+//   debug(`Received ${signal}`);
+//   process.exit(signal);
+// }
 
-process.on('SIGINT', handle);
-process.on('SIGTERM', handle);
+// process.on('SIGINT', handle);
+// process.on('SIGTERM', handle);
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 

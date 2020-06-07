@@ -5,6 +5,9 @@ services:
     user: 'root'
     restart: always
     working_dir: /home/node/app
+    build:
+      context: .
+    container_name: stonks-docker
     environment:
       - NODE_ENV=production
       - NPM_CONFIG_PREFIX=/home/node/.npm-global
