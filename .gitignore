@@ -112,3 +112,4 @@ output/
 .tmp/
 tmp/
 .runtimeconfig.json
+backup/
