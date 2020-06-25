@@ -17,6 +17,6 @@ services:
       - ./:/home/node/app
     expose:
       - '8081'
-    command: 'npm run start:docker'
+    command: 'npm start'
     # entrypoint: ./docker-entrypoint.sh
     # env_file: ./.env

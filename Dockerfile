@@ -11,8 +11,8 @@ WORKDIR /var/www/stonks
 # Bundle app source
 COPY . /var/www/stonks
 
-RUN npm ci --production
+RUN npm ci
 
 EXPOSE 8081
 
-CMD "npm start"
+CMD "npm run start:docker"

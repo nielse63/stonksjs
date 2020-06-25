@@ -1,4 +1,4 @@
-const assert = require('assert');
+// const assert = require('assert');
 const path = require('path');
 const cheerio = require('cheerio');
 const axios = require('axios');
@@ -16,10 +16,10 @@ const sortResults = (array) => array.sort((a, b) => {
 
 const scraper = async (writeFile = false) => {
   try {
-    const { data: html } = await axios(URLS.moversScreener);
+    const { data: html } = await axios(URLS.dailyGainers);
     const $ = cheerio.load(html);
     const $table = $('#scr-res-table > *:first-child > table');
-    assert.equal($table.length, 1, 'Could not find #scr-res-table element');
+    if (!$table.length) return [];
 
     const results = parseYahooFinanceTable($table);
     const output = sortResults(results);

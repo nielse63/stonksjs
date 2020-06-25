@@ -15,7 +15,7 @@ source "${env_file}"
 cp "${root}/.env" "${root}/.env.production"
 echo  'NODE_ENV=production' >> "${root}/.env.production"
 
-# ssh $SSH_USER@$SSH_HOST $remote_dir/bin/pre-deploy
+ssh $SSH_USER@$SSH_HOST $remote_dir/bin/pre-deploy
 
 rsync -avzrlpt \
   --exclude=.git \
@@ -29,7 +29,7 @@ rsync -avzrlpt \
   $SSH_USER@$SSH_HOST:$remote_dir
 
 rm "${root}/.env.production"
-# ssh $SSH_USER@$SSH_HOST $remote_dir/bin/post-deploy
+ssh $SSH_USER@$SSH_HOST $remote_dir/bin/post-deploy
 
 # access server
 # ssh $SSH_USER@$SSH_HOST -i ~/.ssh/id_rsa
