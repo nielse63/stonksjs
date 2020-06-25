@@ -31,6 +31,10 @@ class Account {
     this.portfolio = null;
   }
 
+  get isAuthenticated() {
+    return this.user.isAuthenticated();
+  }
+
   async authenticate() {
     try {
       if (this.user.isAuthenticated()) {

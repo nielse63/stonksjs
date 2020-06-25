@@ -11,7 +11,6 @@ module.exports = (app) => {
       );
       await account.authenticate();
       const portfolio = await account.getPortfolio();
-      // console.log({ portfolio });
       res.json({
         data: portfolio,
       });
