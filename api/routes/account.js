@@ -10,11 +10,12 @@ module.exports = (app) => {
         env.ROBINHOOD_DEVICE_TOKEN,
       );
       const user = await account.authenticate();
+      console.log(user);
       const balances = await account.getBalances();
       const buyingPower = await account.getBuyingPower();
       res.json({
         data: {
-          user,
+          // user,
           balances,
           buyingPower,
         },

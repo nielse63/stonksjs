@@ -15,6 +15,15 @@ class Asset {
       throw new Error('`symbol` is undefined');
     }
 
+    if (
+      !alpacaCreds
+      || !alpacaCreds.keyId
+      || !alpacaCreds.secretKey
+      || !alpacaCreds.paper
+    ) {
+      throw new Error('`alpacaCreds` is missing one or more value');
+    }
+
     this.symbol = symbol;
     this.options = options;
     this.interval = options.interval || 'day';
@@ -25,7 +34,7 @@ class Asset {
       usePolygon: false,
     });
     this.history = [];
-    this.lastPrice = [];
+    this.lastPrice = 0;
   }
 
   static parseBarObject(barObject) {
@@ -47,6 +56,17 @@ class Asset {
       close: closePrice,
       volume,
     };
+  }
+
+  static setIndicatorValue({ object, key, period }) {
+    const newObject = { ...object };
+    const value = newObject[key];
+    if (!newObject.sma) {
+      newObject.sma = {};
+    }
+    newObject.sma[period] = value;
+    delete newObject[key];
+    return newObject;
   }
 
   async getHistory() {
@@ -82,32 +102,25 @@ class Asset {
 
   async getCloseValues() {
     try {
-      if (_.isEmpty(this.history)) {
-        this.history = await this.getHistory();
-      }
-      return this.history.map(({ close }) => close);
+      const history = await this.getHistory();
+      return history.map(({ close }) => close);
     } catch (error) {
       console.error(error);
     }
     return [];
   }
 
-  static setIndicatorValue({ object, key, period }) {
-    const newObject = { ...object };
-    const value = newObject[key];
-    if (!newObject.sma) {
-      newObject.sma = {};
+  async getLastPrice() {
+    try {
+      const closeValues = await this.getCloseValues();
+      this.lastPrice = _.last(closeValues);
+    } catch (error) {
+      console.error(error);
     }
-    newObject.sma[period] = value;
-    delete newObject[key];
-    return newObject;
+    return this.lastPrice;
   }
 
-  async calcSMA(period) {
-    if (!period) {
-      throw new Error('`period` is undefined');
-    }
-
+  async calcSMA(period = 20) {
     const history = await this.getHistory();
     const series = new dataForge.DataFrame(history).setIndex('time');
 

@@ -35,7 +35,7 @@ class Portfolio {
   }
 
   static parse(portfolioObject) {
-    const { array = [] } = portfolioObject;
+    const { array } = portfolioObject;
     return Portfolio.parseArray(array);
   }
 }
