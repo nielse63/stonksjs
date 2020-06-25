@@ -68,6 +68,7 @@ class Account {
     this.account = Account.createDefaultObjectFromProps(
       Account.accountProperties,
     );
+    this.accountValue = 0;
   }
 
   static createDefaultObjectFromProps(props = []) {
@@ -155,6 +156,46 @@ class Account {
       console.error(error);
     }
     return [];
+  }
+
+  async getAccountValue() {
+    try {
+      await this.authenticate();
+      const { array: items } = await this.user.getPortfolio();
+      const values = [];
+      for (const item of items) {
+        const { quantity, InstrumentObject } = item;
+        const quote = await InstrumentObject.getQuote(this.user);
+        const lastPrice = await quote.getLast();
+        const value = lastPrice * quantity;
+        values.push(value);
+      }
+      this.accountValue = values.reduce((total, value) => total + value, 0);
+    } catch (error) {
+      console.error(error);
+    }
+    return this.accountValue;
+  }
+
+  async toJSON() {
+    try {
+      await this.authenticate();
+      const json = {
+        balances: await this.getBalances(),
+        account: await this.getUserAccount(),
+        portfolio: await this.getPortfolio(),
+        accountValue: await this.getAccountValue(),
+      };
+      return json;
+    } catch (error) {
+      console.error(error);
+    }
+    return {
+      balances: null,
+      account: null,
+      portfolio: null,
+      accountValue: null,
+    };
   }
 }
 

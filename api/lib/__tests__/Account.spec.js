@@ -1,5 +1,6 @@
 const path = require('path');
 const algotrader = require('algotrader');
+const _ = require('lodash');
 const env = require('../env');
 const Account = require('../Account');
 const mock = require('../__mocks__/user.mock');
@@ -54,6 +55,15 @@ describe('Account', () => {
   });
 
   describe('constructor', () => {
+    let account;
+    beforeAll(() => {
+      account = new Account(
+        env.ROBINHOOD_USERNAME,
+        env.ROBINHOOD_PASSWORD,
+        env.ROBINHOOD_DEVICE_TOKEN,
+      );
+    });
+
     it('should throw error on undefined username', () => {
       expect(() => new Account()).toThrow('`username` is not defined');
     });
@@ -80,21 +90,11 @@ describe('Account', () => {
     });
 
     it('should define a `user` prop', () => {
-      const account = new Account(
-        env.ROBINHOOD_USERNAME,
-        env.ROBINHOOD_PASSWORD,
-        env.ROBINHOOD_DEVICE_TOKEN,
-      );
       expect(account.user).toBeDefined();
       expect(account.user).toBeInstanceOf(User);
     });
 
     it('should define a `balances` prop', () => {
-      const account = new Account(
-        env.ROBINHOOD_USERNAME,
-        env.ROBINHOOD_PASSWORD,
-        env.ROBINHOOD_DEVICE_TOKEN,
-      );
       expect(account.balances).toEqual({
         unsettledFunds: null,
         unsettledDebit: null,
@@ -107,11 +107,6 @@ describe('Account', () => {
     });
 
     it('should define an `account` prop', () => {
-      const account = new Account(
-        env.ROBINHOOD_USERNAME,
-        env.ROBINHOOD_PASSWORD,
-        env.ROBINHOOD_DEVICE_TOKEN,
-      );
       expect(account.account).toEqual({
         portfolioCash: null,
         accountNumber: null,
@@ -131,11 +126,15 @@ describe('Account', () => {
         userId: null,
       });
     });
+
+    it('should define a `accountValue` prop', () => {
+      expect(account.accountValue).toEqual(0);
+    });
   });
 
-  describe('authenticate', () => {
+  describe('methods', () => {
     let account;
-    beforeAll(() => {
+    beforeEach(() => {
       account = new Account(
         env.ROBINHOOD_USERNAME,
         env.ROBINHOOD_PASSWORD,
@@ -143,115 +142,119 @@ describe('Account', () => {
       );
     });
 
-    it('should not be authenticated by default', async () => {
-      const isAuthenticated = account.user.isAuthenticated();
-      expect(isAuthenticated).toBe(false);
+    describe('authenticate', () => {
+      it('should not be authenticated by default', async () => {
+        const isAuthenticated = account.user.isAuthenticated();
+        expect(isAuthenticated).toBe(false);
+      });
+
+      it('should authenticate the user', async () => {
+        await account.authenticate();
+        const isAuthenticated = account.user.isAuthenticated();
+        expect(isAuthenticated).toBe(true);
+      });
+
+      it('should return the user object', async () => {
+        const output = await account.authenticate();
+        expect(output).toBeInstanceOf(User);
+      });
     });
 
-    it('should authenticate the user', async () => {
-      await account.authenticate();
-      const isAuthenticated = account.user.isAuthenticated();
-      expect(isAuthenticated).toBe(true);
+    describe('getUserAccount', () => {
+      it('should authenticate user during getUserAccount', async () => {
+        const spy = jest.spyOn(account, 'authenticate');
+        await account.getUserAccount();
+        expect(spy).toHaveBeenCalled();
+      });
+
+      it('should get user account object', async () => {
+        const output = await account.getUserAccount();
+        expect(output).toBeDefined();
+      });
     });
 
-    it('should return the user object', async () => {
-      const output = await account.authenticate();
-      expect(output).toBeInstanceOf(User);
-    });
-  });
+    describe('getBalances', () => {
+      it('should authenticate user during getBalances', async () => {
+        const spy = jest.spyOn(account, 'authenticate');
+        await account.getBalances();
+        expect(spy).toHaveBeenCalled();
+      });
 
-  describe('getUserAccount', () => {
-    let account;
-    beforeAll(() => {
-      account = new Account(
-        env.ROBINHOOD_USERNAME,
-        env.ROBINHOOD_PASSWORD,
-        env.ROBINHOOD_DEVICE_TOKEN,
-      );
+      it('should get balance object', async () => {
+        const balances = await account.getBalances();
+        expect(Object.keys(balances)).toEqual(Object.keys(mock.balances));
+      });
     });
 
-    it('should authenticate user during getUserAccount', async () => {
-      const spy = jest.spyOn(account, 'authenticate');
-      await account.getUserAccount();
-      expect(spy).toHaveBeenCalled();
+    describe('getBuyingPower', () => {
+      it('should authenticate user during getBuyingPower', async () => {
+        const spy = jest.spyOn(account, 'authenticate');
+        await account.getBuyingPower();
+        expect(spy).toHaveBeenCalled();
+      });
+
+      it('should return an integer', async () => {
+        const buyingPower = await account.getBuyingPower();
+        expect(typeof buyingPower).toEqual('number');
+      });
     });
 
-    it('should get user account object', async () => {
-      const output = await account.getUserAccount();
-      expect(output).toBeDefined();
-    });
-  });
+    describe('getPortfolio', () => {
+      it('should authenticate user during getPortfolio', async () => {
+        const spy = jest.spyOn(account, 'authenticate');
+        await account.getPortfolio();
+        expect(spy).toHaveBeenCalled();
+      });
 
-  describe('getBalances', () => {
-    let account;
-    beforeAll(() => {
-      account = new Account(
-        env.ROBINHOOD_USERNAME,
-        env.ROBINHOOD_PASSWORD,
-        env.ROBINHOOD_DEVICE_TOKEN,
-      );
-    });
+      it('should return an array', async () => {
+        const portfolio = await account.getPortfolio();
+        expect(Array.isArray(portfolio)).toEqual(true);
+      });
 
-    it('should authenticate user during getBalances', async () => {
-      const spy = jest.spyOn(account, 'authenticate');
-      await account.getBalances();
-      expect(spy).toHaveBeenCalled();
+      it('portfolio array should have parsed objects', async () => {
+        const portfolio = await account.getPortfolio();
+        const actual = Object.keys(portfolio[0]);
+        const expected = Object.keys(mock.portfolio[0]);
+        expect(actual).toEqual(expected);
+      });
     });
 
-    it('should get balance object', async () => {
-      const balances = await account.getBalances();
-      expect(Object.keys(balances)).toEqual(Object.keys(mock.balances));
-    });
-  });
+    describe('getAccountValue', () => {
+      it('should authenticate user during getAccountValue', async () => {
+        const spy = jest.spyOn(account, 'authenticate');
+        await account.getPortfolio();
+        expect(spy).toHaveBeenCalled();
+      });
 
-  describe('getBuyingPower', () => {
-    let account;
-    beforeAll(() => {
-      account = new Account(
-        env.ROBINHOOD_USERNAME,
-        env.ROBINHOOD_PASSWORD,
-        env.ROBINHOOD_DEVICE_TOKEN,
-      );
-    });
+      it('should return a number', async () => {
+        const value = await account.getAccountValue();
+        expect(typeof value === 'number').toBe(true);
+      });
 
-    it('should authenticate user during getBuyingPower', async () => {
-      const spy = jest.spyOn(account, 'authenticate');
-      await account.getBuyingPower();
-      expect(spy).toHaveBeenCalled();
+      it('should return a value greater than 0', async () => {
+        const value = await account.getAccountValue();
+        expect(value).toBeGreaterThan(0);
+      });
     });
 
-    it('should return an integer', async () => {
-      const buyingPower = await account.getBuyingPower();
-      expect(typeof buyingPower).toEqual('number');
-    });
-  });
+    describe('toJSON', () => {
+      it('should authenticate user during toJSON', async () => {
+        const spy = jest.spyOn(account, 'authenticate');
+        await account.getPortfolio();
+        expect(spy).toHaveBeenCalled();
+      });
 
-  describe('getPortfolio', () => {
-    let account;
-    beforeAll(() => {
-      account = new Account(
-        env.ROBINHOOD_USERNAME,
-        env.ROBINHOOD_PASSWORD,
-        env.ROBINHOOD_DEVICE_TOKEN,
-      );
-    });
+      it('should return an object', async () => {
+        const json = await account.toJSON();
+        expect(_.isPlainObject(json)).toBe(true);
+      });
 
-    it('should authenticate user during getPortfolio', async () => {
-      const spy = jest.spyOn(account, 'authenticate');
-      await account.getPortfolio();
-      expect(spy).toHaveBeenCalled();
-    });
-
-    it('should return an array', async () => {
-      const portfolio = await account.getPortfolio();
-      expect(Array.isArray(portfolio)).toEqual(true);
-    });
-
-    it('portfolio array should have parsed objects', async () => {
-      const portfolio = await account.getPortfolio();
-      const actual = Object.keys(portfolio[0]);
-      const expected = Object.keys(mock.portfolio[0]);
-      expect(actual).toEqual(expected);
+      it('should match desired schema', async () => {
+        const json = await account.toJSON();
+        const actual = Object.keys(json);
+        const expected = Object.keys(mock);
+        expect(actual).toEqual(expected);
+      });
     });
   });
 });

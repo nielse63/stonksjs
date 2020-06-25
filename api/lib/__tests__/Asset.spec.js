@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const env = require('../env');
 const Asset = require('../Asset');
+const mock = require('../__mocks__/asset.mock');
 
 const symbol = 'MSFT';
 const creds = {
@@ -191,6 +192,20 @@ describe('Asset', () => {
         expect(output[0].sma).toBeDefined();
         expect(output[0].sma['5']).toBeDefined();
         expect(typeof output[0].sma['5'] === 'number').toBe(true);
+      });
+    });
+
+    describe('toJSON', () => {
+      it('should return an object', async () => {
+        const json = await asset.toJSON();
+        expect(_.isPlainObject(json)).toBe(true);
+      });
+
+      it('should match desired schema', async () => {
+        const json = await asset.toJSON();
+        const actual = Object.keys(json);
+        const expected = Object.keys(mock);
+        expect(actual).toEqual(expected);
       });
     });
   });

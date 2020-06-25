@@ -40,4 +40,5 @@ module.exports = {
       },
     },
   ],
+  accountValue: 0,
 };

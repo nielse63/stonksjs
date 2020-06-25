@@ -1,6 +1,7 @@
 module.exports = {
   symbol: 'MSFT',
-  interval: 'day',
+  name: 'Microsoft',
+  type: 'stock',
   history: [
     {
       volume: 34698225,

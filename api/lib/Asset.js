@@ -1,11 +1,14 @@
 const Alpaca = require('@alpacahq/alpaca-trade-api');
 const dataForge = require('data-forge');
 require('data-forge-indicators');
+const algotrader = require('algotrader');
 const {
   formatISO,
   toDate,
 } = require('date-fns');
 const _ = require('lodash');
+
+const { Data } = algotrader;
 
 class Asset {
   static MAX_HISTORY_COUNT = 1000;
@@ -135,6 +138,28 @@ class Asset {
       .map((object) => Asset.setIndicatorValue({ object, key, period }));
 
     return this.history;
+  }
+
+  async toJSON() {
+    try {
+      const searchResults = await Data.Query.search(this.symbol);
+      const {
+        name = '',
+        typeDisp = '',
+      } = searchResults.find((object) => object.symbol === this.symbol);
+      const type = typeDisp.toLowerCase();
+      const json = {
+        symbol: this.symbol,
+        name,
+        type,
+        history: await this.getHistory(),
+        lastPrice: await this.getLastPrice(),
+      };
+      return json;
+    } catch (error) {
+      console.error(error);
+    }
+    return null;
   }
 }
 

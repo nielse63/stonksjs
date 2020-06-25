@@ -9,17 +9,8 @@ module.exports = (app) => {
         env.ROBINHOOD_PASSWORD,
         env.ROBINHOOD_DEVICE_TOKEN,
       );
-      const user = await account.authenticate();
-      console.log(user);
-      const balances = await account.getBalances();
-      const buyingPower = await account.getBuyingPower();
-      res.json({
-        data: {
-          // user,
-          balances,
-          buyingPower,
-        },
-      });
+      const data = await account.toJSON();
+      res.json({ data });
     } catch (error) {
       console.error(error);
       res.status(500).json(error);

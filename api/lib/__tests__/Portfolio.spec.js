@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const { Robinhood } = require('algotrader');
+// const env = require('../env');
 const Portfolio = require('../Portfolio');
 const { response, mock } = require('../__mocks__/portfolio.mock');
 
@@ -53,4 +54,23 @@ describe('Portfolio', () => {
       expect(output.length).toEqual(input.array.length);
     });
   });
+
+  // describe('order', () => {
+  //   let portfolio;
+  //   beforeEach(() => {
+  //     portfolio = new Portfolio(
+  //       env.ROBINHOOD_USERNAME,
+  //       env.ROBINHOOD_PASSWORD,
+  //       env.ROBINHOOD_DEVICE_TOKEN,
+  //     );
+  //   });
+
+  //   it('should submit a buy order', async () => {
+  //     const res = await portfolio.buy('IDEX', {
+  //       quantity: 1,
+  //     });
+  //     console.log(res);
+  //     expect(res).toBeDefined();
+  //   });
+  // });
 });
