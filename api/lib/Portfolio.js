@@ -72,6 +72,11 @@ class Portfolio {
     return null;
   }
 
+  async getSymbols() {
+    this.portfolio = await this.getPortfolio();
+    return this.portfolio.map(({ symbol }) => symbol);
+  }
+
   async order(symbol, options) {
     try {
       if (!symbol) {
@@ -104,7 +109,6 @@ class Portfolio {
         instrument,
         quote,
       });
-      // console.log({ orderConfig, order });
       const response = await order.submit();
       return parseObject(response);
     } catch (error) {
@@ -128,23 +132,28 @@ class Portfolio {
 
   async buy(symbol, options) {
     try {
-      const buyOrder = await this.order(symbol, {
+      console.log({ symbol, options });
+      // return { symbol, options };
+      const order = await this.order(symbol, {
         ...options,
         side: 'buy',
       });
-      const { quantity, price } = buyOrder;
-      const stopPrice = Number.parseFloat(price * Portfolio.MAX_DRAWDOWN).toFixed(2);
-      const sellOptions = {
-        quantity,
-        type: 'limit',
-        timeInForce: 'gtc',
-        trigger: 'stop',
-        side: 'sell',
-        stopPrice,
-        overrideDayTradeCheck: true,
-      };
-      const sellOrder = await this.order(symbol, sellOptions);
-      return { buyOrder, sellOrder };
+      return order;
+
+      // const { quantity, price } = buyOrder;
+      // const stopPrice = Number.parseFloat(price * Portfolio.MAX_DRAWDOWN).toFixed(2);
+      // const sellOptions = {
+      //   quantity: Math.floor(quantity),
+      //   type: 'limit',
+      //   timeInForce: 'gtc',
+      //   trigger: 'stop',
+      //   side: 'sell',
+      //   stopPrice,
+      //   overrideDayTradeCheck: true,
+      // };
+      // const sellOrder = await this.order(symbol, sellOptions);
+      // return { buyOrder, sellOrder };
+      // return order;
     } catch (error) {
       console.error(error.toString());
     }

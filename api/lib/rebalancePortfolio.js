@@ -33,7 +33,7 @@ const rebalancePortfolio = async () => {
   const assets = await account.getPortfolio();
   const promises = assets.map(({ symbol }) => {
     const backtest = new Backtest(symbol, creds);
-    return backtest.sma(12, 50);
+    return backtest.sma();
   });
   const results = await Promise.all(promises);
   const assetsToSell = results
@@ -51,7 +51,10 @@ const rebalancePortfolio = async () => {
       };
     });
 
-  if (!assetsToSell.length) return;
+  if (!assetsToSell.length) {
+    console.log('no assets to sell. exiting');
+    return;
+  }
 
   const portfolio = await account.user.getPortfolio();
   const stonksPortfolio = new Portfolio(
@@ -59,15 +62,22 @@ const rebalancePortfolio = async () => {
     env.ROBINHOOD_PASSWORD,
     env.ROBINHOOD_DEVICE_TOKEN,
   );
+  console.log(`setting ${assetsToSell.length} assets`);
 
   await account.user.cancelOpenOrders();
 
   for (const object of assetsToSell) {
     const { symbol } = object;
     const quantity = await portfolio.getQuantity(symbol);
-    const order = await stonksPortfolio.sell(symbol, { quantity });
-    console.log({ symbol, quantity, order });
+    await stonksPortfolio.sell(symbol, { quantity });
+    console.log(`sold ${symbol}`);
   }
 };
 
 module.exports = rebalancePortfolio;
+
+if (!module.parent) {
+  (async () => {
+    await rebalancePortfolio();
+  })();
+}

@@ -31,20 +31,20 @@ describe('Backtest', () => {
   });
 
   describe('sma', () => {
-    it('should handle a fluid number of arguments', async () => {
-      const testValues = [
-        [1, 2, 3],
-        [5, 12],
-        [1],
-      ];
-      for (const array of testValues) {
-        await backtest.sma(...array);
-        expect(backtest.periods).toEqual(expect.arrayContaining(array));
-      }
-    });
+    // it('should handle a fluid number of arguments', async () => {
+    //   const testValues = [
+    //     [1, 2, 3],
+    //     [5, 12],
+    //     [1],
+    //   ];
+    //   for (const array of testValues) {
+    //     await backtest.sma(...array);
+    //     expect(backtest.periods).toEqual(expect.arrayContaining(array));
+    //   }
+    // });
 
     it('should respond with expected shape', async () => {
-      const results = await backtest.sma(5, 12);
+      const results = await backtest.sma();
       expect(Object.keys(results)).toEqual(Object.keys(mock));
     });
   });

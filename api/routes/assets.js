@@ -22,7 +22,7 @@ module.exports = (app) => {
     const { symbol } = req.params;
     const options = req.query;
     const backtest = new Backtest(symbol, creds, options);
-    const results = await backtest.sma(12, 50);
+    const results = await backtest.sma();
 
     res.json({
       data: results,

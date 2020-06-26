@@ -7,25 +7,24 @@ const Asset = require('./Asset');
 
 const { DataFrame } = df;
 
-const smaStrategy = ({ firstKey, lastKey }) => {
-  const firstBarKey = firstKey === lastKey ? 'close' : firstKey;
-  return {
-    entryRule: (enterPosition, { bar }) => {
-      if (bar[firstBarKey] > bar[lastKey]) { // Buy when price is below average.
-        enterPosition();
-      }
-    },
-    exitRule: (exitPosition, { bar }) => {
-      if (bar[lastKey] > bar[firstBarKey]) {
-        exitPosition();
-      }
-    },
-    stopLoss: ({ entryPrice }) => entryPrice * (5 / 100),
-  };
-};
+const smaStrategy = () => ({
+  entryRule: (enterPosition, { bar }) => {
+    if (bar.sma20 > bar.sma50) {
+      enterPosition();
+    }
+  },
+  exitRule: (exitPosition, { bar }) => {
+    if (bar.sma20 < bar.sma50 || bar.sma50 < bar.sma200) {
+      exitPosition();
+    }
+  },
+  stopLoss: ({ entryPrice }) => entryPrice * 0.95,
+});
 
 class Backtest extends Asset {
   static indicators = ['sma'];
+
+  static stopLossPct = 0.95;
 
   constructor(...args) {
     super(...args);
@@ -74,42 +73,63 @@ class Backtest extends Asset {
   }
 
   _createKeys() {
-    const keys = this.periods
-      .map((value) => `${this.indicator} (${value})`);
-    const firstKey = _.first(keys);
-    const lastKey = _.last(keys);
-    this.keys = keys;
-    return { keys, firstKey, lastKey };
+    this.keys = this.periods
+      .map((value) => `${this.indicator}${value}`);
+    // const firstKey = _.first(this.keys);
+    // const lastKey = _.last(this.keys);
+    // return { keys: this.keys, firstKey, lastKey };
+    return this.keys;
   }
 
   _createSMASeries = (period, i) => {
-    const { keys } = this._createKeys();
-    const key = keys[i];
+    // const { keys } = this._createKeys();
+    const key = this.keys[i];
     const movingAverage = this.series
       .deflate((bar) => bar.close)
       .sma(period);
     this.series = this.series
       .withSeries(key, movingAverage)
       .skip(period);
+    return this.series;
   }
 
   backtest() {
+    if (!this.series.toArray().length) {
+      return {
+        analysis: {},
+        trades: [],
+      };
+    }
     const tradeSeries = backtest(this.strategy, this.series);
-    const analysis = analyze(this.startingCapital, tradeSeries);
+    const rawAnalysis = analyze(this.startingCapital, tradeSeries);
     const trades = tradeSeries.toArray();
+    const keysToOmit = [
+      'startingCapital',
+      'finalCapital',
+      'profit',
+      'totalTrades',
+      'barCount',
+      'maxDrawdown',
+      'returnOnAccount',
+    ];
+    const analysis = _.omit(rawAnalysis, keysToOmit);
     return { analysis, trades };
   }
 
-  async sma(...args) {
+  async sma() {
     this.indicator = 'sma';
-    this.periods = [...new Set([...args])].sort();
+    this.periods = [20, 50, 200];
     this.data = await this._fetchBars();
+    const maxPeriod = Math.max(...this.periods);
     this.series = this._createSeries();
+    if (this.data.length < maxPeriod || this.series.toArray().length < maxPeriod) {
+      return null;
+    }
 
-    const { firstKey, lastKey } = this._createKeys();
+    this.keys = this._createKeys();
     this.periods.forEach(this._createSMASeries);
 
-    this.strategy = smaStrategy({ firstKey, lastKey });
+    this.strategy = smaStrategy(this.periods);
     const { analysis, trades } = this.backtest();
     const meta = this.createMetaObject();
     const seriesArray = this.series.toArray();
@@ -122,7 +142,10 @@ class Backtest extends Asset {
       };
     }, {});
     return {
-      meta, analysis, trades, lastIndicator,
+      meta,
+      analysis,
+      trades,
+      lastIndicator,
     };
   }
 }

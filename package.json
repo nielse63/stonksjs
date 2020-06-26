@@ -65,6 +65,7 @@
     "nodemailer": "^6.4.8",
     "pm2": "^4.4.0",
     "request-promise": "^4.2.5",
+    "sentiment": "^5.0.2",
     "supports-color": "^7.1.0",
     "technicalindicators": "^3.1.0",
     "uuid": "^8.1.0"
