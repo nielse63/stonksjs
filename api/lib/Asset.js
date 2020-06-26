@@ -84,9 +84,10 @@ class Asset {
         { limit: Asset.MAX_HISTORY_COUNT },
       );
       const array = response[this.symbol];
+      console.log(array.length);
       const series = new dataForge.DataFrame(array)
         .transformSeries({
-          startEpochTime: (value) => toDate(value * 1000),
+          startEpochTime: (value) => formatISO(toDate(value * 1000)),
         })
         .setIndex('startEpochTime')
         .renameSeries({
