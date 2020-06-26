@@ -104,6 +104,7 @@ class Portfolio {
         instrument,
         quote,
       });
+      // console.log({ orderConfig, order });
       const response = await order.submit();
       return parseObject(response);
     } catch (error) {

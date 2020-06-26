@@ -78,6 +78,7 @@ class Backtest extends Asset {
       .map((value) => `${this.indicator} (${value})`);
     const firstKey = _.first(keys);
     const lastKey = _.last(keys);
+    this.keys = keys;
     return { keys, firstKey, lastKey };
   }
 
@@ -111,7 +112,18 @@ class Backtest extends Asset {
     this.strategy = smaStrategy({ firstKey, lastKey });
     const { analysis, trades } = this.backtest();
     const meta = this.createMetaObject();
-    return { meta, analysis, trades };
+    const seriesArray = this.series.toArray();
+    const lastObject = _.last(seriesArray);
+    const lastIndicator = this.keys.reduce((output, key) => {
+      const value = lastObject[key];
+      return {
+        ...output,
+        [key]: value,
+      };
+    }, {});
+    return {
+      meta, analysis, trades, lastIndicator,
+    };
   }
 }
 

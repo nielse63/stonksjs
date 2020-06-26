@@ -14,8 +14,6 @@ module.exports = (app) => {
     const { symbol } = req.params;
     const options = req.query;
     const asset = new Asset(symbol, creds, options);
-    // const lastPrice = await asset.getLastPrice();
-    // const cleanAsset = _.omit(asset, ['alpaca', 'options']);
     const data = await asset.toJSON();
     res.json({ data });
   });
@@ -25,7 +23,6 @@ module.exports = (app) => {
     const options = req.query;
     const backtest = new Backtest(symbol, creds, options);
     const results = await backtest.sma(12, 50);
-    // console.log(backtest);
 
     res.json({
       data: results,
