@@ -124,23 +124,6 @@ class Asset {
     return this.lastPrice;
   }
 
-  async calcSMA(period = 20) {
-    const history = await this.getHistory();
-    const series = new dataForge.DataFrame(history).setIndex('time');
-
-    const smaSeries = series
-      .deflate((bar) => bar.close)
-      .sma(period);
-    const key = `sma${period}`;
-    this.history = series
-      .withSeries(key, smaSeries)
-      .skip(period)
-      .toArray()
-      .map((object) => Asset.setIndicatorValue({ object, key, period }));
-
-    return this.history;
-  }
-
   async toJSON() {
     try {
       const searchResults = await Data.Query.search(this.symbol);

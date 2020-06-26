@@ -162,39 +162,6 @@ describe('Asset', () => {
       });
     });
 
-    describe('calcSMA', () => {
-      beforeEach(() => {
-        asset = new Asset(symbol, creds);
-      });
-
-      it('should be defined', () => {
-        expect(asset.calcSMA).toBeDefined();
-        expect(asset.calcSMA).toBeInstanceOf(Function);
-      });
-
-      it('should handle undefined period value', () => {
-        expect(() => asset.calcSMA()).not.toThrow();
-      });
-
-      it('should execute getHistory', async () => {
-        const spy = jest.spyOn(asset, 'getHistory');
-        await asset.calcSMA(5);
-        expect(spy).toHaveBeenCalled();
-      });
-
-      it('should return history array', async () => {
-        const output = await asset.calcSMA(5);
-        expect(Array.isArray(output)).toBe(true);
-      });
-
-      it('should add `sma` object to history objects', async () => {
-        const output = await asset.calcSMA(5);
-        expect(output[0].sma).toBeDefined();
-        expect(output[0].sma['5']).toBeDefined();
-        expect(typeof output[0].sma['5'] === 'number').toBe(true);
-      });
-    });
-
     describe('toJSON', () => {
       it('should return an object', async () => {
         const json = await asset.toJSON();
