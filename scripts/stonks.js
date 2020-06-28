@@ -3,13 +3,16 @@ require('../config/env');
 const path = require('path');
 const debug = require('debug')('stonks:cli');
 const fs = require('fs-extra');
+const algotrader = require('algotrader');
 const screener = require('./screener');
 const backtest = require('./backtest');
 const buy = require('./buy');
 const sell = require('./sell');
 const getBuyingPower = require('./getBuyingPower');
 
-(async () => {
+const { Scheduler } = algotrader.Algorithm;
+
+const rebalance = async () => {
   const datadir = path.resolve(__dirname, 'data');
   fs.ensureDirSync(datadir);
   // first sell anything that needs to be sold
@@ -24,4 +27,7 @@ const getBuyingPower = require('./getBuyingPower');
   await screener();
   await backtest();
   await buy();
-})();
+};
+
+const scheduler = new Scheduler(rebalance);
+scheduler.every(60 * 24);
