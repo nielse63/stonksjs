@@ -1,7 +1,0 @@
-node_modules
-logs/*
-data
-tmp
-.git
-.gitignore
-*.md

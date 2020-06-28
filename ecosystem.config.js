@@ -1,5 +1,6 @@
 require('dotenv').config();
 const path = require('path');
+const os = require('os');
 
 module.exports = {
   apps: [{
@@ -7,8 +8,8 @@ module.exports = {
     script: './api/index.js',
     watch: false,
     instances: 1,
-    error_file: path.resolve(__dirname, 'logs/stonks.stderr.log'),
-    out_file: path.resolve(__dirname, 'logs/stonks.stdout.log'),
+    error_file: path.resolve(os.tmpdir(), 'stonks.stderr.log'),
+    out_file: path.resolve(os.tmpdir(), 'stonks.stdout.log'),
     env: {
       NODE_ENV: 'development',
     },
