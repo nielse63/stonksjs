@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-const env = require('../api/lib/env');
+const env = require('../config/env');
 const debug = require('debug')('stonks:buying-power');
-const Account = require('../api/lib/Account');
+const Account = require('../lib/Account');
 
 let cachedAccount = null;
 const getAccount = () => {

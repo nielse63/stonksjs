@@ -1,11 +1,11 @@
 #!/usr/bin/env node
-const env = require('../api/lib/env');
+const env = require('../config/env');
 const path = require('path');
 const debug = require('debug')('stonks:backtest');
 const _ = require('lodash');
 const df = require('data-forge');
 const fs = require('fs-extra');
-const Backtest = require('../api/lib/Backtest');
+const Backtest = require('../lib/Backtest');
 
 const creds = {
   keyId: env.ALPACA_API_KEY,

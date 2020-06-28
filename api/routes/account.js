@@ -1,5 +1,5 @@
-const env = require('../lib/env');
-const Account = require('../lib/Account');
+const env = require('../../config/env');
+const Account = require('../../lib/Account');
 
 module.exports = (app) => {
   app.get('/api/account', async (req, res) => {

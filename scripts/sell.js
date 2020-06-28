@@ -1,11 +1,11 @@
 #!/usr/bin/env node
-const env = require('../api/lib/env');
+const env = require('../config/env');
 const fs = require('fs-extra');
 const path = require('path');
 const debug = require('debug')('stonks:sell');
-const Portfolio = require('../api/lib/Portfolio');
-const Account = require('../api/lib/Account');
-const Backtest = require('../api/lib/Backtest');
+const Portfolio = require('../lib/Portfolio');
+const Account = require('../lib/Account');
+const Backtest = require('../lib/Backtest');
 
 const creds = {
   keyId: env.ALPACA_API_KEY,

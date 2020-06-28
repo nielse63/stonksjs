@@ -1,6 +1,6 @@
-const env = require('../lib/env');
-const Asset = require('../lib/Asset');
-const Backtest = require('../lib/Backtest');
+const env = require('../../config/env');
+const Asset = require('../../lib/Asset');
+const Backtest = require('../../lib/Backtest');
 
 const creds = {
   keyId: env.ALPACA_API_KEY,

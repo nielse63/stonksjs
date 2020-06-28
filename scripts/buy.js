@@ -1,10 +1,10 @@
 #!/usr/bin/env node
-const env = require('../api/lib/env');
+const env = require('../config/env');
 const debug = require('debug')('stonks:buy');
 const path = require('path');
 const fs = require('fs-extra');
-const Portfolio = require('../api/lib/Portfolio');
-const Account = require('../api/lib/Account');
+const Portfolio = require('../lib/Portfolio');
+const Account = require('../lib/Account');
 
 let cachedAccount = null;
 const getAccount = () => {
