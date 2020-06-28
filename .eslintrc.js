@@ -13,24 +13,6 @@ module.exports = {
     'no-restricted-globals': 'warn',
     'no-underscore-dangle': 'off',
     'max-len': ['warn', { ignoreComments: true }],
-    // 'import/order': ['warn', {
-    //   groups: [
-    //     'builtin',
-    //     'external',
-    //     'internal',
-    //     'unknown',
-    //     'parent',
-    //     'sibling',
-    //     'index',
-    //   ],
-    //   pathGroups: [
-    //     {
-    //       pattern: './config/**',
-    //       group: 'builtin',
-    //       position: 'before',
-    //     },
-    //   ],
-    // }],
     'no-restricted-syntax': ['error', {
       selector: 'ForInStatement',
       message: 'for..in loops iterate over the entire prototype chain, which is virtually never what you want. Use Object.{keys,values,entries}, and iterate over the resulting array.',

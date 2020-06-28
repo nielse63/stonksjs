@@ -1,4 +1,3 @@
-// const _ = require('lodash');
 const env = require('../lib/env');
 const Asset = require('../lib/Asset');
 const Backtest = require('../lib/Backtest');

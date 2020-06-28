@@ -10,11 +10,6 @@ const creds = {
 };
 
 describe('Backtest', () => {
-  // let backtest;
-  // beforeEach(() => {
-  //   backtest = new Backtest(symbol, creds);
-  // });
-
   describe('props', () => {
     it('should have static prop of available indicators', () => {
       expect(Backtest.indicators).toEqual(['sma']);

@@ -4,22 +4,9 @@ const _ = require('lodash');
 const { backtest, analyze } = require('grademark');
 const Asset = require('./Asset');
 const Yahoo = require('algotrader/objects/data/Yahoo');
+const smaStrategy = require('./strategies/sma');
 
 const { DataFrame } = df;
-
-const smaStrategy = () => ({
-  entryRule: (enterPosition, { bar }) => {
-    if (bar.period1 >= bar.period2) {
-      enterPosition();
-    }
-  },
-  exitRule: (exitPosition, { bar }) => {
-    if (bar.period1 < bar.period2) {
-      exitPosition();
-    }
-  },
-  stopLoss: ({ entryPrice }) => entryPrice * 0.95,
-});
 
 class Backtest extends Asset {
   static indicators = ['sma'];
@@ -54,33 +41,9 @@ class Backtest extends Asset {
       time: quote.date,
     }));
     return results;
-    // try {
-    //   if (this.symbol === 'SPY' || this.symbol === 'QQQ' || this.symbol === 'IWM') return [];
-    //   const bars = await Yahoo.getQuotes(this.symbol, '3mo', '1d', false);
-    //   const results = bars.map((quote) => ({
-    //     ...quote.price,
-    //     time: quote.date,
-    //   }));
-    //   return results;
-    // } catch (error) {
-    //   console.error(error);
-    // }
-    // return [];
   }
 
   _createSeries() {
-    // const series = new DataFrame(this.data)
-    //   .transformSeries({
-    //     startEpochTime: (value) => toDate(value * 1000),
-    //   })
-    //   .setIndex('startEpochTime')
-    //   .renameSeries({
-    //     startEpochTime: 'time',
-    //     openPrice: 'open',
-    //     highPrice: 'high',
-    //     lowPrice: 'low',
-    //     closePrice: 'close',
-    //   });
     this.series = new DataFrame(this.data).setIndex('time');
     return this.series;
   }
@@ -92,7 +55,7 @@ class Backtest extends Asset {
   }
 
   _createSMASeries = (period, i) => {
-    // this.keys = this._createKeys();
+    this.keys = this._createKeys();
     const key = this.keys[i];
     const movingAverage = this.series
       .deflate((bar) => bar.close)
