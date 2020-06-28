@@ -2,7 +2,6 @@ require('dotenv').config();
 const debug = require('debug')('stonks:env');
 const nodemailer = require('nodemailer');
 
-
 const sendMail = async (text) => {
   const transporter = nodemailer.createTransport({
     host: 'smtp.mailtrap.io',
@@ -28,28 +27,11 @@ process.on('beforeExit', async (code) => {
   }
 });
 
-// process.on('uncaughtException', (err, origin) => {
-//   console.log('uncaughtException', { err, origin });
-// });
-
 process.on('uncaughtExceptionMonitor', async (err, origin) => {
   const string = JSON.stringify({ err, origin }, null, '  ');
   debug('uncaughtExceptionMonitor', { err, origin });
   await sendMail(string);
 });
-
-// process.on('unhandledRejection', (reason, promise) => {
-//   console.log('Unhandled Rejection at:', promise, 'reason:', reason);
-//   // Application specific logging, throwing an error, or other logic here
-// });
-
-// function handle(signal) {
-//   debug(`Received ${signal}`);
-//   process.exit(signal);
-// }
-
-// process.on('SIGINT', handle);
-// process.on('SIGTERM', handle);
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -75,10 +57,6 @@ requiredKeys.forEach((key) => {
   if (process.env[key] === undefined) {
     throw new Error(`${key} is a required environment key`);
   }
-  // console.log(key, process.env[key]);
 });
-// process.exit();
-
-// console.log(process.env);
 
 module.exports = process.env;

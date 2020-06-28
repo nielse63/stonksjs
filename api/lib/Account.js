@@ -42,42 +42,6 @@ class Account {
     'accountType',
   ]
 
-  static parseSingleObject(object = {}) {
-    const {
-      symbol,
-      quantity,
-      averageBuy: { price },
-      dates: { originalPurchase: purchaseDate },
-      InstrumentObject,
-    } = object;
-    const name = InstrumentObject.getSimpleName();
-    const type = InstrumentObject.getType();
-    const id = InstrumentObject.getID();
-    const links = {
-      path: `/api/assets/${symbol}`,
-    };
-
-    return parseObject({
-      symbol,
-      quantity,
-      price,
-      purchaseDate,
-      name,
-      type,
-      id,
-      links,
-    });
-  }
-
-  static parseArray(array = []) {
-    return array.map(Account.parseSingleObject);
-  }
-
-  static parsePortfolio(portfolioObject) {
-    const { array } = portfolioObject;
-    return Account.parseArray(array);
-  }
-
   constructor(username, password, deviceToken) {
     if (!username) {
       throw new Error('`username` is not defined');
@@ -113,6 +77,46 @@ class Account {
       [prop]: null,
     }), {});
     return parseObject(defaultObject);
+  }
+
+  async parseSingleObject(object = {}) {
+    const {
+      symbol,
+      quantity,
+      averageBuy: { price },
+      dates: { originalPurchase: purchaseDate },
+      InstrumentObject,
+    } = object;
+    const name = InstrumentObject.getSimpleName();
+    const type = InstrumentObject.getType();
+    const id = InstrumentObject.getID();
+    const quote = await InstrumentObject.getQuote(this.user);
+    const lastPrice = quote.getLast();
+
+    return parseObject({
+      symbol,
+      quantity,
+      buyPrice: price,
+      lastPrice,
+      purchaseDate,
+      name,
+      type,
+      id,
+    });
+  }
+
+  async parseArray(array = []) {
+    const output = [];
+    for (const object of array) {
+      const results = await this.parseSingleObject(object);
+      output.push(results);
+    }
+    return output;
+  }
+
+  async parsePortfolio(portfolioObject) {
+    const { array } = portfolioObject;
+    return this.parseArray(array);
   }
 
   async authenticate() {
@@ -186,8 +190,9 @@ class Account {
   async getPortfolio() {
     try {
       await this.authenticate();
-      const portfolio = await this.user.getPortfolio();
-      return Account.parsePortfolio(portfolio);
+      this.portfolio = await this.user.getPortfolio();
+      const output = await this.parsePortfolio(this.portfolio);
+      return output;
     } catch (error) {
       console.error(error);
     }

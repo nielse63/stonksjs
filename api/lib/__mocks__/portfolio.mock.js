@@ -24,14 +24,12 @@ module.exports = {
     {
       symbol: 'ABC',
       quantity: 100,
-      price: 100,
       purchaseDate: '2020-04-10T12:07:46.013012Z',
       name: 'Fake Corp',
       type: 'equity',
       id: '1234567-asdf-asdaf-asdf-rcdftvyunijmk',
-      links: {
-        path: '/api/assets/ABC',
-      },
+      buyPrice: 100,
+      lastPrice: 100,
     },
   ],
 };

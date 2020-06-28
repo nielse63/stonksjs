@@ -10,42 +10,6 @@ const { Robinhood } = algotrader;
 class Portfolio {
   static MAX_DRAWDOWN = 0.9;
 
-  static parseSingleObject(object = {}) {
-    const {
-      symbol,
-      quantity,
-      averageBuy: { price },
-      dates: { originalPurchase: purchaseDate },
-      InstrumentObject,
-    } = object;
-    const name = InstrumentObject.getSimpleName();
-    const type = InstrumentObject.getType();
-    const id = InstrumentObject.getID();
-    const links = {
-      path: `/api/assets/${symbol}`,
-    };
-
-    return parseObject({
-      symbol,
-      quantity,
-      price,
-      purchaseDate,
-      name,
-      type,
-      id,
-      links,
-    });
-  }
-
-  static parseArray(array = []) {
-    return array.map(Portfolio.parseSingleObject);
-  }
-
-  static parse(portfolioObject) {
-    const { array } = portfolioObject;
-    return Portfolio.parseArray(array);
-  }
-
   constructor(username, password, deviceToken) {
     this.account = new Account(username, password, deviceToken);
     this.user = this.account.user;
@@ -64,7 +28,6 @@ class Portfolio {
   async cancelOpenOrders() {
     try {
       const response = await this.user.cancelOpenOrders();
-      console.log({ response });
       return response;
     } catch (error) {
       console.error(error);
@@ -132,28 +95,11 @@ class Portfolio {
 
   async buy(symbol, options) {
     try {
-      console.log({ symbol, options });
-      // return { symbol, options };
       const order = await this.order(symbol, {
         ...options,
         side: 'buy',
       });
       return order;
-
-      // const { quantity, price } = buyOrder;
-      // const stopPrice = Number.parseFloat(price * Portfolio.MAX_DRAWDOWN).toFixed(2);
-      // const sellOptions = {
-      //   quantity: Math.floor(quantity),
-      //   type: 'limit',
-      //   timeInForce: 'gtc',
-      //   trigger: 'stop',
-      //   side: 'sell',
-      //   stopPrice,
-      //   overrideDayTradeCheck: true,
-      // };
-      // const sellOrder = await this.order(symbol, sellOptions);
-      // return { buyOrder, sellOrder };
-      // return order;
     } catch (error) {
       console.error(error.toString());
     }

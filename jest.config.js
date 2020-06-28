@@ -15,7 +15,7 @@ module.exports = {
   // automock: false,
 
   // Stop running tests after `n` failures
-  bail: 1,
+  // bail: 1,
 
   // Respect "browser" field in package.json when resolving modules
   // browser: false,
@@ -156,9 +156,14 @@ module.exports = {
   // ],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
-  // testPathIgnorePatterns: [
-  //   "/node_modules/"
-  // ],
+  testPathIgnorePatterns: [
+    '/node_modules/',
+    '/coverage/',
+    '/tmp/',
+    '/data/',
+    '/backup/',
+    '/logs/',
+  ],
 
   // The regexp pattern or array of patterns that Jest uses to detect test files
   // testRegex: [],

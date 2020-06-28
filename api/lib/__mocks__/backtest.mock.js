@@ -224,4 +224,5 @@ module.exports = {
       stopPrice: 165.4045,
     },
   ],
+  lastIndicator: {},
 };

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -e
+
+$HOME/.local/share/virtualenvs/stonks-35Yr3TA3/bin/pip3.7 $@
