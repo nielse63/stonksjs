@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-set -e
-
-root=$(dirname $(dirname $0))
-
-# run scripts
-node "${root}/bin/helpers/backup-env.js"
-git add .env.sample
-npx lint-staged

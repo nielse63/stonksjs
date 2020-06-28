@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -e
+
+root=$(realpath $(dirname $(dirname $0)))
+backup_folder="${root}/backup/etc/nginx/sites-available"
+env_file="${root}/.env"
+
+cd $root
+
+if ! [ -f "${env_file}" ]; then
+  echo 'no .env file found'
+  exit 1
+fi
+
+source "${env_file}"
+
+echo 'backing up remote nginx config'
+
+rsync -azrP \
+  -e ssh $SSH_USER@$SSH_HOST:/etc/nginx/sites-available/ \
+  $backup_folder

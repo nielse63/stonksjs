@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+set -e
+
+root=$(realpath $(dirname $(dirname $0)))
+remote_dir="/var/www/stonks"
+env_file="${root}/.env"
+
+cd "${root}"
+
+if ! [ -f "${env_file}" ]; then
+  exit
+fi
+
+source "${env_file}"
+cp "${root}/.env" "${root}/.env.production"
+echo  'NODE_ENV=production' >> "${root}/.env.production"
+
+ssh $SSH_USER@$SSH_HOST $remote_dir/bin/pre-deploy
+
+rsync -avzrlpt \
+  --exclude=.git \
+  --exclude=node_modules \
+  --exclude=data \
+  --exclude=tmp \
+  --exclude=*.md \
+  --del \
+  --force \
+  -e ssh "${root}/" \
+  $SSH_USER@$SSH_HOST:$remote_dir
+
+rm "${root}/.env.production"
+ssh $SSH_USER@$SSH_HOST $remote_dir/bin/post-deploy
+
+# access server
+# ssh $SSH_USER@$SSH_HOST -i ~/.ssh/id_rsa
+# docker-compose up --detach --remove-orphans --project-name stonks-docker

@@ -3,13 +3,18 @@ const path = require('path');
 
 module.exports = {
   apps: [{
-    name: 'stonks',
-    script: 'npm',
-    args: 'start',
+    name: 'api',
+    script: './api/index.js',
     watch: false,
     instances: 1,
     error_file: path.resolve(__dirname, 'logs/stonks.stderr.log'),
     out_file: path.resolve(__dirname, 'logs/stonks.stdout.log'),
+    env: {
+      NODE_ENV: 'development',
+    },
+    env_production: {
+      NODE_ENV: 'production',
+    },
   }],
   deploy: {
     production: {
