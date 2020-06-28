@@ -4,3 +4,4 @@ matplotlib
 seaborn
 quandl
 scipy
+alpaca_trade_api

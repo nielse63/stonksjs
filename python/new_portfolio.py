@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import quandl
 import scipy.optimize as sco
+from datetime import datetime
 
 plt.style.use('fivethirtyeight')
 np.random.seed(777)
@@ -11,11 +12,18 @@ np.random.seed(777)
 # %matplotlib inline
 # %config InlineBackend.figure_format = 'retina'
 
-quandl.ApiConfig.api_key = '6MCYoDxGE-KNJ2wxyzyB'
-stocks = ['AAPL','AMZN','GOOGL','FB']
+quandl.ApiConfig.api_key = ''
+stocks = [
+  'GE',
+  'CCL',
+  'TWTR',
+  'ET',
+  'SCHW',
+]
+today = datetime.today().strftime('%Y-%m-%d')
 data = quandl.get_table('WIKI/PRICES', ticker = stocks,
                         qopts = { 'columns': ['date', 'ticker', 'adj_close'] },
-                        date = { 'gte': '2016-1-1', 'lte': '2017-12-31' }, paginate=True)
+                        date = { 'gte': '2016-1-1', 'lte': today }, paginate=True)
 
 df = data.set_index('date')
 # df.head()
