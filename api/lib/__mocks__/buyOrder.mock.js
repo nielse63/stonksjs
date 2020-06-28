@@ -1,12 +1,16 @@
+const { v4: uuid } = require('uuid');
+
+const id = uuid();
+
 module.exports = {
   buyOrder: {
-    id: '0e79657f-7354-4824-ad32-70927bfcef56',
+    id,
     refId: null,
-    url: 'https://api.robinhood.com/orders/0e79657f-7354-4824-ad32-70927bfcef56/',
-    account: 'https://api.robinhood.com/accounts/834362501/',
-    position: 'https://api.robinhood.com/positions/834362501/61fec2c4-2c8e-470d-88b1-6e211f004d1e/',
-    cancel: 'https://api.robinhood.com/orders/0e79657f-7354-4824-ad32-70927bfcef56/cancel/',
-    instrument: 'https://api.robinhood.com/instruments/61fec2c4-2c8e-470d-88b1-6e211f004d1e/',
+    url: `https://api.robinhood.com/orders/${id}/`,
+    account: 'https://api.robinhood.com/accounts/123456789/',
+    position: `https://api.robinhood.com/positions/123456789/${id}/`,
+    cancel: `https://api.robinhood.com/orders/${id}/cancel/`,
+    instrument: `https://api.robinhood.com/instruments/${id}/`,
     cumulativeQuantity: 0,
     averagePrice: null,
     fees: 0,
@@ -37,13 +41,13 @@ module.exports = {
     investmentScheduleId: null,
   },
   sellOrder: {
-    id: '770f8e32-723e-4413-a2c7-25e76cd14c2e',
+    id,
     refId: null,
-    url: 'https://api.robinhood.com/orders/770f8e32-723e-4413-a2c7-25e76cd14c2e/',
-    account: 'https://api.robinhood.com/accounts/834362501/',
-    position: 'https://api.robinhood.com/positions/834362501/61fec2c4-2c8e-470d-88b1-6e211f004d1e/',
-    cancel: 'https://api.robinhood.com/orders/770f8e32-723e-4413-a2c7-25e76cd14c2e/cancel/',
-    instrument: 'https://api.robinhood.com/instruments/61fec2c4-2c8e-470d-88b1-6e211f004d1e/',
+    url: `https://api.robinhood.com/orders/${id}/`,
+    account: 'https://api.robinhood.com/accounts/123456789/',
+    position: `https://api.robinhood.com/positions/123456789/${id}/`,
+    cancel: `https://api.robinhood.com/orders/${id}/cancel/`,
+    instrument: `https://api.robinhood.com/instruments/${id}/`,
     cumulativeQuantity: 0,
     averagePrice: null,
     fees: 0,

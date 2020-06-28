@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 require('dotenv').config();
-const cp = require('child_process');
 const path = require('path');
 const debug = require('debug')('stonks:cli');
 const fs = require('fs-extra');
@@ -9,12 +8,6 @@ const backtest = require('./backtest');
 const buy = require('./buy');
 const sell = require('./sell');
 const getBuyingPower = require('./getBuyingPower');
-
-const runScreenerScrtipt = () => {
-  debug('running screener.py');
-  const filepath = path.resolve(__dirname, 'screener.py');
-  cp.execSync(filepath);
-};
 
 (async () => {
   const datadir = path.resolve(__dirname, 'data');
@@ -28,7 +21,6 @@ const runScreenerScrtipt = () => {
   }
 
   // refresh our screened assets
-  runScreenerScrtipt();
   await screener();
   await backtest();
   await buy();

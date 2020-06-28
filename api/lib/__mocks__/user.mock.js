@@ -1,3 +1,7 @@
+const { v4: uuid } = require('uuid');
+
+const id = uuid();
+
 module.exports = {
   balances: {
     unsettledFunds: 0,
@@ -24,7 +28,7 @@ module.exports = {
     rhsAccountNumber: 1234567890,
     state: 'active',
     locked: false,
-    userId: '1234567-asdf-asdaf-asdf-rcdftvyunijmk',
+    userId: id,
   },
   portfolio: [
     {
@@ -35,7 +39,7 @@ module.exports = {
       purchaseDate: '2020-04-10T12:07:46.013012Z',
       name: 'Fake Corp',
       type: 'equity',
-      id: '1234567-asdf-asdaf-asdf-rcdftvyunijmk',
+      id,
     },
   ],
   accountValue: 0,

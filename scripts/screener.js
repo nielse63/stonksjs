@@ -6,15 +6,14 @@ const axios = require('axios');
 const _ = require('lodash');
 const fs = require('fs-extra');
 const path = require('path');
-const csv = require('csvtojson');
 const df = require('data-forge');
+const getFinvizData = require('./finviz');
 
 const getTrendingSymbols = async () => {
   const trending = await Query.getTrendingSymbols(100);
   const tickers = trending
     .filter((symbol) => !symbol.includes('.'));
   const output = [...new Set(tickers)];
-  // debug(`returning ${output.length} symbols`);
   return output;
 };
 
@@ -70,20 +69,9 @@ const saveRecommendations = (json) => {
   debug('saved recommendations to `./recommendations.json`');
 };
 
-const readScreenerResults = async () => {
-  const filepath = path.join(__dirname, 'data/screener_results.csv');
-  if (!fs.existsSync(filepath)) {
-    return [];
-  }
-
-  const json = await csv().fromFile(filepath);
-  const symbols = json.map(({ Ticker }) => Ticker);
-  return symbols;
-};
-
 const screener = async () => {
   debug('running screener.js');
-  const screenerResults = await readScreenerResults();
+  const screenerResults = await getFinvizData();
   const trending = await getTrendingSymbols();
   const recommendations = await getRecommendations(trending, screenerResults);
   saveRecommendations(recommendations);

@@ -1,11 +1,15 @@
+const { v4: uuid } = require('uuid');
+
+const id = uuid();
+
 module.exports = {
-  id: 'c4b48f6b-3a23-4691-b77e-2c3a27f4090f',
+  id,
   ref_id: null,
-  url: 'https://api.robinhood.com/orders/c4b48f6b-3a23-4691-b77e-2c3a27f4090f/',
-  account: 'https://api.robinhood.com/accounts/834362501/',
-  position: 'https://api.robinhood.com/positions/834362501/9a2de854-8463-4299-80c3-4bbc48b5688d/',
-  cancel: 'https://api.robinhood.com/orders/c4b48f6b-3a23-4691-b77e-2c3a27f4090f/cancel/',
-  instrument: 'https://api.robinhood.com/instruments/9a2de854-8463-4299-80c3-4bbc48b5688d/',
+  url: `https://api.robinhood.com/orders/${id}/`,
+  account: 'https://api.robinhood.com/accounts/123456789/',
+  position: `https://api.robinhood.com/positions/123456789/${id}/`,
+  cancel: `https://api.robinhood.com/orders/${id}/cancel/`,
+  instrument: `https://api.robinhood.com/instruments/${id}/`,
   cumulative_quantity: '0.00000000',
   average_price: null,
   fees: '0.00',
@@ -34,7 +38,7 @@ module.exports = {
   total_notional: {
     amount: '13.07',
     currency_code: 'USD',
-    currency_id: '1072fc76-1862-41ab-82c2-485837590762',
+    currency_id: id,
   },
   executed_notional: null,
   investment_schedule_id: null,
