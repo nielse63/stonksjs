@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-require('dotenv').config();
+require('../config/env');
 const path = require('path');
 const debug = require('debug')('stonks:cli');
 const fs = require('fs-extra');

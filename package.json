@@ -92,10 +92,12 @@
   "nodemonConfig": {
     "ignore": [
       "__tests__/",
+      "__mocks__/",
       "docs/*"
     ],
     "watch": [
-      "api/"
+      "api/",
+      "lib/"
     ],
     "env": {
       "NODE_ENV": "development"

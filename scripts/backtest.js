@@ -1,17 +1,10 @@
 #!/usr/bin/env node
-const env = require('../config/env');
 const path = require('path');
 const debug = require('debug')('stonks:backtest');
 const _ = require('lodash');
 const df = require('data-forge');
 const fs = require('fs-extra');
 const Backtest = require('../lib/Backtest');
-
-const creds = {
-  keyId: env.ALPACA_API_KEY,
-  secretKey: env.ALPACA_API_SECRET,
-  paper: env.ALPACA_PAPER_TRADING,
-};
 
 const filterResults = (array) => {
   const output = new df.DataFrame(array)
@@ -36,7 +29,7 @@ const readRecommendations = () => {
 
 const runSingleBacktest = async (object) => {
   const { symbol } = object;
-  const backtest = new Backtest(symbol, creds);
+  const backtest = new Backtest(symbol);
   const results = await backtest.sma(5, 12, 25);
   const profitPct = _.get(results, 'analysis.profitPct', 0);
   return {

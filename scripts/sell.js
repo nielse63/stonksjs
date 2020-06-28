@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-const env = require('../config/env');
 const fs = require('fs-extra');
 const path = require('path');
 const debug = require('debug')('stonks:sell');
@@ -7,25 +6,11 @@ const Portfolio = require('../lib/Portfolio');
 const Account = require('../lib/Account');
 const Backtest = require('../lib/Backtest');
 
-const creds = {
-  keyId: env.ALPACA_API_KEY,
-  secretKey: env.ALPACA_API_SECRET,
-  paper: env.ALPACA_PAPER_TRADING,
-};
-
 let cacheRHPortfolio;
 
-const account = new Account(
-  env.ROBINHOOD_USERNAME,
-  env.ROBINHOOD_PASSWORD,
-  env.ROBINHOOD_DEVICE_TOKEN,
-);
+const account = new Account();
 
-const stonksPortfolio = new Portfolio(
-  env.ROBINHOOD_USERNAME,
-  env.ROBINHOOD_PASSWORD,
-  env.ROBINHOOD_DEVICE_TOKEN,
-);
+const stonksPortfolio = new Portfolio();
 
 const shouldSellAsset = (object) => {
   if (!object) return false;
@@ -59,7 +44,7 @@ const runBacktest = async (array) => {
   for (const object of assetsInPlay) {
     const { symbol } = object;
     debug(`backtesting ${symbol}`);
-    const backtest = new Backtest(symbol, creds);
+    const backtest = new Backtest(symbol);
     try {
       const results = await backtest.sma(5, 12, 25);
       if (!results) {
