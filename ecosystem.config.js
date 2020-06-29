@@ -1,22 +1,32 @@
 require('dotenv').config();
-const path = require('path');
-const os = require('os');
+// const path = require('path');
+// const os = require('os');
 
 module.exports = {
-  apps: [{
-    name: 'api',
-    script: './api/index.js',
-    watch: false,
-    instances: 1,
-    error_file: path.resolve(os.tmpdir(), 'stonks.stderr.log'),
-    out_file: path.resolve(os.tmpdir(), 'stonks.stdout.log'),
-    env: {
-      NODE_ENV: 'development',
+  apps: [
+    // {
+    //   name: 'api',
+    //   script: './api/index.js',
+    //   watch: false,
+    //   instances: 1,
+    // },
+    {
+      name: 'scripts',
+      script: 'npm',
+      args: ['start'],
+      watch: false,
+      instances: 1,
+      // error_file: path.resolve(os.tmpdir(), 'stonks.stderr.log'),
+      // out_file: path.resolve(os.tmpdir(), 'stonks.stdout.log'),
+      env: {
+        NODE_ENV: 'production',
+        DEBUG: 'stonks:*',
+        ROBINHOOD_USERNAME: process.env.ROBINHOOD_USERNAME,
+        ROBINHOOD_PASSWORD: process.env.ROBINHOOD_PASSWORD,
+        ROBINHOOD_DEVICE_TOKEN: process.env.ROBINHOOD_DEVICE_TOKEN,
+      },
     },
-    env_production: {
-      NODE_ENV: 'production',
-    },
-  }],
+  ],
   deploy: {
     production: {
       user: process.env.SSH_USER,

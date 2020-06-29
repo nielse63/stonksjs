@@ -30,4 +30,6 @@ const rebalance = async () => {
 };
 
 const scheduler = new Scheduler(rebalance);
-scheduler.every(60 * 24);
+scheduler.every(60);
+const next = scheduler.getNext();
+debug(`next scheduled job: ${next.toISOString()}`);
