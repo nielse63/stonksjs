@@ -26,7 +26,9 @@
     "start:api": "cross-env NODE_ENV=production node api/index.js",
     "lint": "eslint .",
     "test": "jest",
-    "deploy": "pm2 deploy production"
+    "predeploy": ".bin/backup-nginx-config",
+    "deploy": "pm2 deploy production",
+    "postdeploy": "rsync -avz .env root@67.207.83.86:/var/www/stonksjs/current/source"
   },
   "author": {
     "name": "Erik Nielsen",

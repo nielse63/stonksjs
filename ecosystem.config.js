@@ -1,24 +1,21 @@
 require('dotenv').config();
-// const path = require('path');
-// const os = require('os');
 
 module.exports = {
   apps: [
-    // {
-    //   name: 'api',
-    //   script: './api/index.js',
-    //   watch: false,
-    //   instances: 1,
-    // },
     {
       name: 'scripts',
-      script: 'npm',
-      args: ['start'],
+      script: './scripts/stonks.js',
       watch: false,
       instances: 1,
-      // error_file: path.resolve(os.tmpdir(), 'stonks.stderr.log'),
-      // out_file: path.resolve(os.tmpdir(), 'stonks.stdout.log'),
+      combine_logs: true,
       env: {
+        NODE_ENV: 'development',
+        DEBUG: 'stonks:*',
+        ROBINHOOD_USERNAME: process.env.ROBINHOOD_USERNAME,
+        ROBINHOOD_PASSWORD: process.env.ROBINHOOD_PASSWORD,
+        ROBINHOOD_DEVICE_TOKEN: process.env.ROBINHOOD_DEVICE_TOKEN,
+      },
+      env_production: {
         NODE_ENV: 'production',
         DEBUG: 'stonks:*',
         ROBINHOOD_USERNAME: process.env.ROBINHOOD_USERNAME,
@@ -34,10 +31,7 @@ module.exports = {
       ref: 'origin/master',
       repo: 'https://github.com/nielse63/stonksjs.git',
       path: process.env.SSH_ROOT,
-      'pre-deploy-local': 'npm test && bin/test',
-      'post-deploy': 'npm ci --production && docker-compose up -d',
-      // 'post-deploy': 'npm ci --production && pm2 reload ecosystem.config.js --env production',
-      'pre-setup': '',
+      'post-deploy': 'npm ci && pm2 startOrRestart ecosystem.config.js --update-env --env production',
     },
   },
 };

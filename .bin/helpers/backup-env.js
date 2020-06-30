@@ -8,5 +8,11 @@ const envSample = path.join(root, '.env.sample');
 const content = fs.readFileSync(env, 'utf8');
 const sampleContent = content
   .replace(/"/g, "'")
-  .replace(/='(.*?)'/g, "=''");
+  .replace(/='(.*?)'/g, "=''")
+  .split('\n')
+  .filter((line) => {
+    return !line.startsWith('#')
+  })
+  .filter(Boolean)
+  .join('\n')
 fs.writeFileSync(envSample, sampleContent);
