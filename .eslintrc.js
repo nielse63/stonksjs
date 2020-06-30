@@ -6,6 +6,7 @@ module.exports = {
   env: {
     browser: false,
     node: true,
+    jest: true,
   },
   rules: {
     'no-console': 'off',
@@ -32,9 +33,6 @@ module.exports = {
   overrides: [
     {
       files: ['*.test.js', '*.spec.js'],
-      env: {
-        jest: true,
-      },
       rules: {
         'no-console': 'off',
         'global-require': 'off',

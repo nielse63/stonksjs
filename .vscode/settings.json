@@ -1,6 +1,5 @@
 {
   "files.exclude": {
-    "**/*.log*": false,
     "**/coverage": true
   },
   "search.exclude": {
@@ -9,5 +8,9 @@
     "**/.tmp": true,
     "**/tmp": true
   },
-  "cSpell.customUserDictionaries": ["algotrader", "backtest", "grademark"]
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
 }
