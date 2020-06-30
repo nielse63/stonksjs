@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 const fs = require('fs-extra');
 const path = require('path');
-const debug = require('debug')('stonks:sell');
 const Portfolio = require('../lib/Portfolio');
 const Account = require('../lib/Account');
 const Backtest = require('../lib/Backtest');
 const Market = require('../lib/Market');
+const StonksLogger = require('../lib/StonksLogger');
+
+const logger = new StonksLogger('sell');
 
 let cacheRHPortfolio;
 
@@ -34,7 +36,7 @@ const runBacktest = async (array) => {
   const assetsInPlay = array.filter(({ shouldSell }) => !shouldSell);
   for (const object of assetsInPlay) {
     const { symbol } = object;
-    debug(`backtesting ${symbol}`);
+    logger.log(`backtesting ${symbol}`);
     const backtest = new Backtest(symbol);
     try {
       const results = await backtest.sma(5, 12, 25);
@@ -63,15 +65,12 @@ const getPortfolio = async () => {
 
 const sellAsset = async (asset) => {
   const portfolio = await getPortfolio();
-  const { symbol, lastPrice } = asset;
+  const { symbol } = asset;
   const quantity = await portfolio.getQuantity(symbol);
   const options = {
-    quantity: Math.floor(quantity),
-    timeInForce: 'gtc',
-    stopPrice: lastPrice,
-    trigger: 'stop',
+    quantity,
   };
-  debug(`placing sell order for ${symbol}`);
+  logger.log(`placing sell order for ${symbol}`);
   const order = await stonksPortfolio.sell(symbol, options);
   return order;
 };
@@ -89,10 +88,10 @@ const rebalancePortfolio = async () => {
   const market = new Market();
   const isMarketOpen = await market.isOpen();
   if (!isMarketOpen) {
-    debug('market is not open yet. exiting');
+    logger.error('market is not open yet. exiting');
     return [];
   }
-  debug('running sell');
+  logger.log('running sell');
   const assets = await account.getPortfolio();
   const stocks = getStocks(assets);
   const backtestedAssets = await runBacktest(stocks);
@@ -100,11 +99,11 @@ const rebalancePortfolio = async () => {
 
   const sellCount = assetsToSell.length;
   if (!sellCount) {
-    debug('no assets meet sell criteria');
+    logger.error('no assets meet sell criteria');
     return [];
   }
 
-  debug(`selling ${sellCount} assets`);
+  logger.log(`selling ${sellCount} assets`);
 
   const output = await sellAssets(assetsToSell);
   fs.writeJsonSync(path.resolve(__dirname, 'data/sell-orders.json'), output);

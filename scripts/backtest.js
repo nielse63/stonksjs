@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 const path = require('path');
-const debug = require('debug')('stonks:backtest');
 const _ = require('lodash');
 const df = require('data-forge');
 const fs = require('fs-extra');
 const Backtest = require('../lib/Backtest');
+const StonksLogger = require('../lib/StonksLogger');
+
+const logger = new StonksLogger('backtest');
 
 const filterResults = (array) => {
   const output = new df.DataFrame(array)
@@ -50,7 +52,7 @@ const writeBacktestResults = (array) => {
     };
   }, {});
   fs.writeJSONSync(filepath, json);
-  debug('wrote backtest results to `backtest.json`');
+  logger.log('wrote backtest results to `backtest.json`');
 };
 
 const runBacktests = async (recommendations) => {
@@ -69,11 +71,11 @@ const runBacktests = async (recommendations) => {
 const writeRecommendations = (json) => {
   const filepath = path.resolve(__dirname, 'data/recommendations.json');
   fs.writeJSONSync(filepath, json);
-  debug('wrote post-backtest recommendations to `recommendations.json`');
+  logger.log('wrote post-backtest recommendations to `recommendations.json`');
 };
 
 const main = async () => {
-  debug('running backtest');
+  logger.log('running backtest');
   const recommendations = readRecommendations();
   const output = await runBacktests(recommendations);
   writeRecommendations(output);

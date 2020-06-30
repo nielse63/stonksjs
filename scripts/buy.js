@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 const env = require('../config/env');
-const debug = require('debug')('stonks:buy');
 const path = require('path');
 const fs = require('fs-extra');
 const Portfolio = require('../lib/Portfolio');
 const Account = require('../lib/Account');
 const Market = require('../lib/Market');
+const StonksLogger = require('../lib/StonksLogger');
+
+const logger = new StonksLogger('buy');
 
 let cachedAccount = null;
 const getAccount = () => {
@@ -26,10 +28,9 @@ const getBuyingPower = async () => {
 const buySingleAssets = async ({ asset, amountAvailablePerAsset, portfolio }) => {
   const { symbol, price } = asset;
   const quantity = parseFloat((amountAvailablePerAsset / price).toFixed(2));
-  debug(`buying ${quantity} shares of ${symbol} @ ${price}`);
+  logger.log(`buying ${quantity} shares of ${symbol} @ ${price}`);
   const order = await portfolio.buy(symbol, {
     quantity,
-    trigger: 'stop',
   });
   return order;
 };
@@ -47,7 +48,10 @@ const buyAssets = async (array, buyingPower) => {
     console.log('no assets recommended to buy');
   }
 
-  const amountAvailablePerAsset = buyingPower / assetsLength;
+  let amountAvailablePerAsset = buyingPower / assetsLength;
+  if (amountAvailablePerAsset > 500) {
+    amountAvailablePerAsset = 500;
+  }
   const output = [];
   for (const asset of array) {
     const order = buySingleAssets({ asset, amountAvailablePerAsset, portfolio });
@@ -66,13 +70,13 @@ const main = async () => {
   const market = new Market();
   const isMarketOpen = await market.isOpen();
   if (!isMarketOpen) {
-    debug('market is not open yet. exiting');
+    logger.error('market is not open yet. exiting');
     return [];
   }
-  debug('buying recommended assets');
+  logger.log('buying recommended assets');
   const buyingPower = await getBuyingPower();
   if (buyingPower < 1) {
-    debug('no buying power available - exiting');
+    logger.error('no buying power available - exiting');
     return [];
   }
   const recommendations = readRecommendations();
