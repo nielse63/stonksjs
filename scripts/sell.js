@@ -5,6 +5,7 @@ const debug = require('debug')('stonks:sell');
 const Portfolio = require('../lib/Portfolio');
 const Account = require('../lib/Account');
 const Backtest = require('../lib/Backtest');
+const Market = require('../lib/Market');
 
 let cacheRHPortfolio;
 
@@ -85,6 +86,12 @@ const sellAssets = async (assets) => {
 };
 
 const rebalancePortfolio = async () => {
+  const market = new Market();
+  const isMarketOpen = await market.isOpen();
+  if (!isMarketOpen) {
+    debug('market is not open yet. exiting');
+    return [];
+  }
   debug('running sell');
   const assets = await account.getPortfolio();
   const stocks = getStocks(assets);

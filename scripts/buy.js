@@ -5,6 +5,7 @@ const path = require('path');
 const fs = require('fs-extra');
 const Portfolio = require('../lib/Portfolio');
 const Account = require('../lib/Account');
+const Market = require('../lib/Market');
 
 let cachedAccount = null;
 const getAccount = () => {
@@ -62,6 +63,12 @@ const readRecommendations = () => {
 };
 
 const main = async () => {
+  const market = new Market();
+  const isMarketOpen = await market.isOpen();
+  if (!isMarketOpen) {
+    debug('market is not open yet. exiting');
+    return [];
+  }
   debug('buying recommended assets');
   const buyingPower = await getBuyingPower();
   if (buyingPower < 1) {
