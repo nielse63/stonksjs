@@ -1,58 +1,37 @@
 #!/usr/bin/env node
 require('../config/env');
 const path = require('path');
-const debug = require('debug')('stonks:cli');
 const fs = require('fs-extra');
-// const {
-//   Algorithm: { Scheduler },
-// } = require('algotrader');
 const schedule = require('node-schedule');
+const StonksLogger = require('../lib/StonksLogger');
 const screener = require('./screener');
 const buy = require('./buy');
 const sell = require('./sell');
-const setStopLoss = require('./set-stop-loss');
+const Market = require('../lib/Market');
+// const setStopLoss = require('./set-stop-loss');
 
-const datadir = path.resolve(__dirname, 'data');
-fs.ensureDirSync(datadir);
+const market = new Market();
+const logger = new StonksLogger();
 
-{
-  // schedule cron for stop loss script
-  // const scheduler = new Scheduler(setStopLoss);
-  // scheduler.every(15);
-  // const next = scheduler.getNext();
-  const job = schedule.scheduleJob('*/15 * * * 1-5', async () => {
-    await setStopLoss();
-  });
-  const next = job.nextInvocation();
-  debug(`next stop loss job is scheduled for: ${next}`);
-}
+(async () => {
+  // create the data dir
+  const datadir = path.resolve(__dirname, 'data');
+  fs.ensureDirSync(datadir);
 
-{
-  // schedule running stock screener
-  const job = schedule.scheduleJob('*/60 * * * 1-5', async () => {
-    await screener();
-  });
-  const next = job.nextInvocation();
-  debug(`next screener job is scheduled for: ${next}`);
-}
+  const scheduler = async (interval, fn, title) => {
+    if (await market.isOpen()) {
+      logger.log(`running ${title} immediately`);
+      await fn();
+    }
+    const job = schedule.scheduleJob(`${interval} * * * 1-5`, async () => {
+      await fn();
+    });
+    const next = job.nextInvocation();
+    logger.log(`next ${title} job is scheduled for: ${next}`);
+    return Promise.resolve();
+  };
 
-{
-  // run sell script
-  // const scheduler = new Scheduler(sell);
-  // scheduler.every(30);
-  // const next = scheduler.getNext();
-  const job = schedule.scheduleJob('*/30 * * * 1-5', async () => {
-    await sell();
-  });
-  const next = job.nextInvocation();
-  debug(`next sell job is scheduled for: ${next}`);
-}
-
-{
-  // run buy script
-  const job = schedule.scheduleJob('*/60 * * * 1-5', async () => {
-    await buy();
-  });
-  const next = job.nextInvocation();
-  debug(`next buy job is scheduled for: ${next}`);
-}
+  await scheduler('*/60', screener, 'screener');
+  await scheduler('*/30', sell, 'sell');
+  await scheduler('0,30', buy, 'buy');
+})();

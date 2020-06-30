@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 const env = require('../config/env');
-const debug = require('debug')('stonks:buying-power');
 const Account = require('../lib/Account');
+const StonksLogger = require('../lib/StonksLogger');
+
+const logger = new StonksLogger('buying-power');
 
 let cachedAccount = null;
 const getAccount = () => {
@@ -20,7 +22,7 @@ const getBuyingPower = async () => {
 };
 
 const main = async () => {
-  debug('getting buying power');
+  logger.log('getting buying power');
   const buyingPower = await getBuyingPower();
   return buyingPower;
 };
