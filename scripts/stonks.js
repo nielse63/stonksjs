@@ -3,33 +3,47 @@ require('../config/env');
 const path = require('path');
 const debug = require('debug')('stonks:cli');
 const fs = require('fs-extra');
-const algotrader = require('algotrader');
+const {
+  Algorithm: { Scheduler },
+} = require('algotrader');
+const schedule = require('node-schedule');
 const screener = require('./screener');
-const backtest = require('./backtest');
 const buy = require('./buy');
 const sell = require('./sell');
-const getBuyingPower = require('./getBuyingPower');
+const setStopLoss = require('./set-stop-loss');
 
-const { Scheduler } = algotrader.Algorithm;
+const datadir = path.resolve(__dirname, 'data');
+fs.ensureDirSync(datadir);
 
-const rebalance = async () => {
-  const datadir = path.resolve(__dirname, 'data');
-  fs.ensureDirSync(datadir);
-  // first sell anything that needs to be sold
-  await sell();
-  const buyingPower = await getBuyingPower();
-  if (!buyingPower) {
-    debug('not enough buying power to continue');
-    return;
-  }
+{
+  // schedule cron for stop loss script
+  const scheduler = new Scheduler(setStopLoss);
+  scheduler.every(15);
+  const next = scheduler.getNext();
+  debug(`next stop loss job is scheduled for: ${next}`);
+}
 
-  // refresh our screened assets
-  await screener();
-  await backtest();
-  await buy();
-};
+{
+  // schedule running stock screener
+  const job = schedule.scheduleJob('*/60 * * * 1-5', async () => {
+    await screener();
+  });
+  const next = job.nextInvocation();
+  debug(`next screener job is scheduled for: ${next}`);
+}
 
-const scheduler = new Scheduler(rebalance);
-scheduler.every(60);
-const next = scheduler.getNext();
-debug(`next scheduled job: ${next.toISOString()}`);
+{
+  // run sell script
+  const scheduler = new Scheduler(sell);
+  scheduler.every(30);
+  const next = scheduler.getNext();
+  debug(`next sell job is scheduled for: ${next}`);
+}
+
+{
+  // run sell script
+  const scheduler = new Scheduler(buy);
+  scheduler.every(60);
+  const next = scheduler.getNext();
+  debug(`next buy job is scheduled for: ${next}`);
+}

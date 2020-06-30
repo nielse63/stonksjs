@@ -8,6 +8,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const df = require('data-forge');
 const getFinvizData = require('./finviz');
+const backtest = require('./backtest');
 
 const getTrendingSymbols = async () => {
   const trending = await Query.getTrendingSymbols(100);
@@ -42,8 +43,6 @@ const getRecommendations = async (trending, screenerResults) => {
     try {
       const result = await getAssetData(symbol);
 
-      // buy if if recommendationMean < 2
-      // sell if if recommendationMean > 4
       const recommendationMean = _.get(result, 'financialData.recommendationMean.raw', 6);
       if (recommendationMean <= 2) {
         const price = _.get(result, 'financialData.currentPrice.raw');
@@ -63,18 +62,19 @@ const getRecommendations = async (trending, screenerResults) => {
 
 const saveRecommendations = (json) => {
   const dirpath = path.join(__dirname, 'data');
-  const filepath = path.join(dirpath, 'recommendations.json');
+  const filepath = path.join(dirpath, 'screener.json');
   fs.ensureDirSync(dirpath);
   fs.writeJsonSync(filepath, json);
-  debug('saved recommendations to `./recommendations.json`');
+  debug('saved recommendations to `./screener.json`');
 };
 
 const screener = async () => {
   debug('running screener.js');
   const screenerResults = await getFinvizData();
   const trending = await getTrendingSymbols();
-  const recommendations = await getRecommendations(trending, screenerResults);
-  saveRecommendations(recommendations);
+  const universe = await getRecommendations(trending, screenerResults);
+  saveRecommendations(universe);
+  const recommendations = await backtest();
   return recommendations;
 };
 

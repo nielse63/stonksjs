@@ -28,16 +28,6 @@ const shouldSellAsset = (object) => {
   return lastIndicator[firstKey] < lastIndicator[secondKey];
 };
 
-const getRoi = (object) => {
-  const { buyPrice, lastPrice } = object;
-  return ((lastPrice - buyPrice) / buyPrice) * 100;
-};
-
-const shouldExecuteStop = (object) => {
-  const roi = getRoi(object);
-  return roi < -10;
-};
-
 const runBacktest = async (array) => {
   const output = [];
   const assetsInPlay = array.filter(({ shouldSell }) => !shouldSell);
@@ -63,16 +53,6 @@ const runBacktest = async (array) => {
   return output;
 };
 
-const getAssetsToStopSell = (assets) => assets.map((object) => {
-  const shouldSell = shouldExecuteStop(object);
-  const roi = getRoi(object);
-  return {
-    ...object,
-    roi: `${roi.toFixed(2)}%`,
-    shouldSell,
-  };
-}).filter(({ shouldSell }) => shouldSell);
-
 const getStocks = (assets) => assets.filter(({ type }) => type === 'stock');
 
 const getPortfolio = async () => {
@@ -86,7 +66,6 @@ const sellAsset = async (asset) => {
   const quantity = await portfolio.getQuantity(symbol);
   const options = {
     quantity: Math.floor(quantity),
-    type: 'limit',
     timeInForce: 'gtc',
     stopPrice: lastPrice,
     trigger: 'stop',
@@ -108,16 +87,11 @@ const sellAssets = async (assets) => {
 const rebalancePortfolio = async () => {
   debug('running sell');
   const assets = await account.getPortfolio();
-  const assetsToStopSell = getAssetsToStopSell(assets);
   const stocks = getStocks(assets);
   const backtestedAssets = await runBacktest(stocks);
   const assetsToSell = backtestedAssets.filter(({ shouldSell }) => shouldSell);
-  const allSellableAssets = [
-    ...assetsToStopSell,
-    ...assetsToSell,
-  ];
 
-  const sellCount = allSellableAssets.length;
+  const sellCount = assetsToSell.length;
   if (!sellCount) {
     debug('no assets meet sell criteria');
     return [];
@@ -125,7 +99,7 @@ const rebalancePortfolio = async () => {
 
   debug(`selling ${sellCount} assets`);
 
-  const output = await sellAssets(allSellableAssets);
+  const output = await sellAssets(assetsToSell);
   fs.writeJsonSync(path.resolve(__dirname, 'data/sell-orders.json'), output);
   return output;
 };

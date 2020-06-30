@@ -28,19 +28,9 @@ const buySingleAssets = async ({ asset, amountAvailablePerAsset, portfolio }) =>
   debug(`buying ${quantity} shares of ${symbol} @ ${price}`);
   const order = await portfolio.buy(symbol, {
     quantity,
-    type: 'limit',
+    trigger: 'stop',
   });
   return order;
-  // return new Promise((resolve) => {
-  //   // const interval = setInterval(() => {
-  //   //   const response = await order.getResponse();
-  //   //   resolve(order);
-  //   // }, 500);
-  //   setTimeout(() => {
-  //     const response = order.getResponse();
-  //     resolve(order, response);
-  //   }, 500);
-  // });
 };
 
 const buyAssets = async (array, buyingPower) => {
@@ -56,9 +46,7 @@ const buyAssets = async (array, buyingPower) => {
     console.log('no assets recommended to buy');
   }
 
-  const account = getAccount();
   const amountAvailablePerAsset = buyingPower / assetsLength;
-  await account.user.cancelOpenOrders();
   const output = [];
   for (const asset of array) {
     const order = buySingleAssets({ asset, amountAvailablePerAsset, portfolio });
@@ -76,7 +64,7 @@ const readRecommendations = () => {
 const main = async () => {
   debug('buying recommended assets');
   const buyingPower = await getBuyingPower();
-  if (!buyingPower) {
+  if (buyingPower < 1) {
     debug('no buying power available - exiting');
     return [];
   }

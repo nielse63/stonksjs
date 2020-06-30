@@ -22,7 +22,7 @@ const filterResults = (array) => {
 };
 
 const readRecommendations = () => {
-  const recsfilepath = path.resolve(__dirname, 'data/recommendations.json');
+  const recsfilepath = path.resolve(__dirname, 'data/screener.json');
   const recommendations = fs.readJSONSync(recsfilepath, 'utf8');
   return recommendations;
 };
