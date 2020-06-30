@@ -28,7 +28,9 @@
     "test": "jest",
     "predeploy": ".bin/backup-nginx-config",
     "deploy": "pm2 deploy production",
-    "postdeploy": "rsync -avz .env root@67.207.83.86:/var/www/stonksjs/current/source"
+    "postdeploy": "rsync -avz .env root@67.207.83.86:/var/www/stonksjs/current/source",
+    "changelog": "auto-changelog",
+    "release": "dotenv release-it"
   },
   "author": {
     "name": "Erik Nielsen",
@@ -61,6 +63,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
+    "auto-changelog": "^2.1.0",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^25.5.1",
     "chai": "^4.2.0",
