@@ -1,14 +1,15 @@
 #!/usr/bin/env node
 const rp = require('request-promise');
 const cheerio = require('cheerio');
-const StonksLogger = require('../lib/StonksLogger');
+// const StonksLogger = require('../lib/StonksLogger');
 
-const logger = new StonksLogger('finviz');
+// const logger = new StonksLogger('finviz');
 
-const defaultUrl = 'https://finviz.com/screener.ashx?v=112&f=an_recom_buybetter,exch_nyse,fa_epsyoy_high,fa_pe_u20,fa_peg_low,geo_usa&ft=4&o=-change';
-
-const scraper = async (url = defaultUrl, maxLimit = 20) => {
-  logger.log('running finviz scraper');
+const scraper = async (url, maxLimit = 20) => {
+  if (!url) {
+    throw new Error('URL is required for finviz screener');
+  }
+  // logger.log('running finviz scraper');
   try {
     const response = await rp({
       uri: url,
@@ -50,10 +51,10 @@ const scraper = async (url = defaultUrl, maxLimit = 20) => {
     })
     /* eslint-enable */
     const symbols = data.map(({ Ticker }) => Ticker);
-    logger.log('scraping complete');
+    // logger.log('scraping complete');
     return symbols;
   } catch (error) {
-    logger.error(error);
+    console.error(error);
   }
   return [];
 };

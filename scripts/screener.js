@@ -70,7 +70,8 @@ const saveRecommendations = (json) => {
 
 const screener = async () => {
   debug('running screener.js');
-  const screenerResults = await getFinvizData();
+  const url = 'https://finviz.com/screener.ashx?v=112&f=an_recom_buybetter,exch_nyse,fa_epsyoy_high,fa_pe_u20,fa_peg_low,geo_usa&ft=4&o=-change';
+  const screenerResults = await getFinvizData(url);
   const trending = await getTrendingSymbols();
   const universe = await getRecommendations(trending, screenerResults);
   saveRecommendations(universe);

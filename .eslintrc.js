@@ -13,7 +13,7 @@ module.exports = {
     'class-methods-use-this': 'off',
     'no-restricted-globals': 'warn',
     'no-underscore-dangle': 'off',
-    'max-len': ['warn', { ignoreComments: true }],
+    'max-len': ['warn', { ignoreComments: true, ignoreUrls: true }],
     'no-restricted-syntax': ['error', {
       selector: 'ForInStatement',
       message: 'for..in loops iterate over the entire prototype chain, which is virtually never what you want. Use Object.{keys,values,entries}, and iterate over the resulting array.',
