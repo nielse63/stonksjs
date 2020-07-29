@@ -2,29 +2,26 @@
 
 > Algotrading tools in node
 
-## Requirements
+![Node.js CI](https://github.com/nielse63/stonksjs/workflows/Node.js%20CI/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/nielse63/stonksjs/badge.svg?branch=master)](https://coveralls.io/github/nielse63/stonksjs?branch=master)
 
-- [Alpaca](https://alpaca.markets/docs/get-started-with-alpaca/) trading account
+## BEWARE! WORK IN PROGRESS
+
+This project is still work in progress and very, very subject to change. This is by no means
+production ready, and shouldn't really be used by anyone but me right now.
 
 ## Installation
 
 ```bash
-git clone https://github.com/nielse63/stonksjs.git
-cd stonksjs
-npm ci
+npm install stonksjs
+```
+
+or
+
+```bash
+yarn add stonksjs
 ```
 
 ## Usage
 
-Create a `.env` based on [`.env.sample`]('.env.sample), then run:
-
-```bash
-npm start
-```
-
-## Features/Design
-
-- Executes on the command line on a remote server or your local machine
-- Creates a stock universe based on pre-set parameters instead of opinions, emotions, or the latest
-  trends
-- Automatically backtests strategies before execution - if it's not a winner, don't invest
+Again, still work in progress. So there isn't any usage.
