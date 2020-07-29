@@ -2,7 +2,7 @@
 
 > Algotrading tools in node
 
-![Node.js CI](https://github.com/nielse63/stonksjs/workflows/Node.js%20CI/badge.svg)
+![CI Tests](https://github.com/nielse63/stonksjs/workflows/CI%20Tests/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/nielse63/stonksjs/badge.svg?branch=master)](https://coveralls.io/github/nielse63/stonksjs?branch=master)
 
 ## BEWARE! WORK IN PROGRESS
