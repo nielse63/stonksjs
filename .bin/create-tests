@@ -1,6 +1,0 @@
-#!/usr/bin/env node
-const path = require('path');
-const fs = require('fs-extra');
-const globby = require('globby');
-
-const root = path.resolve(__dirname, '../');

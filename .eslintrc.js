@@ -29,6 +29,7 @@ module.exports = {
     'no-await-in-loop': 'warn',
     'no-empty': ['error', { allowEmptyCatch: true }],
     'import/order': 'off',
+    'valid-jsdoc': 'warn',
   },
   overrides: [
     {
