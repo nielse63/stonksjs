@@ -5,19 +5,11 @@
 Functions used to interaact with Robinhood
 
 - [robinhood](#stonksjs.module_robinhood)
-  - [.account](#stonksjs.module_robinhood.account) : <code>RobinhoodAccount</code>
   - [.getBuyingPower()](#stonksjs.module_robinhood.getBuyingPower) ⇒
     <code>Promise.&lt;number&gt;</code>
   - [.buy(symbol, options)](#stonksjs.module_robinhood.buy) ⇒ <code>Promise.&lt;object&gt;</code>
   - [.sell(symbol, options)](#stonksjs.module_robinhood.sell) ⇒ <code>Promise.&lt;object&gt;</code>
 
-<a name="stonksjs.module_robinhood.account"></a>
-
-## robinhood.account : <code>RobinhoodAccount</code>
-
-An instance of the RobinhoodAccount class
-
-**Kind**: static property of [<code>robinhood</code>](#stonksjs.module_robinhood)  
 <a name="stonksjs.module_robinhood.getBuyingPower"></a>
 
 ## robinhood.getBuyingPower() ⇒ <code>Promise.&lt;number&gt;</code>

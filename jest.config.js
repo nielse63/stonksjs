@@ -1,14 +1,9 @@
 // For a detailed explanation regarding each configuration property, visit:
 // https://jestjs.io/docs/en/configuration.html
 
-const coverageReporters = process.env.CI ? [
-  'json',
-  'text-summary',
-  'lcov',
-] : [
-  'text-summary',
-  'html',
-];
+const coverageReporters = process.env.CI
+  ? ['json', 'text-summary', 'lcov']
+  : ['text-summary', 'html'];
 
 module.exports = {
   // All imported modules in your tests should be mocked automatically
@@ -35,7 +30,7 @@ module.exports = {
     '<rootDir>/lib/**/*.{js,jsx}',
     '!**/node_modules/**',
     '!**/vendor/**',
-    '!<rootDir>/api/index.js',
+    '!<rootDir>/**/index.js',
   ],
 
   // The directory where Jest should output its coverage files
@@ -157,14 +152,7 @@ module.exports = {
   // ],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
-  testPathIgnorePatterns: [
-    '/node_modules/',
-    '/coverage/',
-    '/tmp/',
-    '/data/',
-    '/backup/',
-    '/logs/',
-  ],
+  testPathIgnorePatterns: ['/node_modules/', '/coverage/', '/tmp/', '/data/', '/backup/', '/logs/'],
 
   // The regexp pattern or array of patterns that Jest uses to detect test files
   // testRegex: [],

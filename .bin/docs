@@ -3,7 +3,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const cp = require('child_process');
 
-const apiFiles = ['robinhood', 'screeners'];
+const apiFiles = ['robinhood', 'screeners', 'scrapers'];
 
 const exec = (cmd) => cp.execSync(cmd).toString().trim();
 const createDocsFile = (file) => {
