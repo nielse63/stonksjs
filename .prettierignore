@@ -3,3 +3,4 @@ output/
 tmp/
 .tmp/
 old/
+!/.bin/*

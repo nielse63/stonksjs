@@ -1,6 +1,6 @@
 <a name="stonksjs.module_robinhood"></a>
 
-## robinhood
+# robinhood
 
 Functions used to interaact with Robinhood
 
@@ -13,14 +13,14 @@ Functions used to interaact with Robinhood
 
 <a name="stonksjs.module_robinhood.account"></a>
 
-### robinhood.account : <code>RobinhoodAccount</code>
+## robinhood.account : <code>RobinhoodAccount</code>
 
 An instance of the RobinhoodAccount class
 
 **Kind**: static property of [<code>robinhood</code>](#stonksjs.module_robinhood)  
 <a name="stonksjs.module_robinhood.getBuyingPower"></a>
 
-### robinhood.getBuyingPower() ⇒ <code>Promise.&lt;number&gt;</code>
+## robinhood.getBuyingPower() ⇒ <code>Promise.&lt;number&gt;</code>
 
 Get buying power in your Robinhood account
 
@@ -28,7 +28,7 @@ Get buying power in your Robinhood account
 **Returns**: <code>Promise.&lt;number&gt;</code> - Available buying power  
 <a name="stonksjs.module_robinhood.buy"></a>
 
-### robinhood.buy(symbol, options) ⇒ <code>Promise.&lt;object&gt;</code>
+## robinhood.buy(symbol, options) ⇒ <code>Promise.&lt;object&gt;</code>
 
 Buy an equity
 
@@ -42,7 +42,7 @@ Buy an equity
 
 <a name="stonksjs.module_robinhood.sell"></a>
 
-### robinhood.sell(symbol, options) ⇒ <code>Promise.&lt;object&gt;</code>
+## robinhood.sell(symbol, options) ⇒ <code>Promise.&lt;object&gt;</code>
 
 Sell an equity
 
