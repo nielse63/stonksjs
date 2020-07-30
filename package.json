@@ -23,16 +23,12 @@
   },
   "scripts": {
     "postinstall": "! [ -d \"$HOME/.stonksjs\" ] && mkdir -p \"$HOME/.stonksjs\"",
-    "start": "cross-env NODE_ENV=production ./scripts/stonks.js",
-    "start:api": "cross-env NODE_ENV=production node api/index.js",
+    "start": "node lib/index.js",
     "lint": "eslint --fix lib/ && prettier --write lib/",
     "test": "jest",
-    "predeploy": ".bin/backup-nginx-config",
-    "deploy": "pm2 deploy production",
-    "postdeploy": "rsync -avz .env root@67.207.83.86:/var/www/stonksjs/current/source",
     "changelog": "auto-changelog",
     "release": "dotenv release-it",
-    "docs": "documentation build lib/**/* -f html -o docs/api"
+    "docs": ".bin/docs"
   },
   "author": {
     "name": "Erik Nielsen",
@@ -70,13 +66,15 @@
     "husky": "^4.2.5",
     "jest": "^25.5.4",
     "jest-extended": "^0.11.5",
+    "jsdoc-to-markdown": "^6.0.1",
     "lint-staged": "^10.2.9",
     "prettier": "^2.0.5",
     "release-it": "^13.6.6"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "pre-push": "jest --onlyChanged --no-coverage --cache"
     }
   },
   "lint-staged": {
@@ -84,7 +82,7 @@
       "eslint --fix",
       "prettier --write"
     ],
-    "*.json": [
+    "*.{json,md}": [
       "prettier --write"
     ]
   },
