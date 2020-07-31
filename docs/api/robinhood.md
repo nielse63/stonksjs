@@ -18,7 +18,13 @@
 
 # Robinhood
 
-**Kind**: global class
+**Kind**: global class  
+**Properties**
+
+| Name            | Type                                         |
+| --------------- | -------------------------------------------- |
+| user            | [<code>RobinhoodUser</code>](#RobinhoodUser) |
+| isAuthenticated | <code>boolean</code>                         |
 
 - [Robinhood](#Robinhood)
   - [new Robinhood()](#new_Robinhood_new)
@@ -238,9 +244,4 @@ Place anorder with Robinhood
 
 Buy an asset in Robinhood
 
-**Kind**: instance method of [<code>Robinhood</code>](#Robinhood)
-
-| Param   | Type                | Description   |
-| ------- | ------------------- | ------------- |
-| symbol  | <code>string</code> | ticker symbol |
-| options | <code>object</cod   |
+**Kind**: instance method of [<code>Robinhood</cod
