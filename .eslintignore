@@ -1,7 +1,4 @@
 !.*.js
-data/
-output/
 tmp/
-.tmp/
 **/node_modules
-old/
+!/.bin/*

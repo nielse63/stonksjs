@@ -1,6 +1,6 @@
 <a name="stonksjs.module_screeners"></a>
 
-## screeners
+# screeners
 
 Stock screener functions
 
@@ -12,7 +12,7 @@ Stock screener functions
 
 <a name="stonksjs.module_screeners.highYieldDividends"></a>
 
-### screeners.highYieldDividends() ⇒ <code>Promise</code>
+## screeners.highYieldDividends() ⇒ <code>Promise</code>
 
 Screens for equities that meet the following criteria:
 
@@ -29,7 +29,7 @@ Screens for equities that meet the following criteria:
 https://finviz.com/screener.ashx?v=111&f=an_recom_buybetter,fa_div_o5,fa_eps5years_pos,fa_epsyoy1_pos,fa_fpe_u20&ft=4&o=dividendyield  
 <a name="stonksjs.module_screeners.potentialBreakouts"></a>
 
-### screeners.potentialBreakouts() ⇒ <code>Promise</code>
+## screeners.potentialBreakouts() ⇒ <code>Promise</code>
 
 Screens for equities that meet the following criteria:
 
@@ -46,7 +46,7 @@ Screens for equities that meet the following criteria:
 https://finviz.com/screener.ashx?v=111&s=ta_topgainers&f=an_recom_buybetter,ta_highlow52w_b0to10h,ta_sma20_pa,ta_sma200_sb50,ta_sma50_sb20&ft=4&o=-change  
 <a name="stonksjs.module_screeners.swingTrendingUp"></a>
 
-### screeners.swingTrendingUp() ⇒ <code>Promise</code>
+## screeners.swingTrendingUp() ⇒ <code>Promise</code>
 
 Screens for equities that meet the following criteria:
 
@@ -62,7 +62,7 @@ Screens for equities that meet the following criteria:
 https://finviz.com/screener.ashx?v=111&s=ta_topgainers&f=an_recom_buybetter,ta_sma20_pa,ta_sma200_sb50,ta_sma50_sb20&ft=4&o=-change  
 <a name="stonksjs.module_screeners.finvizCustom"></a>
 
-### screeners.finvizCustom(url) ⇒ <code>Promise</code>
+## screeners.finvizCustom(url) ⇒ <code>Promise</code>
 
 Function that allows the user to pass a finviz URL and returns symbols from that search
 

@@ -1,8 +1,0 @@
-{
-  "source": "./lib",
-  "destination": "./docs/api",
-  "plugins": [
-    { "name": "esdoc-standard-plugin" },
-    { "name": "esdoc-ecmascript-proposal-plugin", "option": { "all": true } }
-  ]
-}

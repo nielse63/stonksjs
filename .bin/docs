@@ -1,25 +1,18 @@
-#!/usr/bin/env bash
-set -e
+#!/usr/bin/env node
+const fs = require('fs-extra');
+const path = require('path');
+const cp = require('child_process');
 
-#vars
-files=('robinhood' 'screeners')
+const apiFiles = ['robinhood', 'screeners', 'scrapers'];
 
-# functions
-function create_docs_file() {
-  local file
-  file=$@
-  output_file="docs/api/${file}.md"
-  input_file="lib/${file}/index.js"
-  [ -f $output_file ] && rm -f $output_file
-  [ ! -f $input_file ] && return
-  echo "creating $file api docs"
-  npx jsdoc2md $input_file > $output_file
-}
+const exec = (cmd) => cp.execSync(cmd).toString().trim();
+const createDocsFile = (file) => {
+  const input = path.resolve(__dirname, `../lib/${file}/index.js`);
+  const output = path.resolve(__dirname, `../docs/api/${file}.md`);
+  if (!fs.existsSync(input)) return;
+  const content = exec(`npx jsdoc2md ${input}`)
+    .replace(/\n#/g, '\n');
+  fs.writeFileSync(output, content);
+};
 
-# execution
-if [ ! -d "docs/api" ]; then
-  mkdir -p docs/api
-fi
-for file in ${files[@]}; do
-  create_docs_file $file
-done
+apiFiles.forEach(createDocsFile);
