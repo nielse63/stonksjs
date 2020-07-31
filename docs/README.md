@@ -1,6 +1,6 @@
 # stonksjs
 
-> Algotrading utillity scripts. To the moon!!! 🚀🚀🚀
+> Algotrading utility scripts. To the moon!!! 🚀🚀🚀
 
 ![CI Tests](https://github.com/nielse63/stonksjs/workflows/CI%20Tests/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/nielse63/stonksjs/badge.svg?branch=master)](https://coveralls.io/github/nielse63/stonksjs?branch=master)
@@ -34,6 +34,8 @@ yarn add stonksjs
 ```
 
 ## Usage
+
+> More in-depth examples can be found in the [`example/`](example/) directory
 
 Import the module in your script or project, and execute one of the functions available:
 
