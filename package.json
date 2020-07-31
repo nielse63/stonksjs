@@ -1,6 +1,6 @@
 {
   "name": "stonksjs",
-  "version": "1.0.13",
+  "version": "2.0.0",
   "description": "Algotrading utillity scripts. To the moon!!! 🚀🚀🚀",
   "main": "lib/index.js",
   "files": [
