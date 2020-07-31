@@ -3,9 +3,19 @@ const fs = require('fs-extra');
 const path = require('path');
 const cp = require('child_process');
 
-const apiFiles = ['robinhood', 'screeners', 'scrapers'];
+const apiFiles = ['screeners', 'scrapers'];
 
 const exec = (cmd) => cp.execSync(cmd).toString().trim();
+
+const createRobinhoodDocs = () => {
+  const input = path.resolve(__dirname, `../lib/robinhood/Robinhood.js`);
+  const output = path.resolve(__dirname, `../docs/api/robinhood.md`);
+  if (!fs.existsSync(input)) return;
+  const content = exec(`npx jsdoc2md ${input}`)
+    .replace(/\n#/g, '\n');
+  fs.writeFileSync(output, content);
+}
+
 const createDocsFile = (file) => {
   const input = path.resolve(__dirname, `../lib/${file}/index.js`);
   const output = path.resolve(__dirname, `../docs/api/${file}.md`);
@@ -16,3 +26,5 @@ const createDocsFile = (file) => {
 };
 
 apiFiles.forEach(createDocsFile);
+createRobinhoodDocs();
+console.log('Docs updated')

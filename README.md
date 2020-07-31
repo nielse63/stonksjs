@@ -41,12 +41,14 @@ Import the module in your script or project, and execute one of the functions av
 const stonks = require('stonksjs');
 
 // stonks is a plan object, with each submodule containing the functions
-const { screeners, robinhood, scrapers } = stonks;
+const { screeners, scrapers } = stonks;
 
 // all functions are promise based
 const symbols = await screeners.swingTrendingUp();
 
 // trade on Robinhood by saving your credentials as environment variables
+const { Robinhood } = stonks;
+const robinhood = new Robinhood(username, password, deviceToken);
 const order = await robinhood.buy('MSFT', {
   qty: 100,
   type: 'limit',
@@ -58,21 +60,12 @@ More examples and API docs can be found in [`docs/api`](docs/api).
 
 ### Environment Variables
 
-In order to use stonks you must have your Robinhood credentials stored in a `.env` file - even if
-you're not using any Robinhood functions, an error will be thrown if they aren't set (I'm currently
-working on fixing this: [#10](https://github.com/nielse63/stonksjs/issues/19)).
+The `Robinhood` class required the `username`, `password`, and `deviceToken` and will default to
+environment variables is undefined. See [`.env.sample`](.env.sample) for all the environment
+variables that should be defined.
 
 For instructions on how to get the device token value,
 [read this GitHub comment](https://github.com/robinhood-unofficial/pyrh/issues/176#issuecomment-487310801).
-Add the following to your `.env` file:
-
-```
-ROBINHOOD_USERNAME='xxxxxxxxx'
-ROBINHOOD_PASSWORD='xxxxxxxxx'
-ROBINHOOD_DEVICE_TOKEN='xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
-```
-
-See [`.env.sample`](.env.sample) for all the environment variables that should be defined.
 
 ## API
 
