@@ -1,7 +1,7 @@
 {
   "name": "stonksjs",
   "version": "1.0.13",
-  "description": "To the moon!!! 🚀🚀🚀",
+  "description": "Algotrading utillity scripts. To the moon!!! 🚀🚀🚀",
   "main": "lib/index.js",
   "files": [
     "lib/",
@@ -67,7 +67,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "jest --onlyChanged --no-coverage --cache"
+      "pre-push": "jest --no-coverage --cache"
     }
   },
   "lint-staged": {
