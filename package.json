@@ -66,8 +66,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "jest --no-coverage --cache"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
