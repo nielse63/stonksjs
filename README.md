@@ -35,6 +35,8 @@ yarn add stonksjs
 
 ## Usage
 
+> More in-depth examples can be found in the [`example/`](example/) directory
+
 Import the module in your script or project, and execute one of the functions available:
 
 ```js
