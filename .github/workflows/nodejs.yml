@@ -38,8 +38,4 @@ jobs:
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-        on:
-          push:
-            branches: [master]
-          pull_request:
-            branches: [master]
+        if: ${{ github.event_name == 'pull_request' && github.base_ref == 'master' }}
