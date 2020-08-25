@@ -3,11 +3,7 @@
 
 name: CI Tests
 
-on:
-  push:
-    branches: [master]
-  pull_request:
-    branches: [master]
+on: [push, pull_request]
 
 jobs:
   build:
@@ -42,3 +38,4 @@ jobs:
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+        if: ${{ github.event_name == 'pull_request' && github.base_ref == 'master' }}
