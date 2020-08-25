@@ -7,10 +7,6 @@
       "ignoreChanges": ["*.spec.js", "*.md"],
       "message": "chore(release): publish",
       "registry": "https://registry.npmjs.org/"
-    },
-    "bootstrap": {
-      "ignore": "component-*",
-      "npmClientArgs": ["--no-package-lock"]
     }
   }
 }

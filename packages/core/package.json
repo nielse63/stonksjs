@@ -33,5 +33,12 @@
   },
   "bugs": {
     "url": "https://github.com/nielse63/stonksjs/issues"
+  },
+  "dependencies": {
+    "algotrader": "^2.5.4",
+    "axios": "^0.20.0",
+    "cheerio": "^1.0.0-rc.3",
+    "date-fns": "^2.15.0",
+    "lodash": "^4.17.20"
   }
 }
