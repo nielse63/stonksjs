@@ -1,11 +1,24 @@
 # `@stonksjs/quote`
 
-> TODO: description
+> Object representing a single financial instrument, given a valid ticker symbol is provided
+
+## Installation
+
+```bash
+npm install --save @stonksjs/quote
+```
 
 ## Usage
 
 ```
-const quote = require('@stonksjs/quote');
+const StonksQuote = require('@stonksjs/quote');
 
-// TODO: DEMONSTRATE API
+const quote = new StonksQuote('MSFT');
+const fundamentals = await quote.getFundamentals(); // returns object of fundamental data
 ```
+
+## API
+
+---
+
+_🚀 To the moon!!! 🚀_

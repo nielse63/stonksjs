@@ -1,7 +1,7 @@
 {
   "name": "@stonksjs/quote",
   "version": "0.0.1",
-  "description": "Creates an object of fundamental market data for a given asset",
+  "description": "Object representing a single financial instrument, given a valid ticker symbol is provided",
   "author": "Erik Nielsen <erik@312development.com>",
   "homepage": "https://nielse63.github.io/stonksjs/tree/master/packages/quote#readme",
   "license": "ISC",

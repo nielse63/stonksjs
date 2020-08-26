@@ -30,6 +30,7 @@ module.exports = {
     '<rootDir>/packages/**/*.{js,jsx}',
     '!**/node_modules/**',
     '!**/vendor/**',
+    '!**/typedef/**',
     '!<rootDir>/**/index.js',
   ],
 
@@ -69,20 +70,10 @@ module.exports = {
   maxWorkers: '50%',
 
   // An array of directory names to be searched recursively up from the requiring module's location
-  moduleDirectories: [
-    '<rootDir>/packages/**/node_modules',
-    'node_modules',
-  ],
+  moduleDirectories: ['<rootDir>/packages/**/node_modules', 'node_modules'],
 
   // An array of file extensions your modules use
-  moduleFileExtensions: [
-    'js',
-    'json',
-    'jsx',
-    'ts',
-    'tsx',
-    'node',
-  ],
+  moduleFileExtensions: ['js', 'json', 'jsx', 'ts', 'tsx', 'node'],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   // moduleNameMapper: {},
@@ -132,10 +123,7 @@ module.exports = {
   // setupFiles: [],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  setupFilesAfterEnv: [
-    'jest-extended',
-    '<rootDir>/config/jest/setupAfterEnv.js',
-  ],
+  setupFilesAfterEnv: ['jest-extended', '<rootDir>/config/jest/setupAfterEnv.js'],
 
   // A list of paths to snapshot serializer modules Jest should use for snapshot testing
   // snapshotSerializers: [],
@@ -163,6 +151,7 @@ module.exports = {
     '/data/',
     '/backup/',
     '/logs/',
+    '/typedef/',
   ],
 
   // The regexp pattern or array of patterns that Jest uses to detect test files
