@@ -1,4 +1,4 @@
-# API
+# @stonksjs/quote API Documentation
 
 ## Classes
 
@@ -53,9 +53,9 @@ const fundamentals = await quote.getFundamentals();
 
 Request the latest data from MSN Money
 
-**Kind**: instance method of [<code>StonksQuote</code>](#StonksQuote) **Returns**:
-[<code>Fundamentals</code>](#Fundamentals) - - A [Fundamentals](#Fundamentals) object with data for
-the instrument
+**Kind**: instance method of [<code>StonksQuote</code>](#StonksQuote)  
+**Returns**: [<code>Fundamentals</code>](#Fundamentals) - - A [Fundamentals](#Fundamentals) object
+with data for the instrument
 
 | Param     | Type                 | Default            | Description                           |
 | --------- | -------------------- | ------------------ | ------------------------------------- |
@@ -65,7 +65,8 @@ the instrument
 
 ## Fundamentals : <code>object</code>
 
-**Kind**: global typedef **Properties**
+**Kind**: global typedef  
+**Properties**
 
 | Name               | Type                | Description                                                    |
 | ------------------ | ------------------- | -------------------------------------------------------------- |

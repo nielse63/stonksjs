@@ -26,7 +26,7 @@ class StonksQuote {
   }
 
   /**
-   * Request the latest data from MSN Money
+   * Request the latest fundamentals data from [MSN Money]{@link https://www.msn.com/en-us/money}
    *
    * @param {boolean} [refresh=false] - Whether or not to force a new request
    * @returns {Fundamentals} - A {@link Fundamentals} object with data for the instrument

@@ -19,6 +19,8 @@ const fundamentals = await quote.getFundamentals(); // returns object of fundame
 
 ## API
 
+Full API docs can be found in the [`docs/`](./docs/api.md) folder
+
 ---
 
 _🚀 To the moon!!! 🚀_
