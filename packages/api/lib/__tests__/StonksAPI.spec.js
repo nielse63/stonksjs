@@ -1,7 +1,6 @@
 const StonksAPI = require('../StonksAPI');
 
-const url =
-  'https://finance-services.msn.com/Market.svc/ChartAndQuotes?symbols=EDCFF&chartType=1y&isETF=false&iseod=False&lang=en-US&isCS=false&isVol=true';
+const url = 'https://finance-services.msn.com/Market.svc/ChartAndQuotes?symbols=EDCFF&chartType=1y&isETF=false&iseod=False&lang=en-US&isCS=false&isVol=true';
 const options = {
   headers: {
     Referer: 'https://www.msn.com/en-us/money/stockdetails/fi-a2f4r7',

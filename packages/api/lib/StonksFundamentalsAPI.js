@@ -1,7 +1,7 @@
 const StonksAPI = require('./StonksAPI');
 const _ = require('lodash');
 
-module.exports = class StonksFundamentalsAPI {
+module.exports = class StonksFundamentalsAPI extends StonksAPI {
   static dataKeyConversionHash = {
     Beta: 'beta',
     Ch: 'change',
@@ -40,22 +40,22 @@ module.exports = class StonksFundamentalsAPI {
     market: 'market',
   };
 
-  constructor(symbol) {
-    this.symbol = symbol.toUpperCase();
-    this.url = `https://finance-services.msn.com/Market.svc/ChartAndQuotes?symbols=${this.symbol}&lang=en-US&chartType=1y`;
+  constructor(ticker) {
+    const symbol = ticker.toUpperCase();
+    const url = `https://finance-services.msn.com/Market.svc/ChartAndQuotes?symbols=${symbol}&lang=en-US&chartType=1y`;
     const options = {
       headers: {
         Referer: 'https://www.msn.com/en-us/money/stockdetails/fi-a2f4r7',
       },
     };
-    this.api = new StonksAPI(this.url, options);
+    super(url, options);
   }
 
-  parseResponse() {
+  toJSON() {
     const quoteObject = _.get(this, 'response.data[0].Quotes', {});
     const parsedObject = _.pick(
       quoteObject,
-      Object.keys(StonksFundamentalsAPI.dataKeyConversionHash)
+      Object.keys(StonksFundamentalsAPI.dataKeyConversionHash),
     );
     return Object.entries(parsedObject).reduce((output, [key, value]) => {
       const newKey = StonksFundamentalsAPI.dataKeyConversionHash[key];
@@ -67,8 +67,7 @@ module.exports = class StonksFundamentalsAPI {
   }
 
   async fetch() {
-    this.response = await this.api.get();
-    const data = this.parseResponse();
-    return data;
+    this.response = await this.get();
+    return this.toJSON();
   }
 };

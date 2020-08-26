@@ -9,7 +9,6 @@ describe('StonksCollection', () => {
 
   it('should fetch data for a valid collection and set quotes array', async () => {
     const response = await collection.fetch();
-    console.log(response);
     expect(response).toBeArray();
     expect(_.isEmpty(collection.quotes)).toBe(false);
   });
