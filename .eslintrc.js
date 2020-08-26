@@ -41,7 +41,7 @@ module.exports = {
       },
     },
     {
-      files: ['bin/**/*'],
+      files: ['.bin/**/*'],
       rules: {
         'no-console': 'off',
         'import/no-extraneous-dependencies': 'off',

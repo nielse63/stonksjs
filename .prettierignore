@@ -1,5 +1,5 @@
 !.*.js
 tmp/
 **/node_modules
-!/.bin/*
+!.bin/
 package-lock.json

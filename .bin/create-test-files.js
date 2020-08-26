@@ -4,19 +4,18 @@ const path = require('path');
 const globby = require('globby');
 
 const createTestFiles = async () => {
-  const files = await globby(['packages/core/lib/*.js', '!node_modules'])
+  const files = await globby(['packages/core/lib/*.js', '!node_modules']);
   files.map((file) => {
-    // const basename = path.basename(file);
     const src = path.resolve(__dirname, '..', file);
     const test = path.resolve(__dirname, '..', file)
       .replace('core/lib/', 'core/lib/__tests__/')
-      .replace('.js', '.spec.js')
-      return {src, test}
+      .replace('.js', '.spec.js');
+    return { src, test };
   })
-  .filter(({test}) => !fs.existsSync(test))
-  .forEach(({src, test}) => {
-    const basename = path.basename(src).replace('.js', '');
-    const content = `const ${basename} = require('../${basename}');
+    .filter(({ test }) => !fs.existsSync(test))
+    .forEach(({ src, test }) => {
+      const basename = path.basename(src).replace('.js', '');
+      const content = `const ${basename} = require('../${basename}');
 
 describe('${basename}', () => {
   let instance;
@@ -29,9 +28,13 @@ describe('${basename}', () => {
   });
 });
 `;
-    fs.writeFileSync(test, content);
-  })
-  console.log(abspaths)
-}
+      fs.writeFileSync(test, content);
+    });
+  return Promise.resolve();
+};
 
-createTestFiles()
+try {
+  createTestFiles();
+} catch (error) {
+  console.error(error);
+}

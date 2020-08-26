@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const cheerio = require('cheerio');
 const toDate = require('date-fns/toDate');
 const StonksRequest = require('./StonksRequest');
 
@@ -98,6 +99,35 @@ class StonksQuote {
       ...output,
       [key]: this[key],
     }), {});
+  }
+
+  async getKeyStatistics() {
+    const request = new StonksRequest(`https://finance.yahoo.com/quote/${this.symbol}/key-statistics`);
+    const response = await request.fetch();
+    const $ = cheerio.load(response.data);
+    const $wrapper = $('#Col1-0-KeyStatistics-Proxy');
+    if (!$wrapper.length) {
+      return {};
+    }
+    const innerWrapper = $wrapper.find('> section > div').last().find('> div');
+    const sections = Array.from(innerWrapper);
+    const financialHighlights = sections[1];
+    const tradingInformation = sections[2];
+    // console.log(financialHighlights);
+    return [
+      this.getDataFromStatisticsSection(financialHighlights),
+      this.getDataFromStatisticsSection(tradingInformation),
+    ];
+  }
+
+  getDataFromStatisticsSection(section) {
+    const titleElement = section.find('h2');
+    const title = titleElement.text();
+    const subSectionElements = titleElement.next('div').find('> div');
+    return {
+      title,
+      subSectionElements: subSectionElements.length,
+    };
   }
 }
 
