@@ -29,19 +29,15 @@ class StonksCollection {
   }
 
   /**
-   * Makes a request for thee latest symbols for the collection
+   * Makes a request for the latest symbols for the collection
    *
    * @returns {Promise} - Promise that resolves to an array of objects, each representing that instruments fundamental financial data.
    * @fulfil {Fundamentals[]}
    * @reject {Error}
    */
   async fetch() {
-    try {
-      this.symbols = await this.getSymbols();
-      this.quotes = await this.createQuotes();
-    } catch (error) {
-      console.error(error);
-    }
+    this.symbols = await this.getSymbols();
+    this.quotes = await this.createQuotes();
     return this.quotes;
   }
 

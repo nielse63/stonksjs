@@ -4,7 +4,6 @@ const StonksResponse = require('./StonksResponse');
 
 module.exports = class StonksAPI {
   static defaultOptions = {
-    method: 'get',
     headers: {
       Accept: '*/*',
     },
@@ -15,12 +14,11 @@ module.exports = class StonksAPI {
     this.options = options;
   }
 
-  async request(options = {}) {
+  async get(options = {}) {
     let output = {};
     try {
       const config = _.merge(StonksAPI.defaultOptions, this.options, options);
-      const response = await axios({
-        url: this.url,
+      const response = await axios.get(this.url, {
         ...config,
       });
       this.response = new StonksResponse(response);
@@ -34,14 +32,4 @@ module.exports = class StonksAPI {
     }
     return output;
   }
-
-  async get() {
-    const response = await this.request();
-    return response;
-  }
-
-  // async save() {
-  //   const response = await this.request({ method: 'post' });
-  //   return response;
-  // }
 };

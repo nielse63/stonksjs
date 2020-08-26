@@ -20,10 +20,11 @@ describe('StonksCollection', () => {
     expect(_.isEmpty(collection.quotes)).toBe(false);
   });
 
-  it('should set request error for invalid collection', async () => {
+  it('should resolve with an empty array for invalid requests', async () => {
     collection = new StonksCollection('not-found');
-    await collection.fetch();
-    expect(collection.request.error.code).toEqual(404);
+    await expect(collection.fetch()).toResolve();
+    const output = await collection.fetch();
+    expect(output.length).toBe(0);
   });
 
   it('should return an array of StonksQuote objects', async () => {

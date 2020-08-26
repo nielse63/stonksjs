@@ -37,7 +37,7 @@ class StonksQuote {
     }
     try {
       const api = new StonksFundamentalsAPI(this.symbol);
-      this.fundamentals = await api.fetch();
+      this.fundamentals = await api.get();
     } catch (error) {
       console.error(error);
     }
