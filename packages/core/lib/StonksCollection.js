@@ -1,6 +1,6 @@
 const cheerio = require('cheerio');
 const StonksRequest = require('./StonksRequest');
-const StonksQuote = require('./StonksQuote');
+const StonksQuote = require('@stonksjs/quote');
 
 class StonksCollection {
   constructor(collection, limit = 20) {
