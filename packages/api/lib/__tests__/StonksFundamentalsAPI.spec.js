@@ -10,7 +10,7 @@ describe('StonksFundamentalsAPI', () => {
 
   it('should set url from given symbol', () => {
     expect(fundamentalsApi.url).toEqual(
-      'https://finance-services.msn.com/Market.svc/ChartAndQuotes?symbols=MSFT&lang=en-US&chartType=1y',
+      'https://finance-services.msn.com/Market.svc/ChartAndQuotes?symbols=126.1.MSFT&lang=en-US&chartType=1y'
     );
   });
 

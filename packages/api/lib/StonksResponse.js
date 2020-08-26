@@ -1,7 +1,7 @@
 const _ = require('lodash');
 
 module.exports = class StonksResponse {
-  constructor(response = {}) {
+  constructor(response) {
     this.response = response;
     this.config = response.config;
   }
@@ -17,7 +17,7 @@ module.exports = class StonksResponse {
       message: _.get(
         this.response,
         'statusText',
-        'An unknown error occured. Please report all bugs at https://github.com/nielse63/stonksjs/issues',
+        'An unknown error occured. Please report all bugs at https://github.com/nielse63/stonksjs/issues'
       ),
     };
   }

@@ -42,7 +42,7 @@ module.exports = class StonksFundamentalsAPI extends StonksAPI {
 
   constructor(ticker) {
     const symbol = ticker.toUpperCase();
-    const url = `https://finance-services.msn.com/Market.svc/ChartAndQuotes?symbols=${symbol}&lang=en-US&chartType=1y`;
+    const url = `https://finance-services.msn.com/Market.svc/ChartAndQuotes?symbols=126.1.${symbol}&lang=en-US&chartType=1y`;
     const options = {
       headers: {
         Referer: 'https://www.msn.com/en-us/money/stockdetails/fi-a2f4r7',
@@ -55,7 +55,7 @@ module.exports = class StonksFundamentalsAPI extends StonksAPI {
     const quoteObject = _.get(this, 'response.data[0].Quotes', {});
     const parsedObject = _.pick(
       quoteObject,
-      Object.keys(StonksFundamentalsAPI.dataKeyConversionHash),
+      Object.keys(StonksFundamentalsAPI.dataKeyConversionHash)
     );
     return Object.entries(parsedObject).reduce((output, [key, value]) => {
       const newKey = StonksFundamentalsAPI.dataKeyConversionHash[key];

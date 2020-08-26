@@ -1,15 +1,15 @@
 const cheerio = require('cheerio');
-const _ = require('lodash');
 const StonksRequest = require('./StonksRequest');
-const StonksError = require('./StonksError');
+const StonksQuote = require('./StonksQuote');
 
 class StonksCollection {
-  constructor(collection) {
+  constructor(collection, limit = 20) {
     this.description = 'Collection of StonksQuote objects for a given Robinhood category.';
     if (!collection) {
-      throw new StonksError({ message: 'Collection must be defined' });
+      throw new Error('Collection must be defined');
     }
     this.collection = collection;
+    this.limit = limit;
     this.quotes = [];
   }
 
@@ -18,24 +18,30 @@ class StonksCollection {
   }
 
   async fetch() {
-    this.resetProperties();
-
     try {
       this.request = new StonksRequest(this.url);
       const response = await this.request.fetch();
-      if (!_.isEmpty(response.error)) {
-        throw new StonksError(response.error);
-      }
       const html = response.data;
-      this.quotes = this.getSymbols(html);
+      const symbols = this.getSymbols(html);
+      this.quotes = await this.createQuotes(symbols);
     } catch (error) {
       console.error(error);
     }
     return this.quotes;
   }
 
-  resetProperties() {
-    this.quotes = [];
+  async createQuotes(symbols) {
+    const promises = symbols.map((symbol) => {
+      const quote = new StonksQuote(symbol);
+      return quote.getFundamentals();
+    });
+    try {
+      const quotes = await Promise.all(promises);
+      return quotes;
+    } catch (error) {
+      console.error(error);
+    }
+    return [];
   }
 
   getSymbols(html) {
@@ -43,6 +49,7 @@ class StonksCollection {
     const selector = '.main-container .table tbody tr td:nth-child(2)';
     const results = [];
     $(selector).each((i, cell) => {
+      if (i >= this.limit) return;
       results.push($(cell).text());
     });
     return results;

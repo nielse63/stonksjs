@@ -16,6 +16,7 @@ module.exports = class StonksAPI {
   }
 
   async request(options = {}) {
+    let output = {};
     try {
       const config = _.merge(StonksAPI.defaultOptions, this.options, options);
       const response = await axios({
@@ -23,13 +24,15 @@ module.exports = class StonksAPI {
         ...config,
       });
       this.response = new StonksResponse(response);
+      output = this.response.toJSON();
       if (!this.response.isOK) {
         console.error(this.response.error);
       }
     } catch (error) {
+      output = { error };
       console.error(error);
     }
-    return this.response.toJSON();
+    return output;
   }
 
   async get() {
@@ -37,8 +40,8 @@ module.exports = class StonksAPI {
     return response;
   }
 
-  async save() {
-    const response = await this.request({ method: 'post' });
-    return response;
-  }
+  // async save() {
+  //   const response = await this.request({ method: 'post' });
+  //   return response;
+  // }
 };
