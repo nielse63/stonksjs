@@ -1,5 +1,4 @@
 const StonksCollection = require('../StonksCollection');
-// const StonksQuote = require('../StonksQuote');
 const _ = require('lodash');
 
 describe('StonksCollection', () => {

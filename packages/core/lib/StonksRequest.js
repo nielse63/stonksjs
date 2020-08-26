@@ -5,17 +5,13 @@ const axios = require('axios');
 class StonkRequest {
   static defaultOptions = {
     headers: {
-      // Accept: '*/*',
-      // 'Accept-Encoding': 'gzip, deflate, br',
-      // 'Accept-Language': 'en-US',
-      // 'Cache-Control': 'max-age=0',
       Connection: 'keep-alive',
       'Upgrade-Insecure-Requests': '1',
       'User-Agent':
         'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
     },
     gzip: true,
-  }
+  };
 
   constructor(url, options = {}) {
     this.description = 'Shared request utility class';
@@ -27,7 +23,7 @@ class StonkRequest {
           Host: this.host,
         },
       },
-      options,
+      options
     );
     this.response = {};
     this.error = {};

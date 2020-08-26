@@ -1,30 +1,31 @@
 #!/usr/bin/env node
 const fs = require('fs-extra');
 const path = require('path');
-const cp = require('child_process');
+const jsdoc2md = require('jsdoc-to-markdown');
 
-const apiFiles = ['screeners', 'scrapers'];
+const createApiDocs = async (pkg) => {
+  console.log('creating api docs for', pkg);
 
-const exec = (cmd) => cp.execSync(cmd).toString().trim();
+  const markdown = jsdoc2md.renderSync({
+    files: path.resolve(__dirname, '../packages', pkg, 'lib/**/*.js'),
+  });
+  if (!markdown.trim()) {
+    return;
+  }
 
-const createRobinhoodDocs = () => {
-  const input = path.resolve(__dirname, `../lib/robinhood/Robinhood.js`);
-  const output = path.resolve(__dirname, `../docs/api/robinhood.md`);
-  if (!fs.existsSync(input)) return;
-  const content = exec(`npx jsdoc2md ${input}`)
-    .replace(/\n#/g, '\n');
-  fs.writeFileSync(output, content);
-}
+  const output = path.resolve('packages', pkg, 'docs/api.md');
+  const docsFolder = path.resolve(__dirname, '../packages', pkg, 'docs');
+  if (!fs.existsSync(docsFolder)) {
+    fs.mkdirpSync(docsFolder);
+  }
+  const content = `# @stonksjs/${pkg} API Documentation
 
-const createDocsFile = (file) => {
-  const input = path.resolve(__dirname, `../lib/${file}/index.js`);
-  const output = path.resolve(__dirname, `../docs/api/${file}.md`);
-  if (!fs.existsSync(input)) return;
-  const content = exec(`npx jsdoc2md ${input}`)
-    .replace(/\n#/g, '\n');
+${markdown}`;
   fs.writeFileSync(output, content);
 };
 
-apiFiles.forEach(createDocsFile);
-createRobinhoodDocs();
-console.log('Docs updated')
+const packages = fs.readdirSync(path.resolve(__dirname, '../packages'));
+packages.forEach((pkg) => {
+  createApiDocs(pkg);
+});
+// console.log(packages);

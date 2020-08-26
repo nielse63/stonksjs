@@ -1,17 +1,9 @@
 {
-  "name": "@stonksjs/core",
-  "version": "1.0.0-alpha.0",
-  "description": "Core library for stonksjs",
-  "keywords": [
-    "robinhood",
-    "stocks",
-    "screener",
-    "finviz",
-    "dividends",
-    "finance"
-  ],
+  "name": "@stonksjs/quote",
+  "version": "0.0.1",
+  "description": "Object representing a single financial instrument, given a valid ticker symbol is provided",
   "author": "Erik Nielsen <erik@312development.com>",
-  "homepage": "https://nielse63.github.io/stonksjs/tree/master/packages/core#readme",
+  "homepage": "https://nielse63.github.io/stonksjs/tree/master/packages/quote#readme",
   "license": "ISC",
   "main": "index.js",
   "directories": {
@@ -35,11 +27,7 @@
     "url": "https://github.com/nielse63/stonksjs/issues"
   },
   "dependencies": {
-    "@stonksjs/quote": "^0.0.1",
-    "algotrader": "^2.5.4",
-    "axios": "^0.20.0",
-    "cheerio": "^1.0.0-rc.3",
-    "date-fns": "^2.15.0",
+    "@stonksjs/api": "^1.0.0-alpha.0",
     "lodash": "^4.17.20"
   }
 }
