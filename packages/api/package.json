@@ -1,17 +1,9 @@
 {
-  "name": "@stonksjs/core",
+  "name": "@stonksjs/api",
   "version": "1.0.0-alpha.0",
-  "description": "Core library for stonksjs",
-  "keywords": [
-    "robinhood",
-    "stocks",
-    "screener",
-    "finviz",
-    "dividends",
-    "finance"
-  ],
+  "description": "Utility classes for fetching data and responding in a standardized format",
   "author": "Erik Nielsen <erik@312development.com>",
-  "homepage": "https://nielse63.github.io/stonksjs/tree/master/packages/core#readme",
+  "homepage": "https://nielse63.github.io/stonksjs/tree/master/packages/api#readme",
   "license": "ISC",
   "main": "index.js",
   "directories": {
@@ -35,8 +27,6 @@
     "url": "https://github.com/nielse63/stonksjs/issues"
   },
   "dependencies": {
-    "@stonksjs/api": "^1.0.0-alpha.0",
-    "algotrader": "^2.5.4",
     "axios": "^0.20.0",
     "cheerio": "^1.0.0-rc.3",
     "date-fns": "^2.15.0",
