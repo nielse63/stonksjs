@@ -1,6 +1,6 @@
 {
   "name": "@stonksjs/quote",
-  "version": "0.0.1",
+  "version": "1.0.0-alpha.0",
   "description": "Object representing a single financial instrument, given a valid ticker symbol is provided",
   "author": "Erik Nielsen <erik@312development.com>",
   "homepage": "https://nielse63.github.io/stonksjs/tree/master/packages/quote#readme",
@@ -27,7 +27,7 @@
     "url": "https://github.com/nielse63/stonksjs/issues"
   },
   "dependencies": {
-    "@stonksjs/api": "^1.0.0-alpha.0",
+    "@stonksjs/api": "^1.0.0-alpha.1",
     "lodash": "^4.17.20"
   }
 }

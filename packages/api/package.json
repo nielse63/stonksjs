@@ -1,6 +1,6 @@
 {
   "name": "@stonksjs/api",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "description": "Utility classes for fetching data and responding in a standardized format",
   "author": "Erik Nielsen <erik@312development.com>",
   "homepage": "https://nielse63.github.io/stonksjs/tree/master/packages/api#readme",
