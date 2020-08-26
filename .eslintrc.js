@@ -9,7 +9,7 @@ module.exports = {
     jest: true,
   },
   rules: {
-    'no-console': 'off',
+    'no-console': ['error', { allow: ['warn', 'error'] }],
     'class-methods-use-this': 'off',
     'no-restricted-globals': 'warn',
     'no-underscore-dangle': 'off',
@@ -35,13 +35,13 @@ module.exports = {
     {
       files: ['*.test.js', '*.spec.js'],
       rules: {
-        'no-console': 'off',
+        'no-console': 'warn',
         'global-require': 'off',
         'no-new': 'off',
       },
     },
     {
-      files: ['bin/**/*'],
+      files: ['.bin/**/*'],
       rules: {
         'no-console': 'off',
         'import/no-extraneous-dependencies': 'off',
