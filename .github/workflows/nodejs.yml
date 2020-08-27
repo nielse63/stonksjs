@@ -5,9 +5,13 @@ name: CI Tests
 
 on:
   push:
-    branches: [master]
+    branches:
+      - master
   pull_request:
-    branches: [master, feature/*]
+    branches:
+      - master
+      - develop
+      - 'feature/*'
 
 jobs:
   build:
