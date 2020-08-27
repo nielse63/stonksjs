@@ -51,7 +51,7 @@ const fundamentals = await quote.getFundamentals();
 
 ### stonksQuote.getFundamentals([refresh]) ⇒ [<code>Fundamentals</code>](#Fundamentals)
 
-Request the latest data from MSN Money
+Request the latest fundamentals data from [MSN Money](https://www.msn.com/en-us/money)
 
 **Kind**: instance method of [<code>StonksQuote</code>](#StonksQuote)  
 **Returns**: [<code>Fundamentals</code>](#Fundamentals) - - A [Fundamentals](#Fundamentals) object

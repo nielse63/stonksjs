@@ -2,12 +2,19 @@
 const fs = require('fs-extra');
 const path = require('path');
 const jsdoc2md = require('jsdoc-to-markdown');
+const cp = require('child_process');
+
+const exec = (cmd) => cp.execSync(cmd).toString().trim();
 
 const createApiDocs = async (pkg) => {
   console.log('creating api docs for', pkg);
 
   const markdown = jsdoc2md.renderSync({
-    files: path.resolve(__dirname, '../packages', pkg, 'lib/**/*.js'),
+    files: [
+      path.resolve(__dirname, '../packages', pkg, 'lib/**/*.js'),
+      path.resolve(__dirname, '../packages', pkg, 'index.js'),
+      // path.resolve(__dirname, '../typedef/**/*.js'),
+    ],
   });
   if (!markdown.trim()) {
     return;
@@ -22,6 +29,8 @@ const createApiDocs = async (pkg) => {
 
 ${markdown}`;
   fs.writeFileSync(output, content);
+  const cmd = `npx prettier --write ${output}`;
+  exec(cmd);
 };
 
 const packages = fs.readdirSync(path.resolve(__dirname, '../packages'));

@@ -2,27 +2,44 @@ const axios = require('axios').default;
 const _ = require('lodash');
 const StonksResponse = require('./StonksResponse');
 
-module.exports = class StonksAPI {
-  static defaultOptions = {
-    method: 'get',
-    headers: {
-      Accept: '*/*',
-    },
-  };
-
-  constructor(url, options = {}) {
-    this.url = url;
-    this.options = options;
+/**
+ * Utility class to fetch data
+ *
+ * @class
+ * @example
+ * const { StonksAPI } = require('@stonksjs/api');
+ *
+ * const api = new StonksAPI();
+ * const data = await api.get('https://some-url.com/api/data');
+ */
+class StonksAPI {
+  /**
+   * Creates an instance of StonksAPI
+   * @param {object} [options={}] - Config object to pass to axios
+   */
+  constructor(options = {}) {
+    this.options = _.merge(
+      {
+        headers: {
+          Accept: '*/*',
+        },
+      },
+      options,
+    );
   }
 
-  async request(options = {}) {
+  /**
+   * Makes a request to the provided URL
+   *
+   * @param {string} url - The URL to fetch data from
+   * @returns {Promise} - Resolves to the data type from the requested endpoint
+   * @fulfil {*}
+   * @reject {Error}
+   */
+  async get(url) {
     let output = {};
     try {
-      const config = _.merge(StonksAPI.defaultOptions, this.options, options);
-      const response = await axios({
-        url: this.url,
-        ...config,
-      });
+      const response = await axios.get(url, this.options);
       this.response = new StonksResponse(response);
       output = this.response.toJSON();
       if (!this.response.isOK) {
@@ -34,14 +51,6 @@ module.exports = class StonksAPI {
     }
     return output;
   }
+}
 
-  async get() {
-    const response = await this.request();
-    return response;
-  }
-
-  // async save() {
-  //   const response = await this.request({ method: 'post' });
-  //   return response;
-  // }
-};
+module.exports = StonksAPI;
