@@ -10,7 +10,7 @@ const StonksQuote = require('@stonksjs/quote');
  * const StonksCollection = require('@stonksjs/quote');
  *
  * const collection = new StonksCollection('etf'); // get ETF instruments
- * const quotes = collection.fetch();
+ * const quotes = collection.getQuotes();
  */
 class StonksCollection {
   /**
@@ -29,13 +29,13 @@ class StonksCollection {
   }
 
   /**
-   * Makes a request for the latest symbols for the collection
+   * Makes a request for the latest fundamental data for items in the collection
    *
    * @returns {Promise} - Promise that resolves to an array of objects, each representing that instruments fundamental financial data.
    * @fulfil {Fundamentals[]}
    * @reject {Error}
    */
-  async fetch() {
+  async getQuotes() {
     this.symbols = await this.getSymbols();
     this.quotes = await this.createQuotes();
     return this.quotes;
@@ -72,12 +72,12 @@ class StonksCollection {
     const html = response.data;
     const $ = cheerio.load(html);
     const selector = '.main-container .table tbody tr td:nth-child(2)';
-    const results = [];
+    this.symbols = [];
     $(selector).each((i, cell) => {
       if (i >= this.limit) return;
-      results.push($(cell).text());
+      this.symbols.push($(cell).text());
     });
-    return results;
+    return this.symbols;
   }
 }
 
