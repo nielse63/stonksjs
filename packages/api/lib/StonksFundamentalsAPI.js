@@ -1,7 +1,18 @@
 const StonksAPI = require('./StonksAPI');
 const _ = require('lodash');
 
-module.exports = class StonksFundamentalsAPI extends StonksAPI {
+/**
+ * Handles requests to get fundamental data for a single asset
+ *
+ * @class
+ * @extends {StonksAPI}
+ * @example
+ * const { StonksFundamentalsAPI } = require('@stonksjs/api');
+ *
+ * const api = new StonksFundamentalsAPI('MSFT');
+ * const quotes = await api.get();
+ */
+class StonksFundamentalsAPI extends StonksAPI {
   static dataKeyConversionHash = {
     Beta: 'beta',
     Ch: 'change',
@@ -40,26 +51,29 @@ module.exports = class StonksFundamentalsAPI extends StonksAPI {
     market: 'market',
   };
 
-  constructor(symbol = '') {
+  /**
+   * Creates an instance of StonksFundamentalsAPI.
+   *
+   * @param {string} symbol - Ticker symbol to get data for
+   */
+  constructor(symbol) {
+    if (!symbol) {
+      throw new Error('symbol is undefined');
+    }
     const options = {
       headers: {
         Referer: 'https://www.msn.com/en-us/money/stockdetails/fi-a2f4r7',
       },
     };
-    super(symbol, options);
-    this._symbol = '';
-    this.symbol = symbol;
+    super(options);
+    this.symbol = symbol.toUpperCase();
   }
 
-  set symbol(symbol) {
-    this.url = `https://finance-services.msn.com/Market.svc/ChartAndQuotes?symbols=126.1.${symbol.toUpperCase()}&lang=en-US&chartType=1y`;
-    this._symbol = symbol;
-  }
-
-  get symbol() {
-    return this._symbol;
-  }
-
+  /**
+   * Parses the api response into a standard plain object
+   *
+   * @returns {Fundamentals} - Fundamental data object
+   */
   toJSON() {
     const quoteObject = _.get(this, 'response.data[0].Quotes', {});
     const dataKeys = StonksFundamentalsAPI.dataKeyConversionHash;
@@ -73,8 +87,18 @@ module.exports = class StonksFundamentalsAPI extends StonksAPI {
     }, {});
   }
 
+  /**
+   * Fetch data for the instance symbol
+   *
+   * @returns {Promise} - Resolves a Fundamental data object
+   * @fulfil {Fundamentals}
+   * @reject {Error}
+   */
   async get() {
-    this.response = await super.get();
+    const url = `https://finance-services.msn.com/Market.svc/ChartAndQuotes?symbols=126.1.${this.symbol}&lang=en-US&chartType=1y`;
+    this.response = await super.get(url);
     return this.toJSON();
   }
-};
+}
+
+module.exports = StonksFundamentalsAPI;

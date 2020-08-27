@@ -7,19 +7,11 @@
 Retreives a collection of instruments, and their fundamental data, from a pre-defined Robinhood
 collection
 
-**Kind**: global class  
-**Properties**
-
-| Name       | Type                                    | Description                                                     |
-| ---------- | --------------------------------------- | --------------------------------------------------------------- |
-| collection | <code>string</code>                     | A Robinhood collection                                          |
-| limit      | <code>number</code>                     | The maximum number of entries to include                        |
-| quotes     | <code>Array.&lt;string&gt;</code>       | Array of ticker symbols in the collection                       |
-| quotes     | <code>Array.&lt;Fundamentals&gt;</code> | An array of objects containing fundamental data for each record |
+**Kind**: global class
 
 - [StonksCollection](#StonksCollection)
   - [new StonksCollection(collection, [limit])](#new_StonksCollection_new)
-  - [.fetch()](#StonksCollection+fetch) ⇒ <code>Promise</code>
+  - [.getQuotes()](#StonksCollection+getQuotes) ⇒ <code>Promise</code>
   - [.createQuotes(symbols)](#StonksCollection+createQuotes) ⇒ <code>Promise</code>
   - [.getSymbols()](#StonksCollection+getSymbols) ⇒ <code>Promise</code>
 
@@ -37,17 +29,17 @@ Creates an instance of StonksCollection.
 **Example**
 
 ```js
-const StonksCollection = require('@stonksjs/quote');
+const StonksCollection = require('@stonksjs/core');
 
 const collection = new StonksCollection('etf'); // get ETF instruments
-const quotes = collection.fetch();
+const quotes = await collection.getQuotes();
 ```
 
-<a name="StonksCollection+fetch"></a>
+<a name="StonksCollection+getQuotes"></a>
 
-### stonksCollection.fetch() ⇒ <code>Promise</code>
+### stonksCollection.getQuotes() ⇒ <code>Promise</code>
 
-Makes a request for thee latest symbols for the collection
+Makes a request for the latest fundamental data for items in the collection
 
 **Kind**: instance method of [<code>StonksCollection</code>](#StonksCollection)  
 **Returns**: <code>Promise</code> - - Promise that resolves to an array of objects, each

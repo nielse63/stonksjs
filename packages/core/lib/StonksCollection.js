@@ -7,10 +7,10 @@ const StonksQuote = require('@stonksjs/quote');
  *
  * @class
  * @example
- * const StonksCollection = require('@stonksjs/quote');
+ * const StonksCollection = require('@stonksjs/core');
  *
  * const collection = new StonksCollection('etf'); // get ETF instruments
- * const quotes = collection.getQuotes();
+ * const quotes = await collection.getQuotes();
  */
 class StonksCollection {
   /**

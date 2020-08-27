@@ -11,7 +11,7 @@ const options = {
 describe('StonksAPI', () => {
   let api;
   beforeEach(() => {
-    api = new StonksAPI(url, options);
+    api = new StonksAPI(options);
   });
 
   afterAll(() => {
@@ -20,25 +20,24 @@ describe('StonksAPI', () => {
 
   it('should handle undefined options arg', () => {
     expect(() => {
-      new StonksAPI(url);
+      new StonksAPI();
     }).not.toThrow();
   });
 
   it('should set properties', () => {
-    expect(api.url).toEqual(url);
     expect(api.options.headers.Referer).toEqual(options.headers.Referer);
   });
 
   it('should fetch data', async () => {
-    const response = await api.get();
+    const response = await api.get(url);
     expect(response).toBeObject();
     expect(response).toContainAllKeys(['status', 'statusText', 'data', 'error']);
   });
 
   it('should catch invalid urls', async () => {
     console.error = jest.fn();
-    api = new StonksAPI('https://google.com/not-real', options);
-    const response = await api.get();
+    api = new StonksAPI(options);
+    const response = await api.get('https://google.com/not-real');
     expect(response).toBeObject();
   });
 });
