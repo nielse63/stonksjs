@@ -2,7 +2,7 @@
 set -e
 
 export CI='true'
-COMMIT_MESSAGE="${1}"
+# COMMIT_MESSAGE="${1}"
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
 if [ $CURRENT_BRANCH != 'master' ]; then
@@ -10,17 +10,17 @@ if [ $CURRENT_BRANCH != 'master' ]; then
   exit 1
 fi
 
-if [ -z "$COMMIT_MESSAGE" ]; then
-  echo 'Commit message empty'
-  exit 1
-fi
+# if [ -z "$COMMIT_MESSAGE" ]; then
+#   echo 'Commit message empty'
+#   exit 1
+# fi
 
-git add .
-git commit -m "$COMMIT_MESSAGE" --allow-empty
+# git add .
+# git commit -m "$COMMIT_MESSAGE" --allow-empty
 
 npx auto-changelog
 git add CHANGELOG.md
-git commit --amend --no-edit
+git commit -m 'chore(docs): auto-changelog'
 git push
 
 # follow prompts to release on npm and github
