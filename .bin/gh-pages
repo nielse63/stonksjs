@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -e
+
+rm -rf /tmp/stonkjs
+mkdir -p /tmp/stonksjs
+
+cp -R docs /tmp/stonksjs/docs
+
+current_branch=$(git rev-parse --abbrev-ref HEAD)
+git add .
+git stash push
+
+git checkout gh-pages
+git pull
+cp -R /tmp/stonksjs/docs/* .
+git add .
+git commit -m 'chore(docs): update gh-pages'
+git push -u origin gh-pages
+
+git checkout $current_branch
+git stash pop
