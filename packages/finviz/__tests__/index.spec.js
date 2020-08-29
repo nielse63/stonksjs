@@ -11,7 +11,7 @@ describe('@stonksjs/finviz', () => {
   it('should be an object with two methods', () => {
     expect(finviz).toBeObject();
     expect(finviz.quote).toBeFunction();
-    expect(finviz.screener).toBeFunction();
+    expect(finviz.search).toBeFunction();
   });
 
   describe('#quote', () => {
@@ -21,9 +21,9 @@ describe('@stonksjs/finviz', () => {
     });
   });
 
-  describe('#screener', () => {
+  describe('#search', () => {
     it('should return an array of symbols', async () => {
-      const response = await finviz.screener(url);
+      const response = await finviz.search(url);
       expect(response).toBeArray();
     });
   });

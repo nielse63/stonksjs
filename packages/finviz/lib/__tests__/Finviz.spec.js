@@ -24,23 +24,23 @@ describe('Finviz', () => {
     });
   });
 
-  describe('#getScreener', () => {
+  describe('#getScreenerResults', () => {
     it('should throw an error if no url is given', async () => {
-      await expect(finviz.getScreener()).toReject();
+      await expect(finviz.getScreenerResults()).toReject();
     });
 
     it('should return an array of symbols', async () => {
-      const response = await finviz.getScreener(url);
+      const response = await finviz.getScreenerResults(url);
       expect(response).toBeArray();
     });
 
     it('should have a max of 20 items', async () => {
-      const response = await finviz.getScreener(url);
+      const response = await finviz.getScreenerResults(url);
       expect(response.length).toBeLessThanOrEqual(20);
     });
 
     it('should return symbols (no other strings)', async () => {
-      const response = await finviz.getScreener(url);
+      const response = await finviz.getScreenerResults(url);
       response.forEach((ticker) => {
         expect(/[A-Z]{1,5}/.test(ticker)).toBe(true);
       });

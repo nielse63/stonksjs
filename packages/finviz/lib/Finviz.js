@@ -41,16 +41,16 @@ class Finviz {
     return data;
   }
 
-  async getScreener(url) {
+  async getScreenerResults(url) {
     if (!url) {
       return Promise.reject(Error('url is not defined'));
     }
     const data = await this.request(url);
-    const symbols = this.getScreenerSymbols(data);
+    const symbols = this.getScreenerResultsSymbols(data);
     return symbols;
   }
 
-  getScreenerSymbols(html) {
+  getScreenerResultsSymbols(html) {
     const $ = cheerio.load(html);
     const rows = $('#screener-content > table > tbody > tr');
     const data = new Set();
