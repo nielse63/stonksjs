@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -e
+
+# duplicate the readme file
+cp README.md docs/README.md
+git add docs/README.md
+
+npx lint-staged

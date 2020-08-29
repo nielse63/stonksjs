@@ -78,7 +78,7 @@ describe('StonksRequest', () => {
     request.$ = cheerio.load(
       mock404
         .replace('<h1 class="css-143xv0r">404</h1>', '')
-        .replace('<h1 class="css-143xv0r">Page not found</h1>', '')
+        .replace('<h1 class="css-143xv0r">Page not found</h1>', ''),
     );
     const error = request.getError();
 

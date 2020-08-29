@@ -1,79 +1,80 @@
+![stonksjs](https://raw.githubusercontent.com/nielse63/stonksjs/gh-pages/img/banner.svg)
+
 # stonksjs
 
-> Algotrading utility scripts. To the moon!!! 🚀🚀🚀
+> Reliable algotrading utilities written in node
 
 ![CI Tests](https://github.com/nielse63/stonksjs/workflows/CI%20Tests/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/nielse63/stonksjs/badge.svg?branch=master)](https://coveralls.io/github/nielse63/stonksjs?branch=master)
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/nielse63/stonksjs?style=flat-square)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 - [Features](#features)
-- [Installation](#installation)
+  - [Goals](#goals)
 - [Usage](#usage)
-- [API](#api)
+  - [Packages](#packages)
+- [Collaboration](#collaboration)
 - [Development](#development)
+  - [Setup](#setup)
+  - [Testing](#testing)
+  - [Release](#release)
 - [Roadmap](#roadmap)
 
 ## Features
 
-Stonks is a collection of helpful tools to make stock searches and algotrading easier. The goal is
-for stonks to be everything but the backtesting. With stonks you can:
+- Custom screeners from finviz, msn, and finscreener
+- Detailed ticket fundamentals
+- Robinhood collection symbols
+- And more features planned
 
-- Buy and sell on Robinhood with node
-- Custom finviz screener
-- Diverse scrapers, pulling symbols from Robinhood, finviz, and Dividend Value Builder
+### Goals
 
-## Installation
+**What stonksjs is:**
 
-```bash
-npm install stonksjs
-```
+The primary objective of this project are:
 
-or
+- To provide a collection of reliable algotrading utilities written in node
+- Take some of the guess-work out of the stock research process by using industry-tested, predefined
+  screeners
+- Provide more data-points for a given instrument than other packages currently available
+- Enable algotrading programmers with diversified assets - not just the hottest options rumors on
+  [r/wallstreetbets](https://reddit.com/r/wallstreetbets)
 
-```bash
-yarn add stonksjs
-```
+**What stonksjs is not:**
+
+- stonksjs **is not** roboadvisor or professional trading app - this is just a fun little side
+  project for me
+- stonksjs **is not** an unofficial API for Robinhood or any other brokerage. If that's what you're
+  looking for, I'd recommend [algotrader](https://github.com/torreyleonard/algotrader)
+- stonksjs currently **is not** a backtesting tool, although that might get added to the roadmap
+  soon
 
 ## Usage
 
-> More in-depth examples can be found in the [`example/`](example/) directory
+Installation, usage, and API docs can be found in each scoped package directory.
 
-Import the module in your script or project, and execute one of the functions available:
+### Packages
 
-```js
-const stonks = require('stonksjs');
+| Name                                                                                 | Description                                                               | Version                                                                                            |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| [@stonksjs/core](https://github.com/nielse63/stonksjs/tree/master/packages/core)     | Core library for stonksjs                                                 | ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/quote?color=brightgreen&style=flat-square)  |
+| [@stonksjs/api](https://github.com/nielse63/stonksjs/tree/master/packages/api)       | Utility classes for fetching data and responding in a standardized format | ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/api?color=brightgreen&style=flat-square)    |
+| [@stonksjs/quote](https://github.com/nielse63/stonksjs/tree/master/packages/quote)   | Detailed financial data for any ticket symbol                             | ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/quote?color=brightgreen&style=flat-square)  |
+| [@stonksjs/finviz](https://github.com/nielse63/stonksjs/tree/master/packages/finviz) | Get the results from a custom finviz screener                             | ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/finviz?color=brightgreen&style=flat-square) |
 
-// stonks is a plan object, with each submodule containing the functions
-const { screeners, scrapers } = stonks;
+## Collaboration
 
-// all functions are promise based
-const symbols = await screeners.swingTrendingUp();
+Use the links below for feature requests, issues, or pull rquests:
 
-// trade on Robinhood by saving your credentials as environment variables
-const { Robinhood } = stonks;
-const robinhood = new Robinhood(username, password, deviceToken);
-const order = await robinhood.buy('MSFT', {
-  qty: 100,
-  type: 'limit',
-  price: 123.45,
-});
-```
-
-More examples and API docs can be found in [`docs/api`](docs/api).
-
-### Environment Variables
-
-The `Robinhood` class required the `username`, `password`, and `deviceToken` and will default to
-environment variables is undefined. See [`.env.sample`](.env.sample) for all the environment
-variables that should be defined.
-
-For instructions on how to get the device token value,
-[read this GitHub comment](https://github.com/robinhood-unofficial/pyrh/issues/176#issuecomment-487310801).
-
-## API
-
-Full API docs and examples can be found in [`docs/api`](docs/api).
+- [New feature request](https://github.com/nielse63/stonksjs/issues/new?template=feature-request.md)
+- [Defect/bug](https://github.com/nielse63/stonksjs/issues/new?template=bug.md)
+- [Pull request](https://github.com/nielse63/stonksjs/compare)
 
 ## Development
+
+### Setup
+
+Clone the repo and install the dependencies:
 
 ```bash
 git clone http://github.com/nielse63/stonksjs.git
@@ -81,9 +82,25 @@ cd stonksjs
 npm ci
 ```
 
-Lint and run the full test suite before pushing or opening a PR.
+Because stonksjs is a monorepo using [`lerna`](https://github.com/lerna/lerna), a `postinstall`
+script will run `lerna bootstrap` to install all package dependencies. Once this is complete you're
+ready to make your changes.
 
-### Releases
+### Testing
+
+Tests are run using `jest`, and can be run by executing:
+
+```bash
+npm test
+
+# run with coverage
+npm test -- --coverage
+```
+
+The full test suite is also execute whenever a branch is pushed and as a required pull request
+check.
+
+### Release
 
 To release a new version, run:
 
@@ -91,7 +108,11 @@ To release a new version, run:
 npm run release
 ```
 
+This executes `lerna publish` behind the scenes, and you'll be prompted with a few questions before
+the package is deployed.
+
 ## Roadmap
 
-See [`docs/roadmap.md`](docs/roadmap.md) for upcoming features, or
-[open an issue on GitHub](https://github.com/nielse63/stonksjs/issues).
+All new features and changes are being tracked in GitHub under the
+[projects](https://github.com/nielse63/stonksjs/projects) and
+[issues](https://github.com/nielse63/stonksjs/issues) tabs of this repo.

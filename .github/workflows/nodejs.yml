@@ -3,7 +3,15 @@
 
 name: CI Tests
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+      - develop
+      - 'feature/*'
 
 jobs:
   build:

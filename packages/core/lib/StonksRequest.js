@@ -23,7 +23,7 @@ class StonkRequest {
           Host: this.host,
         },
       },
-      options
+      options,
     );
     this.response = {};
     this.error = {};

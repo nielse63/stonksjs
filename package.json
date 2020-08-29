@@ -1,7 +1,7 @@
 {
   "name": "stonksjs",
   "version": "2.0.2",
-  "description": "Algotrading utility scripts. To the moon!!! 🚀🚀🚀",
+  "description": "Reliable algotrading utilities written in node",
   "main": "lib/index.js",
   "files": [
     "lib/",
@@ -37,7 +37,7 @@
     "lint": "eslint --fix packages/ && prettier --write packages/",
     "test": "jest",
     "changelog": "auto-changelog",
-    "release": "dotenv release-it",
+    "release": "lerna publish",
     "docs": ".bin/docs"
   },
   "author": {
@@ -77,7 +77,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "cp README.md docs/README.md && lint-staged"
+      "pre-commit": ".bin/pre-commit"
     }
   },
   "lint-staged": {
@@ -88,20 +88,5 @@
     "*.{json,md,html,css}": [
       "prettier --write"
     ]
-  },
-  "nodemonConfig": {
-    "ignore": [
-      "__tests__/",
-      "__mocks__/",
-      "docs/*"
-    ],
-    "watch": [
-      "api/",
-      "lib/"
-    ],
-    "env": {
-      "NODE_ENV": "development"
-    },
-    "ext": "js,json"
   }
 }
