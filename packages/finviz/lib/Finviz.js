@@ -1,5 +1,6 @@
 const { StonksAPI } = require('@stonksjs/api');
 const cheerio = require('cheerio');
+const _ = require('lodash');
 
 class Finviz {
   constructor() {
@@ -32,7 +33,7 @@ class Finviz {
       cells.each((j, cell) => {
         const value = $(cell).text();
         if (j % 2 === 0) {
-          lastKey = value;
+          lastKey = this.formatKey(value);
         } else {
           data[lastKey] = value;
         }
@@ -61,6 +62,10 @@ class Finviz {
       }
     });
     return [...data];
+  }
+
+  formatKey(key) {
+    return _.camelCase(key);
   }
 }
 
