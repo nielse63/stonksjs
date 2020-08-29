@@ -1,7 +1,7 @@
 {
   "name": "@stonksjs/quote",
   "version": "1.0.0-alpha.0",
-  "description": "Object representing a single financial instrument, given a valid ticker symbol is provided",
+  "description": "Detailed financial data for any ticket symbol",
   "author": "Erik Nielsen <erik@312development.com>",
   "homepage": "https://nielse63.github.io/stonksjs/tree/master/packages/quote#readme",
   "license": "ISC",
