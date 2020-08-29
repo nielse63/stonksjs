@@ -1,6 +1,6 @@
 {
   "name": "@stonksjs/stock-screener",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Pre-defined industry standard stock screeners from MSN Money",
   "author": "Erik Nielsen <erik@312development.com>",
   "homepage": "https://nielse63.github.io/stonksjs/tree/master/packages/stock-screener#readme",
@@ -27,7 +27,7 @@
     "url": "https://github.com/nielse63/stonksjs/issues"
   },
   "dependencies": {
-    "@stonksjs/api": "^1.0.0-alpha.1",
+    "@stonksjs/api": "^1.0.0",
     "axios": "^0.20.0",
     "cheerio": "^1.0.0-rc.3",
     "date-fns": "^2.15.0",
