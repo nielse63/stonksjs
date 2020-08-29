@@ -54,7 +54,7 @@ program
   .action(() => {
     const { name, desc } = program.opts();
     createPackageFiles(name, desc);
-    exec('npx lerna bootstrap --hoist');
+    // exec('npx lerna bootstrap --hoist');
     exec(`npx eslint --fix packages/${name}`);
     exec(`npx prettier --write packages/${name}`);
   });
