@@ -4,7 +4,7 @@
   "npmClient": "npm",
   "command": {
     "publish": {
-      "ignoreChanges": ["*.spec.js", "*.md"],
+      "ignoreChanges": ["*.spec.js", "*.mock.js", "*.md"],
       "message": "chore(release): publish",
       "registry": "https://registry.npmjs.org/"
     }

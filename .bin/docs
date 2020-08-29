@@ -37,4 +37,3 @@ const packages = fs.readdirSync(path.resolve(__dirname, '../packages'));
 packages.forEach((pkg) => {
   createApiDocs(pkg);
 });
-// console.log(packages);

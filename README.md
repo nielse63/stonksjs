@@ -55,12 +55,13 @@ Installation, usage, and API docs can be found in each scoped package directory.
 
 ### Packages
 
-| Name                                                                                 | Description                                                               | Version                                                                                            |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| [@stonksjs/core](https://github.com/nielse63/stonksjs/tree/master/packages/core)     | Core library for stonksjs                                                 | ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/quote?color=brightgreen&style=flat-square)  |
-| [@stonksjs/api](https://github.com/nielse63/stonksjs/tree/master/packages/api)       | Utility classes for fetching data and responding in a standardized format | ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/api?color=brightgreen&style=flat-square)    |
-| [@stonksjs/quote](https://github.com/nielse63/stonksjs/tree/master/packages/quote)   | Detailed financial data for any ticket symbol                             | ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/quote?color=brightgreen&style=flat-square)  |
-| [@stonksjs/finviz](https://github.com/nielse63/stonksjs/tree/master/packages/finviz) | Get the results from a custom finviz screener                             | ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/finviz?color=brightgreen&style=flat-square) |
+| Name                                                                                         | Description                                                               | Version                                                                                                    |
+| -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| [@stonksjs/core](https://github.com/nielse63/stonksjs/tree/master/packages/core)             | Core library for stonksjs                                                 | ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/core?color=brightgreen&style=flat-square)           |
+| [@stonksjs/api](https://github.com/nielse63/stonksjs/tree/master/packages/api)               | Utility classes for fetching data and responding in a standardized format | ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/api?color=brightgreen&style=flat-square)            |
+| [@stonksjs/quote](https://github.com/nielse63/stonksjs/tree/master/packages/quote)           | Detailed financial data for any ticket symbol                             | ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/quote?color=brightgreen&style=flat-square)          |
+| [@stonksjs/finviz](https://github.com/nielse63/stonksjs/tree/master/packages/finviz)         | Stock screener and company data from finviz                               | ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/finviz?color=brightgreen&style=flat-square)         |
+| [@stonksjs/finviz](https://github.com/nielse63/stonksjs/tree/master/packages/stock-screener) | Pre-defined industry standard stock screeners from MSN Money              | ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/stock-screener?color=brightgreen&style=flat-square) |
 
 ## Collaboration
 
