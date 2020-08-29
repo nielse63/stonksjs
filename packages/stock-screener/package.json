@@ -1,7 +1,7 @@
 {
   "name": "@stonksjs/stock-screener",
   "version": "0.0.1",
-  "description": "Industry tested stock screeners from MSN Money",
+  "description": "Pre-defined industry standard stock screeners from MSN Money",
   "author": "Erik Nielsen <erik@312development.com>",
   "homepage": "https://nielse63.github.io/stonksjs/tree/master/packages/stock-screener#readme",
   "license": "ISC",
