@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -e
+
+rm -rf /tmp/stonkjs
+mkdir -p /tmp/stonksjs
+
+cp -R docs /tmp/stonksjs/docs
+
+git stash push -m 'gh-pages'
+git checkout gh-pages
+git pull
