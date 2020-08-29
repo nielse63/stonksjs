@@ -1,0 +1,62 @@
+#!/usr/bin/env node
+const fs = require('fs-extra');
+const path = require('path');
+const globby = require('globby');
+const _ = require('lodash');
+const { program } = require('commander');
+const cp = require('child_process');
+const Handlebars = require('handlebars');
+
+const templatesDir = path.resolve(__dirname, '../templates/package');
+const src = path.resolve(__dirname, '../templates/package/**/*.hbs');
+
+const exec = (cmd) => cp.execSync(cmd).toString().trim();
+
+const compileTemplate = (file, name, desc) => {
+  const camelCase = _.camelCase(name);
+  const pascalCase = _.upperFirst(camelCase);
+  const basename = file
+    .replace(templatesDir, '')
+    .replace('.hbs', '')
+    .replace('{{pascalCase}}', pascalCase)
+    .replace('/', '');
+  const source = fs.readFileSync(file, 'utf8');
+  const template = Handlebars.compile(source);
+
+  const data = {
+    name,
+    desc,
+    camelCase,
+    pascalCase,
+  };
+  const result = template(data);
+  const dest = path.resolve(__dirname, '../packages', name, basename);
+  const dirname = path.dirname(dest);
+  if (!fs.existsSync(dirname)) {
+    fs.mkdirpSync(dirname);
+  }
+  fs.writeFileSync(dest, result, 'utf8');
+};
+
+const createPackageFiles = (name, desc) => {
+  const templates = globby.sync(src);
+  templates.forEach((file) => {
+    compileTemplate(file, name, desc);
+  });
+};
+
+program.storeOptionsAsProperties(false);
+
+program
+  .version('1.0.0')
+  .option('--name <name>', 'package name', '')
+  .option('--desc <desc>', 'package description', '')
+  .action(() => {
+    const { name, desc } = program.opts();
+    createPackageFiles(name, desc);
+    exec('npx lerna bootstrap --hoist');
+    exec(`npx eslint --fix packages/${name}`);
+    exec(`npx prettier --write packages/${name}`);
+  });
+
+program.parse(process.argv);
