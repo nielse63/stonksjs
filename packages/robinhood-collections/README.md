@@ -41,11 +41,6 @@ An array of Robinhood collections, including the name and id
 
 **Kind**: static property of
 [<code>@stonksjs/robinhood-collections</code>](#module_@stonksjs/robinhood-collections)
-**Properties**
-
-| Name                 |
-| -------------------- |
-| robinhoodCollections |
 
 **Example**
 

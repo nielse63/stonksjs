@@ -5,7 +5,7 @@
 > Reliable algotrading utilities written in node
 
 ![CI Tests](https://github.com/nielse63/stonksjs/workflows/CI%20Tests/badge.svg)
-[![Coverage Status](https://coveralls.io/repos/github/nielse63/stonksjs/badge.svg?branch=master)](https://coveralls.io/github/nielse63/stonksjs?branch=master)
+![Coveralls github](https://img.shields.io/coveralls/github/nielse63/stonksjs?style=flat-square)
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/nielse63/stonksjs?style=flat-square)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
