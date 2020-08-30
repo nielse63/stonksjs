@@ -1,23 +1,24 @@
-![stonksjs](https://raw.githubusercontent.com/nielse63/stonksjs/gh-pages/img/banner.svg)
+<img src="https://raw.githubusercontent.com/nielse63/stonksjs/gh-pages/img/docs/img/logo.svg" align="right" width="100" />
 
 # stonksjs
 
 > Reliable algotrading utilities written in node
 
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/nielse63/stonksjs?style=flat-square)
 ![CI Tests](https://github.com/nielse63/stonksjs/workflows/CI%20Tests/badge.svg)
 ![Coveralls github](https://img.shields.io/coveralls/github/nielse63/stonksjs?style=flat-square)
-![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/nielse63/stonksjs?style=flat-square)
+![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/nielse63/stonksjs?style=flat-square)
+![Code Climate technical debt](https://img.shields.io/codeclimate/tech-debt/nielse63/stonksjs?style=flat-square)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 - [Features](#features)
   - [Goals](#goals)
 - [Usage](#usage)
-  - [Packages](#packages)
-- [Collaboration](#collaboration)
 - [Development](#development)
   - [Setup](#setup)
   - [Testing](#testing)
   - [Release](#release)
+- [Contributing](#contributing)
 - [Roadmap](#roadmap)
 
 ## Features
@@ -53,8 +54,6 @@ The primary objective of this project are:
 
 Installation, usage, and API docs can be found in each scoped package directory.
 
-### Packages
-
 | Name                                                                                                               | Description                                                               | Version                                                                                                           |
 | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
 | [@stonksjs/core](https://github.com/nielse63/stonksjs/tree/master/packages/core)                                   | Core library for stonksjs                                                 | ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/core?color=brightgreen&style=flat-square)                  |
@@ -63,14 +62,6 @@ Installation, usage, and API docs can be found in each scoped package directory.
 | [@stonksjs/finviz](https://github.com/nielse63/stonksjs/tree/master/packages/finviz)                               | Stock screener and company data from finviz                               | ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/finviz?color=brightgreen&style=flat-square)                |
 | [@stonksjs/stock-screener](https://github.com/nielse63/stonksjs/tree/master/packages/stock-screener)               | Pre-defined industry standard stock screeners from MSN Money              | ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/stock-screener?color=brightgreen&style=flat-square)        |
 | [@stonksjs/robinhood-collections](https://github.com/nielse63/stonksjs/tree/master/packages/robinhood-collections) | Get the stock symbols for any Robinhood collection                        | ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/robinhood-collections?color=brightgreen&style=flat-square) |
-
-## Collaboration
-
-Use the links below for feature requests, issues, or pull rquests:
-
-- [New feature request](https://github.com/nielse63/stonksjs/issues/new?template=feature-request.md)
-- [Defect/bug](https://github.com/nielse63/stonksjs/issues/new?template=bug.md)
-- [Pull request](https://github.com/nielse63/stonksjs/compare)
 
 ## Development
 
@@ -112,6 +103,13 @@ npm run release
 
 This executes `lerna publish` behind the scenes, and you'll be prompted with a few questions before
 the package is deployed.
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would
+like to change.
+
+Please make sure to update tests as appropriate.
 
 ## Roadmap
 

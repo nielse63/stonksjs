@@ -4,6 +4,10 @@ const path = require('path');
 const jsdoc2md = require('jsdoc-to-markdown');
 const cp = require('child_process');
 
+// paths
+const packagesDir = path.resolve(__dirname, '../packages');
+const apiDocsDir = path.resolve(__dirname, '../docs/api');
+
 const exec = (cmd) => cp.execSync(cmd).toString().trim();
 
 const createApiDocs = async (pkg) => {
@@ -25,15 +29,22 @@ const createApiDocs = async (pkg) => {
   if (!fs.existsSync(docsFolder)) {
     fs.mkdirpSync(docsFolder);
   }
-  const content = `# @stonksjs/${pkg} API Documentation
-
-${markdown}`;
-  fs.writeFileSync(output, content);
+  fs.writeFileSync(output, markdown);
   const cmd = `npx prettier --write ${output}`;
   exec(cmd);
 };
 
-const packages = fs.readdirSync(path.resolve(__dirname, '../packages'));
+const copyApiDocs = (pkg) => {
+  const readme = path.resolve(packagesDir, pkg, 'README.md');
+  if (!fs.existsSync(apiDocsDir)) {
+    fs.mkdirpSync(apiDocsDir);
+  }
+  const dest = path.resolve(apiDocsDir, `${pkg}.md`);
+  fs.copyFileSync(readme, dest);
+};
+
+const packages = fs.readdirSync(packagesDir);
 packages.forEach((pkg) => {
   createApiDocs(pkg);
+  copyApiDocs(pkg);
 });
