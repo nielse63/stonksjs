@@ -1,30 +1,23 @@
+const { getScreenerResults, listFilters } = require('./lib/stock-screener');
+
 /**
- * Pre-defined industry standard stock screeners from MSN Money
- * @module @stonksjs/stock-screener
- * @typicalname stockScreener
+ * Fetch the latest results from the stock screener
+ *
+ * @example
+ * const symbols = await stockScreener('HIGH_YIELD_DIVIDENDS');
+ *
+ * @param {string} filter - the name of the screener to search
+ * @returns {Promise} - the latest screener data or an error
+ * @fulfil {string[]} - array of ticket symbols
+ * @reject {Error}
  */
-const StockScreener = require('./lib/StockScreener');
+async function stockScreener(filter) {
+  return getScreenerResults(filter);
+}
 
-const screener = new StockScreener();
+/**
+ * @property {string[]} filters - list of available filters to choose from
+ */
+stockScreener.filters = listFilters();
 
-module.exports = {
-  /**
-   * @property {string[]} - array of pre-defined stock screener names
-   */
-  screens: StockScreener.listScreens(),
-
-  /**
-   * Fetch the latest results from the stock screener
-   *
-   * @example
-   * const symbols = await stockScreener.get('highYieldDividends');
-   *
-   * @param {string} filterName - the name of the screener to search
-   * @returns {Promise} - the latest screener data or an error
-   * @fulfil {string[]} - array of ticket symbols
-   * @reject {Error}
-   */
-  async get(filterName) {
-    return screener.getScreenerResults(filterName);
-  },
-};
+module.exports = stockScreener;
