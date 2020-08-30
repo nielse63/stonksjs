@@ -5,9 +5,10 @@
 - [Installation](#installation)
 - [Usage](#usage)
 - [API](#api)
-  - [@stonksjs/robinhood-collections](#stonksjsrobinhood-collections)
-    <code>Array.&lt;object&gt;</code>
-  - [.getCollection](#module_@stonksjs/robinhood-collections.getCollection) ⇒ <code>Promise</code>
+  - [@stonksjs/robinhood-collections : <code>object</code>](#stonksjsrobinhood-collections--object)
+  - [robinhoodCollections.collections : <code>Array.&lt;object&gt;</code>](#robinhoodcollectionscollections--arrayobject)
+  - [robinhoodCollections.getCollection ⇒ <code>Promise</code>](#robinhoodcollectionsgetcollection--promise)
+    <code>Promise&lt;string[]&gt;</code>
 
 ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/robinhood-collections?color=brightgreen&style=flat-square)
 
@@ -30,20 +31,23 @@ const symbols = await robinhoodCollections.getCollection('reit'); // returns arr
 
 ## API
 
-<a name="module_@stonksjs/robinhood-collections"></a>
-
-### @stonksjs/robinhood-collections
-
-Get the stock symbols for any Robinhood collection
+### @stonksjs/robinhood-collections : <code>object</code>
 
 <a name="module_@stonksjs/robinhood-collections.collections"></a>
 
-#### robinhoodCollections.collections : <code>Array.&lt;object&gt;</code>
+### robinhoodCollections.collections : <code>Array.&lt;object&gt;</code>
 
 An array of Robinhood collections, including the name and id
 
 **Kind**: static property of
-[<code>@stonksjs/robinhood-collections</code>](#module_@stonksjs/robinhood-collections) **Example**
+[<code>@stonksjs/robinhood-collections</code>](#module_@stonksjs/robinhood-collections)
+**Properties**
+
+| Name                 |
+| -------------------- |
+| robinhoodCollections |
+
+**Example**
 
 ```js
 [
@@ -78,7 +82,7 @@ An array of Robinhood collections, including the name and id
 
 <a name="module_@stonksjs/robinhood-collections.getCollection"></a>
 
-#### robinhoodCollections.getCollection ⇒ <code>Promise</code>
+### robinhoodCollections.getCollection ⇒ <code>Promise</code>
 
 Get the ticker symbols from a given Robinhood collection
 

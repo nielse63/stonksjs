@@ -3,6 +3,7 @@
  *
  * @module @stonksjs/robinhood-collections
  * @typicalname robinhoodCollections
+ * @type {object}
  */
 const collections = require('./collections');
 const getCollection = require('./get-collection');
@@ -41,6 +42,7 @@ module.exports = {
    *   { id: 'aerospace', name: 'Aerospace' },
    * ];
    *
+   * @property robinhoodCollections
    * @type {object[]}
    */
   collections,
