@@ -53,6 +53,9 @@ program
   .option('--desc <desc>', 'package description', '')
   .action(() => {
     const { name, desc } = program.opts();
+    if (!name || !desc) {
+      throw new Error('name and desc are required');
+    }
     createPackageFiles(name, desc);
     // exec('npx lerna bootstrap --hoist');
     exec(`npx eslint --fix packages/${name}`);
