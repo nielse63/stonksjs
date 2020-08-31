@@ -4,14 +4,10 @@ const url = 'https://finviz.com/screener.ashx?v=111&s=ta_topgainers';
 const symbol = 'AACG';
 
 describe('@stonksjs/finviz', () => {
-  it('should be defined', () => {
-    expect(finviz).toBeDefined();
-  });
-
   it('should be an object with two methods', () => {
     expect(finviz).toBeObject();
     expect(finviz.quote).toBeFunction();
-    expect(finviz.search).toBeFunction();
+    expect(finviz.screener).toBeFunction();
   });
 
   describe('#quote', () => {
@@ -23,7 +19,7 @@ describe('@stonksjs/finviz', () => {
 
   describe('#search', () => {
     it('should return an array of symbols', async () => {
-      const response = await finviz.search(url);
+      const response = await finviz.screener(url);
       expect(response).toBeArray();
     });
   });
