@@ -6,7 +6,6 @@
 
 - Packages
 
-  - [@stonksjs/api](api/api.md)
   - [@stonksjs/core](api/core.md)
   - [@stonksjs/finviz](api/finviz.md)
   - [@stonksjs/quote](api/quote.md)

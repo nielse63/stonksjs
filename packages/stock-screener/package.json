@@ -27,7 +27,7 @@
     "url": "https://github.com/nielse63/stonksjs/issues"
   },
   "dependencies": {
-    "@stonksjs/api": "^1.0.0",
+    "axios": "^0.20.0",
     "lodash": "^4.17.20"
   }
 }
