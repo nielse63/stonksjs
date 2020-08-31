@@ -1,4 +1,4 @@
-const { StonksAPI } = require('@stonksjs/api');
+const axios = require('axios');
 
 const filters = {
   HIGH_YIELD_DIVIDENDS:
@@ -22,8 +22,7 @@ const listFilters = () => Object.keys(filters);
 const isValidFilter = (filter) => listFilters().includes(filter);
 
 const request = async (url) => {
-  const api = new StonksAPI();
-  const { data, error } = await api.get(url);
+  const { data, error } = await axios.get(url);
   if (error) {
     return Promise.reject(new Error(error));
   }
