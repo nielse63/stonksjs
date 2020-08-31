@@ -1,0 +1,31 @@
+# Builds, commits, and pushes updated doc filess on every push to master
+
+name: Docs
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: install dependencies
+        run: npm ci
+      - name: run docs script
+        run: ./.bin/update-api-docs
+      - name: switching from HTTPS to SSH
+        run: git remote set-url origin ${{ secrets.ssh }}
+      - name: check for changes
+        run: git status
+      - name: stage changed files
+        run: git add .
+      - name: commit changed files
+        run: git commit -m 'auto-updating docs'
+      - name: fetch from master
+        run: git fetch origin issue/17
+      - name: push code to master
+        run: git push origin HEAD:issue/17

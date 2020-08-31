@@ -39,9 +39,9 @@ jobs:
         env:
           CI: true
           DEBUG: stonks:*
-          ROBINHOOD_USERNAME: ${{ secrets.ROBINHOOD_USERNAME }}
-          ROBINHOOD_PASSWORD: ${{ secrets.ROBINHOOD_PASSWORD }}
-          ROBINHOOD_DEVICE_TOKEN: ${{ secrets.ROBINHOOD_DEVICE_TOKEN }}
+          # ROBINHOOD_USERNAME: ${{ secrets.ROBINHOOD_USERNAME }}
+          # ROBINHOOD_PASSWORD: ${{ secrets.ROBINHOOD_PASSWORD }}
+          # ROBINHOOD_DEVICE_TOKEN: ${{ secrets.ROBINHOOD_DEVICE_TOKEN }}
       - name: coveralls
         uses: coverallsapp/github-action@master
         with:

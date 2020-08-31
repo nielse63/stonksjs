@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-set -e
-
-# update doc files
-cp README.md docs/README.md
-.bin/update-api-docs
-git add docs/api/* docs/README.md
-
-npx lint-staged

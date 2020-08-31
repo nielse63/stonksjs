@@ -79,7 +79,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": ".bin/pre-commit",
+      "pre-commit": "lint-staged",
       "pre-push": "jest --cache --onlyChanged"
     }
   },

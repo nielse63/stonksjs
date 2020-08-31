@@ -37,4 +37,11 @@ const updateApiDocs = () => {
   updateDocsSidebar(names);
 };
 
+const copyReadme = () => {
+  const src = path.resolve(__dirname, '../README.md');
+  const dest = path.join(docs, 'README.md');
+  fs.copyFileSync(src, dest);
+};
+
+copyReadme();
 updateApiDocs();
