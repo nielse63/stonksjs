@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/nielse63/stonksjs/gh-pages/img/docs/img/logo.svg" align="right" width="100" />
+<img src="https://raw.githubusercontent.com/nielse63/stonksjs/master/docs/img/logo.svg" align="right" width="100" />
 
 # stonksjs
 
