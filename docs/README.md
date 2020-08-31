@@ -117,3 +117,7 @@ Please make sure to update tests as appropriate.
 All new features and changes are being tracked in GitHub under the
 [projects](https://github.com/nielse63/stonksjs/projects) and
 [issues](https://github.com/nielse63/stonksjs/issues) tabs of this repo.
+
+---
+
+Made in Chicago
