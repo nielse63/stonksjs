@@ -12,6 +12,8 @@ on:
       - master
       - develop
       - 'feature/*'
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -43,4 +45,3 @@ jobs:
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-        if: ${{ github.event_name == 'pull_request' && github.base_ref == 'master' }}
