@@ -18,7 +18,7 @@ jobs:
       - name: run docs script
         run: ./.bin/update-api-docs
       - name: switching from HTTPS to SSH
-        run: git remote set-url origin ${{ secrets.ssh }}
+        run: git remote set-url origin ${{ secrets.REMOTE_SSH }}
       - name: check for changes
         run: git status
       - name: stage changed files
