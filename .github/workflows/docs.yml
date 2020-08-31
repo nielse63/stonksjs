@@ -17,12 +17,12 @@ jobs:
         run: npm ci
       - name: run docs script
         run: ./.bin/update-api-docs
-      - name: Commit files
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git commit -m "auto-generated docs" -a
-      - name: Push changes
-        uses: ad-m/github-push-action@master
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          author_name: actions-user
+          author_email: actions@github.com
+          message: "auto-generated docs"
+          add: "docs/"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
