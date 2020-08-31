@@ -1,7 +1,7 @@
 {
   "name": "@stonksjs/quote",
   "version": "1.0.0",
-  "description": "Detailed financial data for any ticket symbol",
+  "description": "Detailed real-time stock data",
   "author": "Erik Nielsen <erik@312development.com>",
   "homepage": "https://nielse63.github.io/stonksjs/tree/master/packages/quote#readme",
   "license": "ISC",
@@ -27,7 +27,6 @@
     "url": "https://github.com/nielse63/stonksjs/issues"
   },
   "dependencies": {
-    "@stonksjs/api": "^1.0.0",
-    "lodash": "^4.17.20"
+    "@stonksjs/finviz": "^1.0.0"
   }
 }

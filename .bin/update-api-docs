@@ -1,0 +1,40 @@
+#!/usr/bin/env node
+const path = require('path');
+const fs = require('fs-extra');
+const globby = require('globby');
+const Handlebars = require('handlebars');
+
+const docs = path.resolve(__dirname, '../docs');
+const packages = path.resolve(__dirname, '../packages');
+
+const updateDocsSidebar = (names) => {
+  const tpl = path.resolve(__dirname, '../templates/docs/_sidebar.md.hbs');
+  const source = fs.readFileSync(tpl, 'utf8');
+  const template = Handlebars.compile(source);
+  const result = template({ names });
+  const dest = path.join(docs, '_sidebar.md');
+  fs.writeFileSync(dest, result);
+};
+
+const updateApiDocs = () => {
+  const files = globby.sync(path.join(packages, '**/README.md'))
+    .filter((file) => !file.includes('node_modules'));
+  const api = path.join(docs, 'api');
+
+  // copy api files
+  files.forEach((file) => {
+    const pkg = path.basename(path.dirname(file));
+    const filename = `${pkg}.md`;
+    const dest = path.join(api, filename);
+    fs.copyFileSync(file, dest);
+  });
+
+  // update docs sidebar
+  const names = files.map((file) => {
+    const pkg = path.basename(path.dirname(file));
+    return pkg;
+  });
+  updateDocsSidebar(names);
+};
+
+updateApiDocs();
