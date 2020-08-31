@@ -1,6 +1,6 @@
 {
   "name": "@stonksjs/core",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Core library for stonksjs",
   "keywords": [
     "robinhood",
@@ -35,9 +35,9 @@
     "url": "https://github.com/nielse63/stonksjs/issues"
   },
   "dependencies": {
-    "@stonksjs/finviz": "^1.0.0",
-    "@stonksjs/quote": "^1.0.0",
+    "@stonksjs/finviz": "^1.0.1",
+    "@stonksjs/quote": "^1.0.1",
     "@stonksjs/robinhood-collections": "^1.0.0",
-    "@stonksjs/stock-screener": "^1.0.1"
+    "@stonksjs/stock-screener": "^1.0.2"
   }
 }

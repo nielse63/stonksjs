@@ -1,6 +1,6 @@
 {
   "name": "@stonksjs/finviz",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Stock screener and company data from finviz",
   "author": "Erik Nielsen <erik@312development.com>",
   "homepage": "https://nielse63.github.io/stonksjs/tree/master/packages/finviz#readme",
