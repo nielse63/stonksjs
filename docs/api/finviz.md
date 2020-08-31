@@ -10,6 +10,7 @@
 - [API](#api)
   - [finviz.quote(symbol) ⇒ <code>Promise</code>](#finvizquotesymbol--promise)
   - [finviz.search(finvizUrl) ⇒ <code>Promise</code>](#finvizsearchfinvizurl--promise)
+- [Response schema](#response-schema)
 
 ## Features
 
@@ -32,7 +33,9 @@ const data = await finviz.quote('MSFT');
 // see below for example response object
 
 // get results from a custom finviz screener
-const symbols = await finviz.search('https://finviz.com/screener.ashx?v=111&s=ta_topgainers');
+const symbols = await finviz.search(
+  'https://finviz.com/screener.ashx?v=111&s=ta_topgainers',
+);
 // ['AAPL', 'MSFT', 'TSLA', ...]
 ```
 
@@ -42,9 +45,11 @@ const symbols = await finviz.search('https://finviz.com/screener.ashx?v=111&s=ta
 
 Get detailed company financial data
 
-**Kind**: static method of [<code>@stonksjs/finviz</code>](#module_@stonksjs/finviz) **Returns**:
-<code>Promise</code> - resolves to a plain object, rejects with an Error **Fulfil**:
-<code>object</code> - company financial data **Reject**: <code>Error</code>
+**Kind**: static method of
+[<code>@stonksjs/finviz</code>](#module_@stonksjs/finviz) **Returns**:
+<code>Promise</code> - resolves to a plain object, rejects with an Error
+**Fulfil**: <code>object</code> - company financial data **Reject**:
+<code>Error</code>
 
 | Param  | Type                | Description                  |
 | ------ | ------------------- | ---------------------------- |
@@ -56,7 +61,31 @@ Get detailed company financial data
 const data = await finviz.quote('MSFT'); // {Promise<object>}
 ```
 
-#### Response schema
+<a name="module_@stonksjs/finviz.search"></a>
+
+### finviz.search(finvizUrl) ⇒ <code>Promise</code>
+
+Get ticker symbols from the results of a custom finviz screener
+
+**Kind**: static method of
+[<code>@stonksjs/finviz</code>](#module_@stonksjs/finviz) **Returns**:
+<code>Promise</code> - resolves to an array of strings, rejects with an Error
+**Fulfil**: <code>string[]</code> - array of ticker symbols for each row of
+results **Reject**: <code>Error</code>
+
+| Param     | Type                | Description                                      |
+| --------- | ------------------- | ------------------------------------------------ |
+| finvizUrl | <code>string</code> | the url from the screener page you want to query |
+
+**Example**
+
+```js
+const symbols = await finviz.search(
+  'https://finviz.com/screener.ashx?v=111&s=ta_topgainers',
+); // {Promise<string[]>}
+```
+
+## Response schema
 
 ```js
 // pulled from https://finviz.com/quote.ashx?t=AACG
@@ -132,25 +161,4 @@ const data = await finviz.quote('MSFT'); // {Promise<object>}
   volume: '',
   change: ''
 }
-```
-
-<a name="module_@stonksjs/finviz.search"></a>
-
-### finviz.search(finvizUrl) ⇒ <code>Promise</code>
-
-Get ticker symbols from the results of a custom finviz screener
-
-**Kind**: static method of [<code>@stonksjs/finviz</code>](#module_@stonksjs/finviz) **Returns**:
-<code>Promise</code> - resolves to an array of strings, rejects with an Error **Fulfil**:
-<code>string[]</code> - array of ticker symbols for each row of results **Reject**:
-<code>Error</code>
-
-| Param     | Type                | Description                                      |
-| --------- | ------------------- | ------------------------------------------------ |
-| finvizUrl | <code>string</code> | the url from the screener page you want to query |
-
-**Example**
-
-```js
-const symbols = await finviz.search('https://finviz.com/screener.ashx?v=111&s=ta_topgainers'); // {Promise<string[]>}
 ```
