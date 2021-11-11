@@ -58,7 +58,7 @@
     "auto-changelog": "^2.2.0",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^25.5.1",
-    "commander": "^6.1.0",
+    "commander": "^6.2.1",
     "cross-env": "^7.0.2",
     "depcheck": "^0.9.2",
     "dotenv-cli": "^3.1.0",
