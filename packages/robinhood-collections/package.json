@@ -1,6 +1,6 @@
 {
   "name": "@stonksjs/robinhood-collections",
-  "version": "1.0.0",
+  "version": "2.0.3",
   "description": "Get the stock symbols for any Robinhood collection",
   "author": "Erik Nielsen <erik@312development.com>",
   "homepage": "https://nielse63.github.io/stonksjs/tree/master/packages/robinhood-collections#readme",
