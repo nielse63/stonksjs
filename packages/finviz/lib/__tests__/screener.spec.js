@@ -10,6 +10,7 @@ describe('screener', () => {
   it('should return an array of symbols', async () => {
     const response = await screener(url);
     expect(response).toBeArray();
+    expect(response.length).toBeGreaterThan(0);
   });
 
   it('should have a max of 20 items', async () => {

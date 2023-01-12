@@ -3,7 +3,7 @@ const cheerio = require('cheerio');
 
 const parseScreenerResponse = (html) => {
   const $ = cheerio.load(html);
-  const rows = $('#screener-content > table > tbody > tr');
+  const rows = $('.table-light > tbody > tr:not(:first-child)');
   const data = new Set();
   rows.each((i, row) => {
     const cell = $(row).find('> td:nth-child(2)');

@@ -1,13 +1,10 @@
 {
-  "files.exclude": {
-    "**/coverage": true
-    // "**/tmp": true
-  },
   "search.exclude": {
     "**/coverage": true,
     "**/dist": true,
     "**/.tmp": true,
-    "**/tmp": true
+    "**/tmp": true,
+    "**/package-lock.json": true
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
