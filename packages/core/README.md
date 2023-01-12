@@ -4,11 +4,10 @@
 
 - [Installation](#installation)
 - [API](#api)
-  - [@stonksjs/core : <code>object</code>](#stonksjscore--object)
+  - [@stonksjs/core : object](#stonksjscore--object)
   - [stonks.finviz](#stonksfinviz)
   - [stonks.quote](#stonksquote)
   - [stonks.stockScreener](#stonksstockscreener)
-  - [stonks.robinhoodCollections](#stonksrobinhoodcollections)
 
 `@stonksjs/core` references all public packages from stonksjs. This is a
 convenient way to import all functionality from stonksjs without having to
@@ -42,10 +41,4 @@ module
 
 References the
 [`@stonksjs/stock-screener`](https://nielse63.github.io/stonksjs/tree/master/packages/stock-screener)
-module
-
-### stonks.robinhoodCollections
-
-References the
-[`@stonksjs/robinhood-collections`](https://nielse63.github.io/stonksjs/tree/master/packages/robinhood-collections)
 module

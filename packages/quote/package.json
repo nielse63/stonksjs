@@ -1,7 +1,7 @@
 {
   "name": "@stonksjs/quote",
   "version": "2.0.3",
-  "description": "Detailed real-time stock data",
+  "description": "Detailed real-time market data",
   "author": "Erik Nielsen <erik@312development.com>",
   "homepage": "https://nielse63.github.io/stonksjs/tree/master/packages/quote#readme",
   "license": "ISC",

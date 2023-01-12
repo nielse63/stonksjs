@@ -37,7 +37,6 @@
   "dependencies": {
     "@stonksjs/finviz": "^2.0.3",
     "@stonksjs/quote": "^2.0.3",
-    "@stonksjs/robinhood-collections": "^2.0.3",
     "@stonksjs/stock-screener": "^2.0.3"
   }
 }
