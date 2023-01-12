@@ -1,6 +1,5 @@
 {
   "packages": ["packages/*"],
-  "version": "independent",
   "npmClient": "npm",
   "command": {
     "publish": {
@@ -8,5 +7,8 @@
       "message": "chore(release): publish",
       "registry": "https://registry.npmjs.org/"
     }
-  }
+  },
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json",
+  "useWorkspaces": true,
+  "version": "2.0.2"
 }
