@@ -1,6 +1,6 @@
 # @stonksjs/quote
 
-> Detailed real-time stock data
+> Detailed real-time market data
 
 ## Installation
 

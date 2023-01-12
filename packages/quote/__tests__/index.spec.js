@@ -81,6 +81,7 @@ describe('@stonksjs/quote', () => {
 
   it('should return an object', async () => {
     const response = await quote(symbol);
+    console.log(response);
     expect(response).toBeObject();
   });
 
