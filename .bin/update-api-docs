@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const path = require('path');
 const fs = require('fs-extra');
-const globby = require('globby');
+const globby = require('fast-glob');
 const Handlebars = require('handlebars');
 
 const docs = path.resolve(__dirname, '../docs');
@@ -26,6 +26,7 @@ const updateApiDocs = () => {
     const pkg = path.basename(path.dirname(file));
     const filename = `${pkg}.md`;
     const dest = path.join(api, filename);
+    console.log(`copying ${file}`);
     fs.copyFileSync(file, dest);
   });
 
