@@ -8,8 +8,8 @@
 - [Installation](#installation)
 - [Usage](#usage)
 - [API](#api)
-  - [finviz.quote(symbol) ⇒ <code>Promise</code>](#finvizquotesymbol--promise)
-  - [finviz.screener(url) ⇒ <code>Promise</code>](#finvizscreenerurl--promise)
+  - [finviz.quote(symbol) ⇒ Promise](#finvizquotesymbol--promise)
+  - [finviz.screener(url) ⇒ Promise](#finvizscreenerurl--promise)
 - [Response schema](#response-schema)
 
 ## Features
@@ -93,6 +93,8 @@ const symbols = await finviz.screener(
 ```
 
 ## Response schema
+
+<!-- TODO: update this schedma -->
 
 ```js
 // pulled from https://finviz.com/quote.ashx?t=AACG
