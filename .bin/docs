@@ -12,14 +12,15 @@ const exec = (cmd) => cp.execSync(cmd).toString().trim();
 
 const createApiDocs = async (pkg) => {
   console.log('creating api docs for', pkg);
+  const files = [];
+  if (fs.existsSync(path.join(packagesDir, pkg, 'lib'))) {
+    files.push(path.resolve(packagesDir, pkg, 'lib/**/*.js'));
+  }
+  if (fs.existsSync(path.resolve(packagesDir, pkg, 'index.js'))) {
+    files.push(path.resolve(packagesDir, pkg, 'index.js'));
+  }
 
-  const markdown = jsdoc2md.renderSync({
-    files: [
-      path.resolve(__dirname, '../packages', pkg, 'lib/**/*.js'),
-      path.resolve(__dirname, '../packages', pkg, 'index.js'),
-      // path.resolve(__dirname, '../typedef/**/*.js'),
-    ],
-  });
+  const markdown = jsdoc2md.renderSync({ files });
   if (!markdown.trim()) {
     return;
   }
@@ -45,6 +46,9 @@ const copyApiDocs = (pkg) => {
 
 const packages = fs.readdirSync(packagesDir);
 packages.forEach((pkg) => {
+  const abspath = path.resolve(packagesDir, pkg);
+  const stats = fs.lstatSync(abspath);
+  if (!stats.isDirectory()) return;
   createApiDocs(pkg);
   copyApiDocs(pkg);
 });

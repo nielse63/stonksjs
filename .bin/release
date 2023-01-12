@@ -5,7 +5,7 @@ export CI='true'
 # COMMIT_MESSAGE="${1}"
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
-if [ $CURRENT_BRANCH != 'master' ]; then
+if [ "$CURRENT_BRANCH" != 'master' ]; then
   echo 'Not on master'
   exit 1
 fi
@@ -19,6 +19,7 @@ fi
 # git commit -m "$COMMIT_MESSAGE" --allow-empty
 
 npx auto-changelog
+npx prettier --write CHANGELOG.md
 git add CHANGELOG.md
 git commit -m 'chore(docs): auto-changelog'
 git push

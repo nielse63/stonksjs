@@ -10,8 +10,9 @@
   - [stonks.stockScreener](#stonksstockscreener)
   - [stonks.robinhoodCollections](#stonksrobinhoodcollections)
 
-`@stonksjs/core` references all public packages from stonksjs. This is a convenient way to import
-all functionality from stonksjs without having to install each scoped module individually.
+`@stonksjs/core` references all public packages from stonksjs. This is a
+convenient way to import all functionality from stonksjs without having to
+install each scoped module individually.
 
 ## Installation
 
@@ -27,12 +28,14 @@ an object containing all public stonksjs modules
 
 ### stonks.finviz
 
-References the [`@stonksjs/finviz`](https://nielse63.github.io/stonksjs/tree/master/packages/finviz)
+References the
+[`@stonksjs/finviz`](https://nielse63.github.io/stonksjs/tree/master/packages/finviz)
 module
 
 ### stonks.quote
 
-References the [`@stonksjs/quote`](https://nielse63.github.io/stonksjs/tree/master/packages/quote)
+References the
+[`@stonksjs/quote`](https://nielse63.github.io/stonksjs/tree/master/packages/quote)
 module
 
 ### stonks.stockScreener

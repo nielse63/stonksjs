@@ -22,7 +22,7 @@ module.exports = {
     ],
     'valid-jsdoc': 'warn',
     'operator-linebreak': [
-      'error',
+      'warn',
       'after',
       { overrides: { "= 'http": 'before' } },
     ],

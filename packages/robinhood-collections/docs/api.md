@@ -1,37 +1,15 @@
-# @stonksjs/robinhood-collections
+<a name="module_@stonksjs/robinhood-collections"></a>
 
-> Get the stock symbols for any Robinhood collection
+## @stonksjs/robinhood-collections : <code>object</code>
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [API](#api)
-  - [@stonksjs/robinhood-collections : <code>object</code>](#stonksjsrobinhood-collections--object)
-  - [robinhoodCollections.collections : <code>Array.&lt;object&gt;</code>](#robinhoodcollectionscollections--arrayobject)
-  - [robinhoodCollections.getCollection ⇒ <code>Promise</code>](#robinhoodcollectionsgetcollection--promise)
-    <code>Promise&lt;string[]&gt;</code>
+Get the stock symbols for any Robinhood collection
 
-![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/robinhood-collections?color=brightgreen&style=flat-square)
-
-## Installation
-
-```bash
-npm install --save @stonksjs/robinhood-collections
-```
-
-## Usage
-
-```js
-const robinhoodCollections = require('@stonksjs/robinhood-collections');
-
-// get all valid Robinhood collections
-console.log(robinhoodCollections.collections); // [{ id: '100-most-popular', name: '100 Most Popular'}, ...]
-
-const symbols = await robinhoodCollections.getCollection('reit'); // returns array of ticket symbols
-```
-
-## API
-
-### @stonksjs/robinhood-collections : <code>object</code>
+- [@stonksjs/robinhood-collections](#module_@stonksjs/robinhood-collections) :
+  <code>object</code>
+  - [.collections](#module_@stonksjs/robinhood-collections.collections) :
+    <code>Array.&lt;object&gt;</code>
+  - [.getCollection](#module_@stonksjs/robinhood-collections.getCollection) ⇒
+    <code>Promise</code>
 
 <a name="module_@stonksjs/robinhood-collections.collections"></a>
 
@@ -40,7 +18,12 @@ const symbols = await robinhoodCollections.getCollection('reit'); // returns arr
 An array of Robinhood collections, including the name and id
 
 **Kind**: static property of
-[<code>@stonksjs/robinhood-collections</code>](#module_@stonksjs/robinhood-collections)
+[<code>@stonksjs/robinhood-collections</code>](#module_@stonksjs/robinhood-collections)  
+**Properties**
+
+| Name                 |
+| -------------------- |
+| robinhoodCollections |
 
 **Example**
 
@@ -82,10 +65,11 @@ An array of Robinhood collections, including the name and id
 Get the ticker symbols from a given Robinhood collection
 
 **Kind**: static property of
-[<code>@stonksjs/robinhood-collections</code>](#module_@stonksjs/robinhood-collections)
+[<code>@stonksjs/robinhood-collections</code>](#module_@stonksjs/robinhood-collections)  
 **Returns**: <code>Promise</code> - - array of ticket symbols from the
-collection **Fulfil**: <code>object</code> - company financial data **Reject**:
-<code>Error</code>
+collection  
+**Fulfil**: <code>object</code> - company financial data  
+**Reject**: <code>Error</code>
 
 | Param      | Type                | Description                      |
 | ---------- | ------------------- | -------------------------------- |

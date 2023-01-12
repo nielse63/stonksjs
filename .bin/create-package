@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const fs = require('fs-extra');
 const path = require('path');
-const globby = require('globby');
+const globby = require('fast-glob');
 const _ = require('lodash');
 const { program } = require('commander');
 const cp = require('child_process');

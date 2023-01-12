@@ -12,9 +12,11 @@ jobs:
       - name: use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
-          node-version: 12.x
+          node-version: 16.x
       - name: install dependencies
         run: npm ci
+      - name: npm run docs
+        run: npm run docs
       - name: run docs script
         run: ./.bin/update-api-docs
       - name: Commit changes
@@ -22,7 +24,7 @@ jobs:
         with:
           author_name: actions-user
           author_email: actions@github.com
-          message: "auto-generated docs"
+          message: "chore(docs): generating documentaation"
           add: "docs/"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
