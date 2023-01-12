@@ -6,6 +6,11 @@ describe('@stonksjs/core', () => {
   });
 
   it('should include all packages', () => {
-    expect(core).toContainKeys(['finviz', 'quote', 'stockScreener', 'robinhoodCollections']);
+    expect(core).toContainKeys([
+      'finviz',
+      'quote',
+      'stockScreener',
+      'robinhoodCollections',
+    ]);
   });
 });

@@ -82,9 +82,10 @@ An array of Robinhood collections, including the name and id
 Get the ticker symbols from a given Robinhood collection
 
 **Kind**: static property of
-[<code>@stonksjs/robinhood-collections</code>](#module_@stonksjs/robinhood-collections) **Returns**:
-<code>Promise</code> - - array of ticket symbols from the collection **Fulfil**:
-<code>object</code> - company financial data **Reject**: <code>Error</code>
+[<code>@stonksjs/robinhood-collections</code>](#module_@stonksjs/robinhood-collections)
+**Returns**: <code>Promise</code> - - array of ticket symbols from the
+collection **Fulfil**: <code>object</code> - company financial data **Reject**:
+<code>Error</code>
 
 | Param      | Type                | Description                      |
 | ---------- | ------------------- | -------------------------------- |

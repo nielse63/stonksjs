@@ -68,8 +68,9 @@ Pre-defined industry standard stock screeners from MSN Money
 
 Fetch the latest results from the stock screener
 
-**Kind**: global function **Returns**: <code>Promise</code> - - the latest screener data or an error
-**Fulfil**: <code>string[]</code> - array of ticket symbols **Reject**: <code>Error</code>
+**Kind**: global function **Returns**: <code>Promise</code> - - the latest
+screener data or an error **Fulfil**: <code>string[]</code> - array of ticket
+symbols **Reject**: <code>Error</code>
 
 | Param  | Type                | Description                        |
 | ------ | ------------------- | ---------------------------------- |
