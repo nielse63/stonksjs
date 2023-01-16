@@ -59,7 +59,7 @@
     "@babel/preset-env": "^7.20.2",
     "auto-changelog": "^2.4.0",
     "babel-jest": "^29.3.1",
-    "commander": "^9.5.0",
+    "commander": "^10.0.0",
     "cross-env": "^7.0.3",
     "depcheck": "^1.4.3",
     "dotenv-cli": "^6.0.0",
