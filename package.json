@@ -62,7 +62,7 @@
     "commander": "^9.5.0",
     "cross-env": "^7.0.3",
     "depcheck": "^1.4.3",
-    "dotenv-cli": "^6.0.0",
+    "dotenv-cli": "^7.0.0",
     "eslint": "^8.31.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.27.4",
