@@ -20,7 +20,7 @@ jobs:
       - name: run docs script
         run: ./.bin/update-api-docs
       - name: Commit changes
-        uses: EndBug/add-and-commit@v4
+        uses: EndBug/add-and-commit@v9
         with:
           author_name: actions-user
           author_email: actions@github.com
