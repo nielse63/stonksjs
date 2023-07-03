@@ -1,4 +1,4 @@
-# Builds, commits, and pushes updated doc filess on every push to master
+# Builds, commits, and pushes updated doc filess on every push to main
 
 name: Docs
 

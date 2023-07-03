@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/nielse63/stonksjs/master/docs/img/logo.svg" align="right" width="100" />
+<img src="https://raw.githubusercontent.com/nielse63/stonksjs/main/docs/img/logo.svg" align="right" width="100" />
 
 # stonksjs
 
@@ -56,12 +56,12 @@ The primary objective of this project are:
 
 Installation, usage, and API docs can be found in each scoped package directory.
 
-| Name                                                                                                 | Description                                                  | Version                                                                                                    |
-| ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
-| [@stonksjs/core](https://github.com/nielse63/stonksjs/tree/master/packages/core)                     | Core library for stonksjs                                    | ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/core?color=brightgreen&style=flat-square)           |
-| [@stonksjs/quote](https://github.com/nielse63/stonksjs/tree/master/packages/quote)                   | Detailed real-time market data                               | ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/quote?color=brightgreen&style=flat-square)          |
-| [@stonksjs/finviz](https://github.com/nielse63/stonksjs/tree/master/packages/finviz)                 | Stock screener and company data from finviz                  | ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/finviz?color=brightgreen&style=flat-square)         |
-| [@stonksjs/stock-screener](https://github.com/nielse63/stonksjs/tree/master/packages/stock-screener) | Pre-defined industry standard stock screeners from MSN Money | ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/stock-screener?color=brightgreen&style=flat-square) |
+| Name                                                                                               | Description                                                  | Version                                                                                                    |
+| -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
+| [@stonksjs/core](https://github.com/nielse63/stonksjs/tree/main/packages/core)                     | Core library for stonksjs                                    | ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/core?color=brightgreen&style=flat-square)           |
+| [@stonksjs/quote](https://github.com/nielse63/stonksjs/tree/main/packages/quote)                   | Detailed real-time market data                               | ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/quote?color=brightgreen&style=flat-square)          |
+| [@stonksjs/finviz](https://github.com/nielse63/stonksjs/tree/main/packages/finviz)                 | Stock screener and company data from finviz                  | ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/finviz?color=brightgreen&style=flat-square)         |
+| [@stonksjs/stock-screener](https://github.com/nielse63/stonksjs/tree/main/packages/stock-screener) | Pre-defined industry standard stock screeners from MSN Money | ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/stock-screener?color=brightgreen&style=flat-square) |
 
 ## Development
 

@@ -3,7 +3,7 @@
   "version": "2.0.3",
   "description": "Detailed real-time market data",
   "author": "Erik Nielsen <erik@312development.com>",
-  "homepage": "https://nielse63.github.io/stonksjs/tree/master/packages/quote#readme",
+  "homepage": "https://nielse63.github.io/stonksjs/tree/main/packages/quote#readme",
   "license": "ISC",
   "main": "index.js",
   "directories": {

@@ -28,17 +28,17 @@ an object containing all public stonksjs modules
 ### stonks.finviz
 
 References the
-[`@stonksjs/finviz`](https://nielse63.github.io/stonksjs/tree/master/packages/finviz)
+[`@stonksjs/finviz`](https://nielse63.github.io/stonksjs/tree/main/packages/finviz)
 module
 
 ### stonks.quote
 
 References the
-[`@stonksjs/quote`](https://nielse63.github.io/stonksjs/tree/master/packages/quote)
+[`@stonksjs/quote`](https://nielse63.github.io/stonksjs/tree/main/packages/quote)
 module
 
 ### stonks.stockScreener
 
 References the
-[`@stonksjs/stock-screener`](https://nielse63.github.io/stonksjs/tree/master/packages/stock-screener)
+[`@stonksjs/stock-screener`](https://nielse63.github.io/stonksjs/tree/main/packages/stock-screener)
 module
