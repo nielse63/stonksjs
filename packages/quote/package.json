@@ -1,6 +1,6 @@
 {
   "name": "@stonksjs/quote",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Detailed real-time market data",
   "author": "Erik Nielsen <erik@312development.com>",
   "homepage": "https://nielse63.github.io/stonksjs/tree/main/packages/quote#readme",
@@ -27,6 +27,6 @@
     "url": "https://github.com/nielse63/stonksjs/issues"
   },
   "dependencies": {
-    "@stonksjs/finviz": "^2.0.3"
+    "@stonksjs/finviz": "^2.0.4"
   }
 }
