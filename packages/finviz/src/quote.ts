@@ -1,6 +1,6 @@
-const axios = require('axios');
-const cheerio = require('cheerio');
-const _ = require('lodash');
+import axios from 'axios';
+import cheerio from 'cheerio';
+import _ from 'lodash';
 
 const parseQuoteData = (html) => {
   const $ = cheerio.load(html);
@@ -28,4 +28,4 @@ const quote = async (symbol) => {
   return results;
 };
 
-module.exports = quote;
+export = quote;

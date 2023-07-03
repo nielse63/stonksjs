@@ -1,4 +1,4 @@
-const core = require('..');
+import * as core from '..';
 
 describe('@stonksjs/core', () => {
   it('should be an object', () => {

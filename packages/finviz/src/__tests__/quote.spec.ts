@@ -1,4 +1,4 @@
-const quote = require('../quote');
+import quote from '../quote';
 
 const symbol = 'AACG';
 const expectedKeys = [

@@ -91,7 +91,7 @@ type Quote = {
  */
 const quote = async (symbol: string): Promise<Quote> => {
   const response = await finviz.quote(symbol);
-  return response;
+  return response as Quote;
 };
 
 export = quote;

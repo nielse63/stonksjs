@@ -6,3 +6,4 @@ dist
 *.*.js
 **/examples/**
 **/config/**
+*.d.ts

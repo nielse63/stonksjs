@@ -1,4 +1,4 @@
-const finviz = require('..');
+import * as finviz from '..';
 
 const url = 'https://finviz.com/screener.ashx?v=111&s=ta_topgainers';
 const symbol = 'AACG';

@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+set -e
+
+node_modules=$(find ./packages -type d -name node_modules -maxdepth 2)
+lock_files=$(find . -type f -name package-lock.json -maxdepth 3)
+dist_dirs=$(find ./packages -type d -name dist -maxdepth 2)
+
+function trash() {
+    local file=$1
+    basename=$(basename "$file")
+    tmpdir="$TMPDIR${basename}_${RANDOM}"
+    mv "$file" "$tmpdir" && rm -rf "$tmpdir" &
+}
+
+if [ -d "node_modules" ]; then
+    echo "Removing ./node_module..."
+    trash "node_modules"
+fi
+
+for node_module in $node_modules; do
+  echo "Removing $node_module..."
+  trash "$node_module"
+done
+
+for lock_file in $lock_files; do
+  echo "Removing $lock_file..."
+  rm -rf "$lock_file"
+done
+
+for dist_dir in $dist_dirs; do
+  echo "Removing $dist_dir..."
+  rm -rf "$dist_dir"
+done

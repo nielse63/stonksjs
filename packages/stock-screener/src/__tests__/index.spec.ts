@@ -1,4 +1,4 @@
-const stockScreener = require('..');
+import stockScreener from '..';
 
 describe('@stonksjs/stock-screener', () => {
   it('should be a function with a static prop', () => {
@@ -14,7 +14,7 @@ describe('@stonksjs/stock-screener', () => {
   it('should return symbols (no other strings)', async () => {
     const response = await stockScreener('HIGH_YIELD_DIVIDENDS');
     response.forEach((symbol) => {
-      expect(/[A-Z]{1,5}/.test(symbol)).toBe(true);
+      expect(/[A-Z]{1,5}/.test(symbol)).toBeTrue();
     });
   });
 });
