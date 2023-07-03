@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.json",
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/__tests__/**/*", "**/__mocks__/**/*"],
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "strict": false,
+    "moduleResolution": "node",
+    "module": "commonjs"
+  }
+}

@@ -6,3 +6,4 @@ package-lock.json
 .github/
 **/coverage/**
 **/templates/**
+dist

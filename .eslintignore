@@ -1,5 +1,8 @@
-!.*.js
 tmp/
 **/node_modules/**
 !.bin/
 **/coverage/**
+dist
+*.*.js
+**/examples/**
+**/config/**

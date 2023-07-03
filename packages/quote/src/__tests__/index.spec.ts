@@ -1,4 +1,4 @@
-const quote = require('..');
+import quote from '../index';
 
 const symbol = 'MSFT';
 const expectedKeys = [
