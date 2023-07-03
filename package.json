@@ -2,10 +2,10 @@
   "name": "stonksjs",
   "version": "2.0.2",
   "description": "Reliable algotrading utilities written in node",
-  "main": "lib/index.js",
   "files": [
     "lib/",
-    "config/"
+    "config/",
+    "packages/"
   ],
   "directories": {
     "lib": "lib/",
@@ -32,7 +32,7 @@
   },
   "scripts": {
     "prepare": "husky install",
-    "start": "node lib/index.js",
+    "start": "echo 'no start script specified' && exit",
     "lint": "eslint --fix . && prettier --write .",
     "test": "jest",
     "changelog": "auto-changelog",
@@ -59,21 +59,21 @@
     "@babel/preset-env": "^7.22.5",
     "auto-changelog": "^2.4.0",
     "babel-jest": "^29.3.1",
-    "commander": "^10.0.1",
+    "commander": "^11.0.0",
     "cross-env": "^7.0.3",
     "depcheck": "^1.4.3",
     "dotenv-cli": "^7.2.1",
-    "eslint": "^8.43.0",
+    "eslint": "^8.44.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.27.4",
     "eslint-plugin-jest": "^27.2.2",
-    "fast-glob": "^3.2.12",
+    "fast-glob": "^3.3.0",
     "handlebars": "^4.7.7",
     "husky": "^8.0.3",
     "jest": "^29.5.0",
-    "jest-extended": "^3.2.3",
+    "jest-extended": "^4.0.0",
     "jsdoc-to-markdown": "^8.0.0",
-    "lerna": "^6.6.2",
+    "lerna": "^7.1.1",
     "lint-staged": "^13.2.3",
     "lodash": "^4.17.20",
     "prettier": "^2.8.8"
