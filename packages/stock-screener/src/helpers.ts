@@ -24,10 +24,10 @@ export const request = async (url) => {
   try {
     const { data } = await axios.get(url);
     if (!isObject(data)) {
-      throw new Error(`Invalid response: ${data}`);
+      throw new Error(`Invalid response data type: ${typeof data}`);
     }
     return data;
   } catch (error) {
-    return Promise.reject(new Error(error));
+    return Promise.reject(error);
   }
 };
