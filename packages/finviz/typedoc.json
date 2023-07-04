@@ -1,0 +1,7 @@
+{
+  "extends": ["../../config/typedoc.js"],
+  "basePath": "./",
+  "entryPoints": ["./src"],
+  "entryPointStrategy": "expand",
+  "out": "./docs"
+}

@@ -4,6 +4,6 @@
  * @typicalname finviz
  */
 import quote from './quote';
-import screener from './screener';
+import { getScreener, getScreenersList } from './screener';
 
-export = { quote, screener };
+export = { quote, screener: getScreener, getScreenersList };

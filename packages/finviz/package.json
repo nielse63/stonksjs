@@ -34,7 +34,8 @@
     "start": "node examples/index.js",
     "build:esm": "tsc -p ./tsconfig.esm.json",
     "build:cjs": "tsc -p ./tsconfig.cjs.json",
-    "build": "npm run build:esm && npm run build:cjs"
+    "build": "rm -rf dist && npm run build:esm && npm run build:cjs",
+    "docs": "typedoc --options typedoc.json --tsconfig tsconfig.json"
   },
   "bugs": {
     "url": "https://github.com/nielse63/stonksjs/issues"
@@ -45,6 +46,7 @@
     "lodash": "^4.17.20"
   },
   "devDependencies": {
+    "typedoc": "^0.24.8",
     "typescript": "5.0.4"
   }
 }

@@ -18,5 +18,4 @@ const data = await quote('MSFT'); // object of financial data
 
 ## API
 
-Full API docs can be found at
-[https://nielse63.github.io/stonksjs](https://nielse63.github.io/stonksjs/modules/_stonksjs_quote.html)
+Full API docs can be found at [`docs/modules`](./docs/modules.md)

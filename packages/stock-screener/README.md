@@ -42,8 +42,7 @@ const symbols = await stockScreener(filters.HIGH_YIELD_DIVIDENDS);
 
 ## API
 
-Full API docs can be found at
-[https://nielse63.github.io/stonksjs](https://nielse63.github.io/stonksjs/modules/_stonksjs_stock_screener.html)
+Full API docs can be found at [`docs/modules`](./docs/modules.md)
 
 <!-- references -->
 

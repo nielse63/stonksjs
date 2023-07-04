@@ -1,4 +1,4 @@
-import quote from '../quote';
+import { getQuote } from '../quote';
 
 const symbol = 'AACG';
 const expectedKeys = [
@@ -75,17 +75,19 @@ const expectedKeys = [
 ];
 
 describe('quote', () => {
-  it('should be defined', () => {
-    expect(quote).toBeFunction();
-  });
+  describe('getQuote', () => {
+    it('should be defined', () => {
+      expect(getQuote).toBeFunction();
+    });
 
-  it('should return an object of data', async () => {
-    const response = await quote(symbol);
-    expect(response).toBeObject();
-  });
+    it('should return an object of data', async () => {
+      const response = await getQuote(symbol);
+      expect(response).toBeObject();
+    });
 
-  it('data should have all expected keys', async () => {
-    const response = await quote(symbol);
-    expect(response).toContainKeys(expectedKeys);
+    it('data should have all expected keys', async () => {
+      const response = await getQuote(symbol);
+      expect(response).toContainKeys(expectedKeys);
+    });
   });
 });
