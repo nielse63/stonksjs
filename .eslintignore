@@ -7,3 +7,4 @@ dist
 **/examples/**
 **/config/**
 *.d.ts
+/docs/**
