@@ -1,5 +1,5 @@
 /**
- * Detailed real-time market data
+ * Detailed, real-time stock quote data
  *
  * @module @stonksjs/quote
  * @typicalname quote

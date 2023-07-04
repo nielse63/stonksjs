@@ -16,36 +16,14 @@
 <li><a href="_stonksjs_quote.html">@stonksjs/quote</a></li></ul>
 <h1>Module @stonksjs/quote</h1></div>
 <section class="tsd-panel tsd-typography"><a id="md:stonksjsquote" class="tsd-anchor"></a><h1><a href="#md:stonksjsquote">@stonksjs/quote</a></h1><blockquote>
-<p>Detailed real-time market data</p>
+<p>Detailed, real-time stock quote data</p>
 </blockquote>
 <a id="md:installation" class="tsd-anchor"></a><h2><a href="#md:installation">Installation</a></h2><pre><code class="language-bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span><span class="hl-1"> </span><span class="hl-4">--save</span><span class="hl-1"> </span><span class="hl-2">@stonksjs/quote</span>
 </code><button>Copy</button></pre>
-<a id="md:usage" class="tsd-anchor"></a><h2><a href="#md:usage">Usage</a></h2><pre><code class="language-js"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">quote</span><span class="hl-1"> = </span><span class="hl-0">require</span><span class="hl-1">(</span><span class="hl-2">&#39;@stonksjs/quote&#39;</span><span class="hl-1">);</span><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">data</span><span class="hl-1"> = </span><span class="hl-6">await</span><span class="hl-1"> </span><span class="hl-0">quote</span><span class="hl-1">(</span><span class="hl-2">&#39;MSFT&#39;</span><span class="hl-1">); </span><span class="hl-3">// object of financial data</span>
+<a id="md:usage" class="tsd-anchor"></a><h2><a href="#md:usage">Usage</a></h2><pre><code class="language-js"><span class="hl-5">import</span><span class="hl-1"> </span><span class="hl-6">quote</span><span class="hl-1"> </span><span class="hl-5">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@stonksjs/quote&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-7">data</span><span class="hl-1"> = </span><span class="hl-5">await</span><span class="hl-1"> </span><span class="hl-0">quote</span><span class="hl-1">(</span><span class="hl-2">&#39;MSFT&#39;</span><span class="hl-1">); </span><span class="hl-3">// object of financial data</span>
 </code><button>Copy</button></pre>
-<a id="md:api" class="tsd-anchor"></a><h2><a href="#md:api">API</a></h2><p><a name="module_@stonksjs/quote"></a></p>
-<a id="md:stonksjsquote-1" class="tsd-anchor"></a><h3><a href="#md:stonksjsquote-1">@stonksjs/quote</a></h3><!-- prettier-ignore-start -->
-<p><strong>Kind</strong>: global function
-<strong>Returns</strong>: <code>Promise.&lt;object&gt;</code> - - data about the stock
-<strong>See</strong>: <a href="https://nielse63.github.io/stonksjs/#/api/finviz?id=response-schema">Quote response schema</a></p>
-<!-- prettier-ignore-end -->
-
-<table>
-<thead>
-<tr>
-<th>Param</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>symbol</td>
-<td><code>string</code></td>
-<td>ticker symbol of the asset</td>
-</tr>
-</tbody></table>
-<p><strong>Example</strong></p>
-<pre><code class="language-js"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">quote</span><span class="hl-1"> = </span><span class="hl-0">require</span><span class="hl-1">(</span><span class="hl-2">&#39;@stonksjs/quote&#39;</span><span class="hl-1">);</span><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">data</span><span class="hl-1"> = </span><span class="hl-6">await</span><span class="hl-1"> </span><span class="hl-0">quote</span><span class="hl-1">(</span><span class="hl-2">&#39;MSFT&#39;</span><span class="hl-1">); </span><span class="hl-3">// object of financial data</span>
-</code><button>Copy</button></pre>
+<a id="md:api" class="tsd-anchor"></a><h2><a href="#md:api">API</a></h2><p>Full API docs can be found at
+<a href="https://nielse63.github.io/stonksjs/modules/_stonksjs_quote.html">https://nielse63.github.io/stonksjs</a></p>
 </section></div>
 <div class="col-sidebar">
 <div class="page-menu">
@@ -73,14 +51,11 @@
 <ul>
 <li><a href="#md:installation"><span>Installation</span></a></li>
 <li><a href="#md:usage"><span>Usage</span></a></li>
-<li><a href="#md:api"><span>API</span></a></li>
-<li>
-<ul>
-<li><a href="#md:stonksjsquote-1"><span>@stonksjs/quote</span></a></li></ul></li></ul></li></ul></li></ul></div></details></div>
+<li><a href="#md:api"><span>API</span></a></li></ul></li></ul></li></ul></div></details></div>
 <div class="site-menu">
 <nav class="tsd-navigation"><a href="../index.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-4"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-namespace)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.33 16V7.24H10.77L13.446 14.74C13.43 14.54 13.41 14.296 13.386 14.008C13.37 13.712 13.354 13.404 13.338 13.084C13.33 12.756 13.326 12.448 13.326 12.16V7.24H14.37V16H12.93L10.266 8.5C10.282 8.692 10.298 8.936 10.314 9.232C10.33 9.52 10.342 9.828 10.35 10.156C10.366 10.476 10.374 10.784 10.374 11.08V16H9.33Z" fill="var(--color-text)"></path></g></svg><span>Documentation -<wbr/> v2.0.2</span></a>
 <ul class="tsd-small-nested-navigation">
-<li><a href="_stonksjs_core.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>@stonksjs/core -<wbr/> v2.0.4</span></a></li>
+<li><a href="_stonksjs_core.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>@stonksjs/core</span></a></li>
 <li><a href="_stonksjs_finviz.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>@stonksjs/finviz</span></a></li>
 <li><a href="_stonksjs_quote.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>@stonksjs/quote</span></a></li>
 <li><a href="_stonksjs_stock_screener.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>@stonksjs/stock-<wbr/>screener</span></a></li></ul></nav></div></div></div>

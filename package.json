@@ -1,6 +1,6 @@
 {
   "name": "stonksjs",
-  "version": "2.0.2",
+  "version": "2.0.4",
   "description": "Reliable algotrading utilities written in node",
   "files": [
     "config/",
@@ -35,7 +35,7 @@
     "test": "jest",
     "changelog": "auto-changelog",
     "release": ".bin/release",
-    "docs": "typedoc --options config/typedoc.js",
+    "docs": ".bin/docs",
     "docs:serve": "docsify serve docs",
     "create": ".bin/create-package",
     "build": "lerna run build"

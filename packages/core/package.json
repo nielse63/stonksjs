@@ -1,7 +1,7 @@
 {
   "name": "@stonksjs/core",
   "version": "2.0.4",
-  "description": "Core library for stonksjs",
+  "description": "Single point of entry for all stonksjs packages",
   "keywords": [
     "robinhood",
     "stocks",

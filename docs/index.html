@@ -12,7 +12,7 @@
 <div class="col-content">
 <div class="tsd-page-title">
 <h2>Documentation - v2.0.2</h2></div>
-<div class="tsd-panel tsd-typography"><img src="https://raw.githubusercontent.com/nielse63/stonksjs/main/docs/img/logo.svg" align="right" width="100" />
+<div class="tsd-panel tsd-typography"><img src="https://raw.githubusercontent.com/nielse63/stonksjs/main/docs/assets/logo.svg" align="right" width="100" />
 
 <a id="md:stonksjs" class="tsd-anchor"></a><h1><a href="#md:stonksjs">stonksjs</a></h1><blockquote>
 <p>Reliable algotrading utilities written in node</p>
@@ -40,30 +40,31 @@
 </ul>
 <a id="md:features" class="tsd-anchor"></a><h2><a href="#md:features">Features</a></h2><ul>
 <li>Custom screeners from finviz, msn, and finscreener</li>
-<li>Detailed ticket fundamentals</li>
-<li>Robinhood collection symbols</li>
-<li>And more features planned</li>
+<li>Detailed ticker fundamentals</li>
+<li>Module and CommonJS compatible</li>
+<li>Light-weight - few to no dependencies</li>
 </ul>
 <a id="md:goals" class="tsd-anchor"></a><h3><a href="#md:goals">Goals</a></h3><p><strong>What stonksjs is:</strong></p>
 <p>The primary objective of this project are:</p>
 <ul>
-<li>To provide a collection of reliable algotrading utilities written in node</li>
+<li>To provide a collection of reliable algotrading utilities written in
+typescript/node</li>
 <li>Take some of the guess-work out of the stock research process by using
 industry-tested, predefined screeners</li>
-<li>Provide more data-points for a given instrument than other packages currently
+<li>Provide more data-points for a given instrument than most packages currently
 available</li>
 <li>Enable algotrading programmers with diversified assets - not just the hottest
 options rumors on <a href="https://reddit.com/r/wallstreetbets">r/wallstreetbets</a></li>
 </ul>
 <p><strong>What stonksjs is not:</strong></p>
 <ul>
-<li>stonksjs <strong>is not</strong> roboadvisor or professional trading app - this is just a
-fun little side project for me</li>
+<li>stonksjs <strong>is not</strong> a roboadvisor or professional trading app - this is just a
+fun little side project</li>
 <li>stonksjs <strong>is not</strong> an unofficial API for Robinhood or any other brokerage. If
 that&#39;s what you&#39;re looking for, I&#39;d recommend
 <a href="https://github.com/torreyleonard/algotrader">algotrader</a></li>
-<li>stonksjs currently <strong>is not</strong> a backtesting tool, although that might get
-added to the roadmap soon</li>
+<li>stonksjs <strong>is not</strong> a backtesting tool, although that might get added to the
+roadmap soon</li>
 </ul>
 <a id="md:usage" class="tsd-anchor"></a><h2><a href="#md:usage">Usage</a></h2><p>Installation, usage, and API docs can be found in each scoped package directory.</p>
 <table>
@@ -76,17 +77,17 @@ added to the roadmap soon</li>
 </thead>
 <tbody><tr>
 <td><a href="https://github.com/nielse63/stonksjs/tree/main/packages/core">@stonksjs/core</a></td>
-<td>Core library for stonksjs</td>
+<td>Single point of entry for all stonksjs packages</td>
 <td><img src="https://img.shields.io/npm/v/@stonksjs/core?color=brightgreen&style=flat-square" alt="npm (scoped)"></td>
 </tr>
 <tr>
 <td><a href="https://github.com/nielse63/stonksjs/tree/main/packages/quote">@stonksjs/quote</a></td>
-<td>Detailed real-time market data</td>
+<td>Detailed, real-time stock quote data</td>
 <td><img src="https://img.shields.io/npm/v/@stonksjs/quote?color=brightgreen&style=flat-square" alt="npm (scoped)"></td>
 </tr>
 <tr>
 <td><a href="https://github.com/nielse63/stonksjs/tree/main/packages/finviz">@stonksjs/finviz</a></td>
-<td>Stock screener and company data from finviz</td>
+<td>Unofficial finviz API</td>
 <td><img src="https://img.shields.io/npm/v/@stonksjs/finviz?color=brightgreen&style=flat-square" alt="npm (scoped)"></td>
 </tr>
 <tr>
@@ -95,17 +96,13 @@ added to the roadmap soon</li>
 <td><img src="https://img.shields.io/npm/v/@stonksjs/stock-screener?color=brightgreen&style=flat-square" alt="npm (scoped)"></td>
 </tr>
 </tbody></table>
-<a id="md:development" class="tsd-anchor"></a><h2><a href="#md:development">Development</a></h2><a id="md:setup" class="tsd-anchor"></a><h3><a href="#md:setup">Setup</a></h3><p>Clone the repo and install the dependencies:</p>
-<pre><code class="language-bash"><span class="hl-0">git</span><span class="hl-1"> </span><span class="hl-2">clone</span><span class="hl-1"> </span><span class="hl-2">http://github.com/nielse63/stonksjs.git</span><br/><span class="hl-0">cd</span><span class="hl-1"> </span><span class="hl-2">stonksjs</span><br/><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">ci</span>
+<a id="md:development" class="tsd-anchor"></a><h2><a href="#md:development">Development</a></h2><a id="md:setup" class="tsd-anchor"></a><h3><a href="#md:setup">Setup</a></h3><a id="md:prerequisites" class="tsd-anchor"></a><h4><a href="#md:prerequisites">Prerequisites</a></h4><p>This project requires node <code>v16.20.1</code>.</p>
+<a id="md:installation" class="tsd-anchor"></a><h4><a href="#md:installation">Installation</a></h4><p>Clone the repo and install the dependencies:</p>
+<pre><code class="language-bash"><span class="hl-0">git</span><span class="hl-1"> </span><span class="hl-2">clone</span><span class="hl-1"> </span><span class="hl-2">http://github.com/nielse63/stonksjs.git</span><br/><span class="hl-0">cd</span><span class="hl-1"> </span><span class="hl-2">stonksjs</span><br/><span class="hl-0">nvm</span><span class="hl-1"> </span><span class="hl-2">use</span><br/><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">ci</span>
 </code><button>Copy</button></pre>
-<p>Because stonksjs is a monorepo using <a href="https://github.com/lerna/lerna"><code>lerna</code></a>,
-a <code>postinstall</code> script will run <code>lerna bootstrap</code> to install all package
-dependencies. Once this is complete you&#39;re ready to make your changes.</p>
 <a id="md:testing" class="tsd-anchor"></a><h3><a href="#md:testing">Testing</a></h3><p>Tests are run using <code>jest</code>, and can be run by executing:</p>
 <pre><code class="language-bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">test</span><br/><br/><span class="hl-3"># run with coverage</span><br/><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">test</span><span class="hl-1"> </span><span class="hl-4">--</span><span class="hl-1"> </span><span class="hl-4">--coverage</span>
 </code><button>Copy</button></pre>
-<p>The full test suite is also execute whenever a branch is pushed and as a
-required pull request check.</p>
 <a id="md:release" class="tsd-anchor"></a><h3><a href="#md:release">Release</a></h3><p>To release a new version, run:</p>
 <pre><code class="language-bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">run</span><span class="hl-1"> </span><span class="hl-2">release</span>
 </code><button>Copy</button></pre>
@@ -151,6 +148,10 @@ discuss what you would like to change.</p>
 <li>
 <ul>
 <li><a href="#md:setup"><span>Setup</span></a></li>
+<li>
+<ul>
+<li><a href="#md:prerequisites"><span>Prerequisites</span></a></li>
+<li><a href="#md:installation"><span>Installation</span></a></li></ul></li>
 <li><a href="#md:testing"><span>Testing</span></a></li>
 <li><a href="#md:release"><span>Release</span></a></li></ul></li>
 <li><a href="#md:contributing"><span>Contributing</span></a></li>
@@ -158,7 +159,7 @@ discuss what you would like to change.</p>
 <div class="site-menu">
 <nav class="tsd-navigation"><a href="index.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-4"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-namespace)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.33 16V7.24H10.77L13.446 14.74C13.43 14.54 13.41 14.296 13.386 14.008C13.37 13.712 13.354 13.404 13.338 13.084C13.33 12.756 13.326 12.448 13.326 12.16V7.24H14.37V16H12.93L10.266 8.5C10.282 8.692 10.298 8.936 10.314 9.232C10.33 9.52 10.342 9.828 10.35 10.156C10.366 10.476 10.374 10.784 10.374 11.08V16H9.33Z" fill="var(--color-text)"></path></g></svg><span>Documentation -<wbr/> v2.0.2</span></a>
 <ul class="tsd-small-nested-navigation">
-<li><a href="modules/_stonksjs_core.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>@stonksjs/core -<wbr/> v2.0.4</span></a></li>
+<li><a href="modules/_stonksjs_core.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>@stonksjs/core</span></a></li>
 <li><a href="modules/_stonksjs_finviz.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>@stonksjs/finviz</span></a></li>
 <li><a href="modules/_stonksjs_quote.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>@stonksjs/quote</span></a></li>
 <li><a href="modules/_stonksjs_stock_screener.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>@stonksjs/stock-<wbr/>screener</span></a></li></ul></nav></div></div></div>

@@ -25,12 +25,7 @@
 <li><a href="#available-screener-filters">Available Screener Filters</a></li>
 </ul>
 </li>
-<li><a href="#api">API</a><ul>
-<li><a href="#stonksjsstock-screener">@stonksjs/stock-screener</a></li>
-<li><a href="#stockscreenerfilter--promisestring">stockScreener(filter) ⇒ <code>Promise<string[]></code></a></li>
-<li><a href="#stockscreenerfilters">stockScreener.filters</a></li>
-</ul>
-</li>
+<li><a href="#api">API</a></li>
 </ul>
 <!-- ## Features
 
@@ -38,80 +33,22 @@
 
 <a id="md:installation" class="tsd-anchor"></a><h2><a href="#md:installation">Installation</a></h2><pre><code class="language-bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span><span class="hl-1"> </span><span class="hl-4">--save</span><span class="hl-1"> </span><span class="hl-2">@stonksjs/stock-screener</span>
 </code><button>Copy</button></pre>
-<a id="md:usage" class="tsd-anchor"></a><h2><a href="#md:usage">Usage</a></h2><pre><code class="language-js"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">stockScreener</span><span class="hl-1"> = </span><span class="hl-0">require</span><span class="hl-1">(</span><span class="hl-2">&#39;@stonksjs/stock-screener&#39;</span><span class="hl-1">);</span><br/><br/><span class="hl-3">// get an array of all available filters (see below)</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">filters</span><span class="hl-1"> = </span><span class="hl-7">stockScreener</span><span class="hl-1">.</span><span class="hl-7">filters</span><span class="hl-1">;</span><br/><br/><span class="hl-3">// get the symbols found on a high-yield dividend screener</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">symbols</span><span class="hl-1"> = </span><span class="hl-6">await</span><span class="hl-1"> </span><span class="hl-0">stockScreener</span><span class="hl-1">(</span><span class="hl-2">&#39;HIGH_YIELD_DIVIDENDS&#39;</span><span class="hl-1">);</span>
+<a id="md:usage" class="tsd-anchor"></a><h2><a href="#md:usage">Usage</a></h2><pre><code class="language-js"><span class="hl-5">import</span><span class="hl-1"> </span><span class="hl-6">stockScreener</span><span class="hl-1"> </span><span class="hl-5">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@stonksjs/stock-screener&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-3">// get an array of all available filters (see below)</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-7">filters</span><span class="hl-1"> = </span><span class="hl-6">stockScreener</span><span class="hl-1">.</span><span class="hl-6">filters</span><span class="hl-1">;</span><br/><br/><span class="hl-3">// get the symbols found on a high-yield dividend screener</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-7">symbols</span><span class="hl-1"> = </span><span class="hl-5">await</span><span class="hl-1"> </span><span class="hl-0">stockScreener</span><span class="hl-1">(</span><span class="hl-6">filters</span><span class="hl-1">.</span><span class="hl-7">HIGH_YIELD_DIVIDENDS</span><span class="hl-1">);</span>
 </code><button>Copy</button></pre>
-<a id="md:available-screener-filters" class="tsd-anchor"></a><h3><a href="#md:available-screener-filters">Available Screener Filters</a></h3><table>
-<thead>
-<tr>
-<th>Key</th>
-<th>Results</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>HIGH_YIELD_DIVIDENDS</code></td>
-<td><a href="https://www.msn.com/en-us/money/stockscreener/hdys?market=USA">https://www.msn.com/en-us/money/stockscreener/hdys?market=USA</a></td>
-</tr>
-<tr>
-<td><code>BARGAIN_STOCKS</code></td>
-<td><a href="https://www.msn.com/en-us/money/stockscreener/bargainstck?market=USA">https://www.msn.com/en-us/money/stockscreener/bargainstck?market=USA</a></td>
-</tr>
-<tr>
-<td><code>BLUE_CHIPS</code></td>
-<td><a href="https://www.msn.com/en-us/money/stockscreener/blueblood?market=USA">https://www.msn.com/en-us/money/stockscreener/blueblood?market=USA</a></td>
-</tr>
-<tr>
-<td><code>52_WEEK_HIGHS</code></td>
-<td><a href="https://www.msn.com/en-us/money/stockscreener/52weekhighs?market=USA">https://www.msn.com/en-us/money/stockscreener/52weekhighs?market=USA</a></td>
-</tr>
-<tr>
-<td><code>52_WEEK_LOWS</code></td>
-<td><a href="https://www.msn.com/en-us/money/stockscreener/52weeklows?market=USA">https://www.msn.com/en-us/money/stockscreener/52weeklows?market=USA</a></td>
-</tr>
-<tr>
-<td><code>PRICE_SHOCKS</code></td>
-<td><a href="https://www.msn.com/en-us/money/stockscreener/priceshockers?market=USA">https://www.msn.com/en-us/money/stockscreener/priceshockers?market=USA</a></td>
-</tr>
-<tr>
-<td><code>TECH_GIANTS</code></td>
-<td><a href="https://www.msn.com/en-us/money/stockscreener/techtit?market=USA">https://www.msn.com/en-us/money/stockscreener/techtit?market=USA</a></td>
-</tr>
-</tbody></table>
-<a id="md:api" class="tsd-anchor"></a><h2><a href="#md:api">API</a></h2><p><a name="module_@stonksjs/stock-screener"></a></p>
-<a id="md:stonksjsstock-screener-1" class="tsd-anchor"></a><h3><a href="#md:stonksjsstock-screener-1">@stonksjs/stock-screener</a></h3><p>Pre-defined industry standard stock screeners from MSN Money</p>
-<dl>
-<dt><a href="#stockScreener">stockScreener(filter)</a> ⇒ <code>Promise</code></dt>
-<dd><p>Fetch the latest results from the stock screener</p>
-</dd>
-<dt><a href="#filters">stockScreener.filters</a></dt>
-<dd><p>A list of available filters to chose from</p></dd>
-</dl>
+<a id="md:available-screener-filters" class="tsd-anchor"></a><h3><a href="#md:available-screener-filters">Available Screener Filters</a></h3><ul>
+<li><a href="https://www.msn.com/en-us/money/listdetails/Highest%205year%20Dividend%20Growth/fl-4210ebac6782?ocid=hpmsn&cvid=09ce823c382944c2929477b2bac8205c&ei=21"><code>HIGH_YIELD_DIVIDENDS</code></a></li>
+<li><a href="https://www.msn.com/en-us/money/listdetails/Stocks%20Analysts%20are%20Bullish%20On/fl-938eb9e4f4d5?ocid=hpmsn&cvid=09ce823c382944c2929477b2bac8205c&ei=25"><code>BULLISH</code></a></li>
+<li><a href="https://www.msn.com/en-us/money/listdetails/52week%20High/fl-332e27279f36?ocid=hpmsn&cvid=09ce823c382944c2929477b2bac8205c&ei=38"><code>52_WEEK_HIGHS</code></a></li>
+<li><a href="https://www.msn.com/en-us/money/listdetails/52week%20Low/fl-4c3298bcd920?ocid=hpmsn&cvid=09ce823c382944c2929477b2bac8205c&ei=47"><code>52_WEEK_LOWS</code></a></li>
+<li><a href="https://www.msn.com/en-us/money/listdetails/High%20Revenue%20Growth/fl-944c649152e8?ocid=hpmsn&cvid=09ce823c382944c2929477b2bac8205c&ei=88"><code>HIGH_REVENUE_GROWTH</code></a></li>
+<li><a href="https://www.msn.com/en-us/money/listdetails/Growth%20Stocks/fl-b2340b8c101f?ocid=hpmsn&cvid=09ce823c382944c2929477b2bac8205c&ei=128"><code>GROWTH_STOCKS</code></a></li>
+</ul>
+<a id="md:api" class="tsd-anchor"></a><h2><a href="#md:api">API</a></h2><p>Full API docs can be found at
+<a href="https://nielse63.github.io/stonksjs/modules/_stonksjs_stock_screener.html">https://nielse63.github.io/stonksjs</a></p>
+<!-- references -->
 
-<p><a name="stockScreener"></a></p>
-<a id="md:stockscreenerfilter-⇒-promise" class="tsd-anchor"></a><h3><a href="#md:stockscreenerfilter-⇒-promise">stockScreener(filter) ⇒ <code>Promise<string[]></code></a></h3><p>Fetch the latest results from the stock screener</p>
-<p><strong>Kind</strong>: global function <strong>Returns</strong>: <code>Promise</code> - - the latest
-screener data or an error <strong>Fulfil</strong>: <code>string[]</code> - array of ticket
-symbols <strong>Reject</strong>: <code>Error</code></p>
-<table>
-<thead>
-<tr>
-<th>Param</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>filter</td>
-<td><code>string</code></td>
-<td>the name of the screener to search</td>
-</tr>
-</tbody></table>
-<p><strong>Example</strong></p>
-<pre><code class="language-js"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">symbols</span><span class="hl-1"> = </span><span class="hl-6">await</span><span class="hl-1"> </span><span class="hl-0">stockScreener</span><span class="hl-1">(</span><span class="hl-2">&#39;HIGH_YIELD_DIVIDENDS&#39;</span><span class="hl-1">);</span>
-</code><button>Copy</button></pre>
-<p><a name="filters"></a></p>
-<a id="md:stockscreenerfilters" class="tsd-anchor"></a><h3><a href="#md:stockscreenerfilters">stockScreener.filters</a></h3><p>list of available filters to choose from</p>
-<p><strong>Type</strong>: <code>Array.string</code></p>
-</section></div>
+<!-- prettier-ignore-start -->
+<!-- prettier-ignore-end --></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -141,16 +78,11 @@ symbols <strong>Reject</strong>: <code>Error</code></p>
 <li>
 <ul>
 <li><a href="#md:available-screener-filters"><span>Available <wbr/>Screener <wbr/>Filters</span></a></li></ul></li>
-<li><a href="#md:api"><span>API</span></a></li>
-<li>
-<ul>
-<li><a href="#md:stonksjsstock-screener-1"><span>@stonksjs/stock-<wbr/>screener</span></a></li>
-<li><a href="#md:stockscreenerfilter-⇒-promise"><span>stock<wbr/>Screener(filter) ⇒ <wbr/>Promise</span></a></li>
-<li><a href="#md:stockscreenerfilters"><span>stock<wbr/>Screener.filters</span></a></li></ul></li></ul></li></ul></li></ul></div></details></div>
+<li><a href="#md:api"><span>API</span></a></li></ul></li></ul></li></ul></div></details></div>
 <div class="site-menu">
 <nav class="tsd-navigation"><a href="../index.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-4"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-namespace)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.33 16V7.24H10.77L13.446 14.74C13.43 14.54 13.41 14.296 13.386 14.008C13.37 13.712 13.354 13.404 13.338 13.084C13.33 12.756 13.326 12.448 13.326 12.16V7.24H14.37V16H12.93L10.266 8.5C10.282 8.692 10.298 8.936 10.314 9.232C10.33 9.52 10.342 9.828 10.35 10.156C10.366 10.476 10.374 10.784 10.374 11.08V16H9.33Z" fill="var(--color-text)"></path></g></svg><span>Documentation -<wbr/> v2.0.2</span></a>
 <ul class="tsd-small-nested-navigation">
-<li><a href="_stonksjs_core.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>@stonksjs/core -<wbr/> v2.0.4</span></a></li>
+<li><a href="_stonksjs_core.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>@stonksjs/core</span></a></li>
 <li><a href="_stonksjs_finviz.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>@stonksjs/finviz</span></a></li>
 <li><a href="_stonksjs_quote.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>@stonksjs/quote</span></a></li>
 <li><a href="_stonksjs_stock_screener.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>@stonksjs/stock-<wbr/>screener</span></a></li></ul></nav></div></div></div>

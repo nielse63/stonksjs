@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -e
+
+logo="docs/assets/logo.svg"
+
+if [ -f "$logo" ]; then
+    mv $logo "logo.svg"
+fi
+
+npx typedoc --options config/typedoc.js
+
+
+if [ -f "logo.svg" ]; then
+    mv "logo.svg" $logo
+fi

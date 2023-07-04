@@ -8,9 +8,6 @@
 - [Usage](#usage)
   - [Available Screener Filters](#available-screener-filters)
 - [API](#api)
-  - [@stonksjs/stock-screener](#stonksjsstock-screener)
-  - [stockScreener(filter) ⇒ <code>Promise<string[]></code>](#stockscreenerfilter--promisestring)
-  - [stockScreener.filters](#stockscreenerfilters)
 
 <!-- ## Features
 
@@ -25,67 +22,36 @@ npm install --save @stonksjs/stock-screener
 ## Usage
 
 ```js
-const stockScreener = require('@stonksjs/stock-screener');
+import stockScreener from '@stonksjs/stock-screener';
 
 // get an array of all available filters (see below)
 const filters = stockScreener.filters;
 
 // get the symbols found on a high-yield dividend screener
-const symbols = await stockScreener('HIGH_YIELD_DIVIDENDS');
+const symbols = await stockScreener(filters.HIGH_YIELD_DIVIDENDS);
 ```
 
 ### Available Screener Filters
 
-| Key                    | Results                                                                                                                                          |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `HIGH_YIELD_DIVIDENDS` | [https://www.msn.com/en-us/money/stockscreener/hdys?market=USA](https://www.msn.com/en-us/money/stockscreener/hdys?market=USA)                   |
-| `BARGAIN_STOCKS`       | [https://www.msn.com/en-us/money/stockscreener/bargainstck?market=USA](https://www.msn.com/en-us/money/stockscreener/bargainstck?market=USA)     |
-| `BLUE_CHIPS`           | [https://www.msn.com/en-us/money/stockscreener/blueblood?market=USA](https://www.msn.com/en-us/money/stockscreener/blueblood?market=USA)         |
-| `52_WEEK_HIGHS`        | [https://www.msn.com/en-us/money/stockscreener/52weekhighs?market=USA](https://www.msn.com/en-us/money/stockscreener/52weekhighs?market=USA)     |
-| `52_WEEK_LOWS`         | [https://www.msn.com/en-us/money/stockscreener/52weeklows?market=USA](https://www.msn.com/en-us/money/stockscreener/52weeklows?market=USA)       |
-| `PRICE_SHOCKS`         | [https://www.msn.com/en-us/money/stockscreener/priceshockers?market=USA](https://www.msn.com/en-us/money/stockscreener/priceshockers?market=USA) |
-| `TECH_GIANTS`          | [https://www.msn.com/en-us/money/stockscreener/techtit?market=USA](https://www.msn.com/en-us/money/stockscreener/techtit?market=USA)             |
+- [`HIGH_YIELD_DIVIDENDS`][HIGH_YIELD_DIVIDENDS]
+- [`BULLISH`][BULLISH]
+- [`52_WEEK_HIGHS`][52_WEEK_HIGHS]
+- [`52_WEEK_LOWS`][52_WEEK_LOWS]
+- [`HIGH_REVENUE_GROWTH`][HIGH_REVENUE_GROWTH]
+- [`GROWTH_STOCKS`][GROWTH_STOCKS]
 
 ## API
 
-<a name="module_@stonksjs/stock-screener"></a>
+Full API docs can be found at
+[https://nielse63.github.io/stonksjs](https://nielse63.github.io/stonksjs/modules/_stonksjs_stock_screener.html)
 
-### @stonksjs/stock-screener
+<!-- references -->
 
-Pre-defined industry standard stock screeners from MSN Money
-
-<dl>
-<dt><a href="#stockScreener">stockScreener(filter)</a> ⇒ <code>Promise</code></dt>
-<dd><p>Fetch the latest results from the stock screener</p>
-</dd>
-<dt><a href="#filters">stockScreener.filters</a></dt>
-<dd><p>A list of available filters to chose from</p></dd>
-</dl>
-
-<a name="stockScreener"></a>
-
-### stockScreener(filter) ⇒ <code>Promise<string[]></code>
-
-Fetch the latest results from the stock screener
-
-**Kind**: global function **Returns**: <code>Promise</code> - - the latest
-screener data or an error **Fulfil**: <code>string[]</code> - array of ticket
-symbols **Reject**: <code>Error</code>
-
-| Param  | Type                | Description                        |
-| ------ | ------------------- | ---------------------------------- |
-| filter | <code>string</code> | the name of the screener to search |
-
-**Example**
-
-```js
-const symbols = await stockScreener('HIGH_YIELD_DIVIDENDS');
-```
-
-<a name="filters"></a>
-
-### stockScreener.filters
-
-list of available filters to choose from
-
-**Type**: `Array.string`
+<!-- prettier-ignore-start -->
+[HIGH_YIELD_DIVIDENDS]: https://www.msn.com/en-us/money/listdetails/Highest%205year%20Dividend%20Growth/fl-4210ebac6782?ocid=hpmsn&cvid=09ce823c382944c2929477b2bac8205c&ei=21
+[BULLISH]: https://www.msn.com/en-us/money/listdetails/Stocks%20Analysts%20are%20Bullish%20On/fl-938eb9e4f4d5?ocid=hpmsn&cvid=09ce823c382944c2929477b2bac8205c&ei=25
+[52_WEEK_HIGHS]: https://www.msn.com/en-us/money/listdetails/52week%20High/fl-332e27279f36?ocid=hpmsn&cvid=09ce823c382944c2929477b2bac8205c&ei=38
+[52_WEEK_LOWS]: https://www.msn.com/en-us/money/listdetails/52week%20Low/fl-4c3298bcd920?ocid=hpmsn&cvid=09ce823c382944c2929477b2bac8205c&ei=47
+[HIGH_REVENUE_GROWTH]: https://www.msn.com/en-us/money/listdetails/High%20Revenue%20Growth/fl-944c649152e8?ocid=hpmsn&cvid=09ce823c382944c2929477b2bac8205c&ei=88
+[GROWTH_STOCKS]: https://www.msn.com/en-us/money/listdetails/Growth%20Stocks/fl-b2340b8c101f?ocid=hpmsn&cvid=09ce823c382944c2929477b2bac8205c&ei=128
+<!-- prettier-ignore-end -->
