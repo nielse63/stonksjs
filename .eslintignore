@@ -8,3 +8,4 @@ dist
 **/config/**
 *.d.ts
 /docs/**
+**/__fixtures__/**
