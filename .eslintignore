@@ -1,5 +1,11 @@
-!.*.js
 tmp/
 **/node_modules/**
 !.bin/
 **/coverage/**
+dist
+*.*.js
+**/examples/**
+**/config/**
+*.d.ts
+/docs/**
+**/__fixtures__/**

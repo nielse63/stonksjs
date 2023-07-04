@@ -2,7 +2,12 @@
 
 name: Docs
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -17,8 +22,6 @@ jobs:
         run: npm ci
       - name: npm run docs
         run: npm run docs
-      - name: run docs script
-        run: ./.bin/update-api-docs
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
         with:

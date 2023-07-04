@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/nielse63/stonksjs/main/docs/img/logo.svg" align="right" width="100" />
+<img src="https://raw.githubusercontent.com/nielse63/stonksjs/main/docs/assets/logo.svg" align="right" width="100" />
 
 # stonksjs
 
@@ -24,9 +24,9 @@
 ## Features
 
 - Custom screeners from finviz, msn, and finscreener
-- Detailed ticket fundamentals
-- Robinhood collection symbols
-- And more features planned
+- Detailed ticker fundamentals
+- Module and CommonJS compatible
+- Light-weight - few to no dependencies
 
 ### Goals
 
@@ -34,23 +34,24 @@
 
 The primary objective of this project are:
 
-- To provide a collection of reliable algotrading utilities written in node
+- To provide a collection of reliable algotrading utilities written in
+  typescript/node
 - Take some of the guess-work out of the stock research process by using
   industry-tested, predefined screeners
-- Provide more data-points for a given instrument than other packages currently
+- Provide more data-points for a given instrument than most packages currently
   available
 - Enable algotrading programmers with diversified assets - not just the hottest
   options rumors on [r/wallstreetbets](https://reddit.com/r/wallstreetbets)
 
 **What stonksjs is not:**
 
-- stonksjs **is not** roboadvisor or professional trading app - this is just a
-  fun little side project for me
+- stonksjs **is not** a roboadvisor or professional trading app - this is just a
+  fun little side project
 - stonksjs **is not** an unofficial API for Robinhood or any other brokerage. If
   that's what you're looking for, I'd recommend
   [algotrader](https://github.com/torreyleonard/algotrader)
-- stonksjs currently **is not** a backtesting tool, although that might get
-  added to the roadmap soon
+- stonksjs **is not** a backtesting tool, although that might get added to the
+  roadmap soon
 
 ## Usage
 
@@ -58,26 +59,29 @@ Installation, usage, and API docs can be found in each scoped package directory.
 
 | Name                                                                                               | Description                                                  | Version                                                                                                    |
 | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
-| [@stonksjs/core](https://github.com/nielse63/stonksjs/tree/main/packages/core)                     | Core library for stonksjs                                    | ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/core?color=brightgreen&style=flat-square)           |
-| [@stonksjs/quote](https://github.com/nielse63/stonksjs/tree/main/packages/quote)                   | Detailed real-time market data                               | ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/quote?color=brightgreen&style=flat-square)          |
-| [@stonksjs/finviz](https://github.com/nielse63/stonksjs/tree/main/packages/finviz)                 | Stock screener and company data from finviz                  | ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/finviz?color=brightgreen&style=flat-square)         |
+| [@stonksjs/core](https://github.com/nielse63/stonksjs/tree/main/packages/core)                     | Single point of entry for all stonksjs packages              | ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/core?color=brightgreen&style=flat-square)           |
+| [@stonksjs/quote](https://github.com/nielse63/stonksjs/tree/main/packages/quote)                   | Detailed, real-time stock quote data                         | ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/quote?color=brightgreen&style=flat-square)          |
+| [@stonksjs/finviz](https://github.com/nielse63/stonksjs/tree/main/packages/finviz)                 | Unofficial finviz API                                        | ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/finviz?color=brightgreen&style=flat-square)         |
 | [@stonksjs/stock-screener](https://github.com/nielse63/stonksjs/tree/main/packages/stock-screener) | Pre-defined industry standard stock screeners from MSN Money | ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/stock-screener?color=brightgreen&style=flat-square) |
 
 ## Development
 
 ### Setup
 
+#### Prerequisites
+
+This project requires node `v16.20.1`.
+
+#### Installation
+
 Clone the repo and install the dependencies:
 
 ```bash
 git clone http://github.com/nielse63/stonksjs.git
 cd stonksjs
+nvm use
 npm ci
 ```
-
-Because stonksjs is a monorepo using [`lerna`](https://github.com/lerna/lerna),
-a `postinstall` script will run `lerna bootstrap` to install all package
-dependencies. Once this is complete you're ready to make your changes.
 
 ### Testing
 
@@ -89,9 +93,6 @@ npm test
 # run with coverage
 npm test -- --coverage
 ```
-
-The full test suite is also execute whenever a branch is pushed and as a
-required pull request check.
 
 ### Release
 

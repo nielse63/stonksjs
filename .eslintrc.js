@@ -1,16 +1,24 @@
 module.exports = {
   root: true,
-  parser: '@babel/eslint-parser',
+  plugins: [
+    '@typescript-eslint',
+    'import',
+    'jest',
+    'jest-extended',
+    'prettier',
+  ],
+  extends: [
+    'airbnb-typescript/base',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:import/typescript',
+    'plugin:jest/recommended',
+    'plugin:jest-extended/all',
+    'prettier',
+  ],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
-    requireConfigFile: false,
-    babelOptions: {
-      babelrc: false,
-      configFile: false,
-      presets: ['@babel/preset-env'],
-    },
+    project: './tsconfig.eslint.json',
   },
-  extends: ['airbnb-base'],
-  plugins: ['jest'],
   env: {
     browser: false,
     node: true,
@@ -37,7 +45,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['*.test.js', '*.spec.js'],
+      files: ['*.spec.js', '*.spec.ts'],
       rules: {
         'no-console': 'warn',
         'no-new': 'off',
@@ -48,6 +56,12 @@ module.exports = {
       rules: {
         'no-console': 'off',
         'import/no-extraneous-dependencies': 'off',
+      },
+    },
+    {
+      files: ['*.js'],
+      rules: {
+        '@typescript-eslint/no-var-requires': 'off',
       },
     },
   ],

@@ -1,54 +1,15 @@
-#!/usr/bin/env node
-const fs = require('fs-extra');
-const path = require('path');
-const jsdoc2md = require('jsdoc-to-markdown');
-const cp = require('child_process');
+#!/usr/bin/env bash
+set -e
 
-// paths
-const packagesDir = path.resolve(__dirname, '../packages');
-const apiDocsDir = path.resolve(__dirname, '../docs/api');
+logo="docs/assets/logo.svg"
 
-const exec = (cmd) => cp.execSync(cmd).toString().trim();
+if [ -f "$logo" ]; then
+    mv $logo "logo.svg"
+fi
 
-const createApiDocs = async (pkg) => {
-  console.log('creating api docs for', pkg);
-  const files = [];
-  if (fs.existsSync(path.join(packagesDir, pkg, 'lib'))) {
-    files.push(path.resolve(packagesDir, pkg, 'lib/**/*.js'));
-  }
-  if (fs.existsSync(path.resolve(packagesDir, pkg, 'index.js'))) {
-    files.push(path.resolve(packagesDir, pkg, 'index.js'));
-  }
+npx typedoc --options config/typedoc.js
 
-  const markdown = jsdoc2md.renderSync({ files });
-  if (!markdown.trim()) {
-    return;
-  }
 
-  const output = path.resolve('packages', pkg, 'docs/api.md');
-  const docsFolder = path.resolve(__dirname, '../packages', pkg, 'docs');
-  if (!fs.existsSync(docsFolder)) {
-    fs.mkdirpSync(docsFolder);
-  }
-  fs.writeFileSync(output, markdown);
-  const cmd = `npx prettier --write ${output}`;
-  exec(cmd);
-};
-
-const copyApiDocs = (pkg) => {
-  const readme = path.resolve(packagesDir, pkg, 'README.md');
-  if (!fs.existsSync(apiDocsDir)) {
-    fs.mkdirpSync(apiDocsDir);
-  }
-  const dest = path.resolve(apiDocsDir, `${pkg}.md`);
-  fs.copyFileSync(readme, dest);
-};
-
-const packages = fs.readdirSync(packagesDir);
-packages.forEach((pkg) => {
-  const abspath = path.resolve(packagesDir, pkg);
-  const stats = fs.lstatSync(abspath);
-  if (!stats.isDirectory()) return;
-  createApiDocs(pkg);
-  copyApiDocs(pkg);
-});
+if [ -f "logo.svg" ]; then
+    mv "logo.svg" $logo
+fi

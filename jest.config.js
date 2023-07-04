@@ -38,9 +38,12 @@ module.exports = {
   coverageDirectory: 'coverage',
 
   // An array of regexp pattern strings used to skip coverage collection
-  // coveragePathIgnorePatterns: [
-  //   "/node_modules/"
-  // ],
+  coveragePathIgnorePatterns: [
+    'node_modules',
+    'dist',
+    '__fixtures__',
+    '__mocks__',
+  ],
 
   // A list of reporter names that Jest uses when writing coverage reports
   coverageReporters,
@@ -123,10 +126,7 @@ module.exports = {
   // setupFiles: [],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  setupFilesAfterEnv: [
-    'jest-extended/all',
-    '<rootDir>/config/jest/setupAfterEnv.js',
-  ],
+  setupFilesAfterEnv: ['jest-extended/all'],
 
   // A list of paths to snapshot serializer modules Jest should use for snapshot testing
   // snapshotSerializers: [],

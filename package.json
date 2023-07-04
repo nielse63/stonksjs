@@ -1,14 +1,12 @@
 {
   "name": "stonksjs",
-  "version": "2.0.2",
+  "version": "2.0.4",
   "description": "Reliable algotrading utilities written in node",
   "files": [
-    "lib/",
     "config/",
     "packages/"
   ],
   "directories": {
-    "lib": "lib/",
     "doc": "docs/"
   },
   "repository": {
@@ -33,13 +31,15 @@
   "scripts": {
     "prepare": "husky install",
     "start": "echo 'no start script specified' && exit",
-    "lint": "eslint --fix . && prettier --write .",
+    "lint": "eslint . && prettier .",
+    "lint:fix": "eslint --fix . && prettier --write .",
     "test": "jest",
     "changelog": "auto-changelog",
     "release": ".bin/release",
     "docs": ".bin/docs",
     "docs:serve": "docsify serve docs",
-    "create": ".bin/create-package"
+    "create": ".bin/create-package",
+    "build": "lerna run build"
   },
   "author": {
     "name": "Erik Nielsen",
@@ -48,41 +48,46 @@
   },
   "license": "ISC",
   "dependencies": {
-    "date-fns": "^2.30.0",
-    "debug": "^4.3.4",
-    "dotenv": "^16.3.1",
-    "fs-extra": "^11.1.1"
+    "dotenv": "^16.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.22.5",
     "@babel/eslint-parser": "^7.22.5",
     "@babel/preset-env": "^7.22.5",
+    "@babel/preset-typescript": "^7.22.5",
+    "@types/jest": "^29.5.2",
+    "@typescript-eslint/eslint-plugin": "^5.60.1",
+    "@typescript-eslint/parser": "^5.60.1",
     "auto-changelog": "^2.4.0",
-    "babel-jest": "^29.3.1",
+    "babel-jest": "^29.5.0",
     "commander": "^11.0.0",
-    "cross-env": "^7.0.3",
     "depcheck": "^1.4.3",
-    "dotenv-cli": "^7.2.1",
     "eslint": "^8.44.0",
-    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.27.4",
     "eslint-plugin-jest": "^27.2.2",
+    "eslint-plugin-jest-extended": "^2.0.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "fast-glob": "^3.3.0",
+    "fs-extra": "^11.1.1",
     "handlebars": "^4.7.7",
     "husky": "^8.0.3",
     "jest": "^29.5.0",
     "jest-extended": "^4.0.0",
-    "jsdoc-to-markdown": "^8.0.0",
     "lerna": "^7.1.1",
     "lint-staged": "^13.2.3",
     "lodash": "^4.17.20",
-    "prettier": "^2.8.8"
+    "prettier": "^2.8.8",
+    "typedoc": "^0.24.8",
+    "typescript": "5.0.4"
   },
   "lint-staged": {
-    "*.js": [
-      "eslint --fix"
+    "*.{js,ts}": [
+      "eslint --fix",
+      "prettier --write"
     ],
-    "*.{js,json,md,html,css}": [
+    "*.{json,md,html,css}": [
       "prettier --write"
     ]
   },

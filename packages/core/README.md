@@ -1,6 +1,6 @@
 # @stonksjs/core
 
-> Core library for stonksjs
+> Single point of entry for all stonksjs packages
 
 - [Installation](#installation)
 - [API](#api)

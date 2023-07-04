@@ -1,17 +1,26 @@
 {
   "name": "@stonksjs/quote",
   "version": "2.0.4",
-  "description": "Detailed real-time market data",
+  "description": "Detailed, real-time stock quote data",
   "author": "Erik Nielsen <erik@312development.com>",
   "homepage": "https://nielse63.github.io/stonksjs/tree/main/packages/quote#readme",
   "license": "ISC",
-  "main": "index.js",
-  "directories": {
-    "lib": "lib",
-    "test": "__tests__"
+  "types": "./dist/cjs/types/index.d.ts",
+  "main": "./dist/cjs/index.js",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/esm/types/index.d.ts",
+        "default": "./dist/esm/index.mjs"
+      },
+      "require": {
+        "types": "./dist/cjs/types/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    }
   },
   "files": [
-    "lib"
+    "dist"
   ],
   "publishConfig": {
     "access": "public"
@@ -21,12 +30,19 @@
     "url": "git+https://github.com/nielse63/stonksjs.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "start": "node examples/index.js",
+    "build:esm": "tsc -p ./tsconfig.esm.json",
+    "build:cjs": "tsc -p ./tsconfig.cjs.json",
+    "build": "npm run build:esm && npm run build:cjs"
   },
   "bugs": {
     "url": "https://github.com/nielse63/stonksjs/issues"
   },
   "dependencies": {
     "@stonksjs/finviz": "^2.0.4"
+  },
+  "devDependencies": {
+    "typescript": "5.0.4"
   }
 }

@@ -6,7 +6,7 @@ export CI='true'
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
 if [ "$CURRENT_BRANCH" != 'main' ]; then
-  echo 'Not on main'
+  echo 'Not on branch main'
   exit 1
 fi
 
