@@ -31,7 +31,8 @@
   "scripts": {
     "prepare": "husky install",
     "start": "echo 'no start script specified' && exit",
-    "lint": "eslint --fix . && prettier --write .",
+    "lint": "eslint . && prettier .",
+    "lint:fix": "eslint --fix . && prettier --write .",
     "test": "jest",
     "changelog": "auto-changelog",
     "release": ".bin/release",
@@ -82,7 +83,7 @@
     "typescript": "5.0.4"
   },
   "lint-staged": {
-    "*.js": [
+    "*.{js,ts}": [
       "eslint --fix",
       "prettier --write"
     ],
