@@ -6,5 +6,12 @@ describe('stock-screener', () => {
       const response = await getScreenerResults('HIGH_YIELD_DIVIDENDS');
       expect(response).toBeArray();
     });
+
+    it('should throw an error if the filter is invalid', async () => {
+      const filter = 'INVALID';
+      await expect(getScreenerResults(filter)).rejects.toThrow(
+        `${filter} is not a valid option`,
+      );
+    });
   });
 });
