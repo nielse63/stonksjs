@@ -22,5 +22,4 @@ module.exports = {
   excludeProtected: false,
   includeVersion: true,
   gitRevision: 'main',
-  plugin: ['typedoc-plugin-markdown'],
 };

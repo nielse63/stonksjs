@@ -1,4 +1,4 @@
-import quote from '../index';
+import quote from '..';
 
 const symbol = 'MSFT';
 const expectedKeys = [

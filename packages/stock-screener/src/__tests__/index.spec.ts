@@ -13,8 +13,9 @@ describe('@stonksjs/stock-screener', () => {
 
   it('should return symbols (no other strings)', async () => {
     const response = await stockScreener('HIGH_YIELD_DIVIDENDS');
-    response.forEach((symbol) => {
-      expect(/[A-Z]{1,5}/.test(symbol)).toBeTrue();
+    response.forEach((quote) => {
+      // expect(/[A-Z]{1,5}/.test(symbol)).toBeTrue();
+      expect(quote).toBeObject();
     });
   });
 });

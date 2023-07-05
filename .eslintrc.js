@@ -41,6 +41,7 @@ module.exports = {
     'operator-linebreak': ['warn', 'before'],
     '@typescript-eslint/ban-ts-comment': 'warn',
     '@typescript-eslint/no-unused-vars': 'error',
+    '@typescript-eslint/lines-between-class-members': 'off',
   },
   overrides: [
     {

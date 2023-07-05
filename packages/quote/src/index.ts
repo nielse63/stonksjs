@@ -89,9 +89,9 @@ type Quote = {
  *
  * const data = await quote('MSFT'); // object of financial data
  */
-const quote = async (symbol: string): Promise<Quote> => {
-  const response = await finviz.quote(symbol);
+export const quote = async (symbol: string): Promise<Quote> => {
+  const response = await finviz.getQuote(symbol);
   return response as Quote;
 };
 
-export = quote;
+export default quote;

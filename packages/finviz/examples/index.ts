@@ -1,4 +1,4 @@
-import finviz from '../src';
+import * as finviz from '../src';
 
 const getQuote = async () => {
   const quote = await finviz.quote('AAPL');
@@ -17,6 +17,6 @@ const getScreenersList = async () => {
   console.log(results);
 };
 
-// getQuote().catch(console.error);
-// getScreener().catch(console.error);
+getQuote().catch(console.error);
+getScreener().catch(console.error);
 getScreenersList().catch(console.error);

@@ -71,4 +71,5 @@ export const DEFAULT_QUOTE = {
   change: '',
 };
 
-export const FINVIZ_URL = 'https://finviz.com/screener.ashx';
+export const FINVIZ_URL = 'https://finviz.com';
+export const SCREENER_URL = `${FINVIZ_URL}/screener.ashx`;
