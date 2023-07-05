@@ -9,12 +9,14 @@ const { FINVIZ_URL, SCREENER_URL, DEFAULT_QUOTE } = contsants;
 class Finviz {
   api: AxiosInstance;
   quoteCache: Map<string, Quote>;
+  screenerCache: Map<string, string[]>;
 
   constructor() {
     this.api = axios.create({
       baseURL: FINVIZ_URL,
     });
     this.quoteCache = new Map();
+    this.screenerCache = new Map();
   }
 
   /**
@@ -74,12 +76,10 @@ class Finviz {
   static parseScreenerResponse(html: string): string[] {
     const $ = load(html);
     const rows = $('.table-light > tbody > tr:not(:first-child)');
-    // const data = new Set();
     const output: string[] = [];
     rows.each((_, row) => {
       const cell = $(row).find('> td:nth-child(2)');
       if (cell.length) {
-        // data.add(cell.text() as string);
         output.push(cell.text() as string);
       }
     });
@@ -134,8 +134,12 @@ class Finviz {
     if (!isUrl(url)) {
       url = await this.getUrlForScreener(screener);
     }
+    if (this.screenerCache.has(url)) {
+      return this.screenerCache.get(url) as string[];
+    }
     const { data } = await this.api.get(url);
     const results = Finviz.parseScreenerResponse(data);
+    this.screenerCache.set(url, results);
     return results;
   }
 }

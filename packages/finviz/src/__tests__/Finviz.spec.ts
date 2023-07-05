@@ -183,6 +183,14 @@ describe('Finviz', () => {
         });
       });
 
+      it('should get value from cache', async () => {
+        const spy = jest.spyOn(finviz.screenerCache, 'get');
+        const response1 = await finviz.getScreener(SCREENER_URL);
+        const response2 = await finviz.getScreener(SCREENER_URL);
+        expect(spy).toHaveBeenCalled();
+        expect(response1).toEqual(response2);
+      });
+
       it('should handle condition where only one cell is in a row', async () => {
         axios.create = jest.fn(() => {
           return {
