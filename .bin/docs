@@ -9,7 +9,8 @@ fi
 
 npx typedoc --options config/typedoc.js
 
-
 if [ -f "logo.svg" ]; then
     mv "logo.svg" $logo
 fi
+
+npx lerna run docs

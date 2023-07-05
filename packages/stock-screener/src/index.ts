@@ -1,23 +1,10 @@
-import { listFilters } from './helpers';
-import { getScreenerResults } from './stock-screener';
-
 /**
- * Fetch the latest results from the stock screener
- *
- * @param {string} filter - the name of the screener to search
- * @returns {Promise} - the latest screener data or an error
- * @fulfil {string[]} - array of ticket symbols
- * @reject {Error}
- * @example
- * const symbols = await stockScreener('HIGH_YIELD_DIVIDENDS');
+ * Pre-defined industry standard stock screeners from Finviz
+ * @module @stonksjs/stock-screener
+ * @typicalname stock-screener
  */
-async function stockScreener(filter) {
-  return getScreenerResults(filter);
-}
+import StockScreener from './StockScreener';
+export { type Screener } from './types';
 
-/**
- * @property {string[]} filters - list of available filters to choose from
- */
-stockScreener.filters = listFilters();
-
-export = stockScreener;
+export { StockScreener };
+export default new StockScreener();

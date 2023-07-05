@@ -8,6 +8,7 @@ module.exports = {
     'prettier',
   ],
   extends: [
+    'eslint:recommended',
     'airbnb-typescript/base',
     'plugin:@typescript-eslint/recommended',
     'plugin:import/typescript',
@@ -37,11 +38,10 @@ module.exports = {
       },
     ],
     'valid-jsdoc': 'warn',
-    'operator-linebreak': [
-      'warn',
-      'after',
-      { overrides: { "= 'http": 'before' } },
-    ],
+    'operator-linebreak': ['warn', 'before'],
+    '@typescript-eslint/ban-ts-comment': 'warn',
+    '@typescript-eslint/no-unused-vars': 'error',
+    '@typescript-eslint/lines-between-class-members': 'off',
   },
   overrides: [
     {

@@ -9,3 +9,4 @@ dist
 *.d.ts
 /docs/**
 **/__fixtures__/**
+/packages/**/.bin/**

@@ -1,4 +1,4 @@
-const quote = require('../dist');
+const quote = require('..');
 
 const main = async () => {
   const output = await quote('MSFT');

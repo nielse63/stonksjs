@@ -20,6 +20,9 @@ module.exports = {
   excludePrivate: false,
   excludeInternal: false,
   excludeProtected: false,
-  includeVersion: true,
+  includeVersion: false,
   gitRevision: 'main',
+  sort: ['source-order'],
+  githubPages: true,
+  // categorizeByGroup: false,
 };

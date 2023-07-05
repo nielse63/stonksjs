@@ -1,6 +1,6 @@
 # @stonksjs/stock-screener
 
-> Pre-defined industry standard stock screeners from MSN Money
+> Pre-defined industry standard stock screeners from Finviz
 
 ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/stock-screener?color=brightgreen&style=flat-square)
 
@@ -24,34 +24,81 @@ npm install --save @stonksjs/stock-screener
 ```js
 import stockScreener from '@stonksjs/stock-screener';
 
-// get an array of all available filters (see below)
-const filters = stockScreener.filters;
+// the object of key/value pairs of finviz stock screeners
+const { filters } = stockScreener;
+console.log(filters);
 
-// get the symbols found on a high-yield dividend screener
-const symbols = await stockScreener(filters.HIGH_YIELD_DIVIDENDS);
+// get the latest available filters
+const filters = await stockScreener.getFilters();
+console.log(filters);
+
+// get results from "Top Gainers" screener
+const symbols = await stockScreener.getTopGainers();
+console.log(symbols);
 ```
 
 ### Available Screener Filters
 
-- [`HIGH_YIELD_DIVIDENDS`][HIGH_YIELD_DIVIDENDS]
-- [`BULLISH`][BULLISH]
-- [`52_WEEK_HIGHS`][52_WEEK_HIGHS]
-- [`52_WEEK_LOWS`][52_WEEK_LOWS]
-- [`HIGH_REVENUE_GROWTH`][HIGH_REVENUE_GROWTH]
-- [`GROWTH_STOCKS`][GROWTH_STOCKS]
+- [Top Gainers](https://finviz.com/screener.ashx?v=111&s=ta_topgainers):
+  `TOP_GAINERS`
+- [Top Losers](https://finviz.com/screener.ashx?v=111&s=ta_toplosers):
+  `TOP_LOSERS`
+- [New High](https://finviz.com/screener.ashx?v=111&s=ta_newhigh): `NEW_HIGH`
+- [New Low](https://finviz.com/screener.ashx?v=111&s=ta_newlow): `NEW_LOW`
+- [Most Volatile](https://finviz.com/screener.ashx?v=111&s=ta_mostvolatile):
+  `MOST_VOLATILE`
+- [Most Active](https://finviz.com/screener.ashx?v=111&s=ta_mostactive):
+  `MOST_ACTIVE`
+- [Unusual Volume](https://finviz.com/screener.ashx?v=111&s=ta_unusualvolume):
+  `UNUSUAL_VOLUME`
+- [Overbought](https://finviz.com/screener.ashx?v=111&s=ta_overbought):
+  `OVERBOUGHT`
+- [Oversold](https://finviz.com/screener.ashx?v=111&s=ta_oversold): `OVERSOLD`
+- [Downgrades](https://finviz.com/screener.ashx?v=111&s=n_downgrades):
+  `DOWNGRADES`
+- [Upgrades](https://finviz.com/screener.ashx?v=111&s=n_upgrades): `UPGRADES`
+- [Earnings Before](https://finviz.com/screener.ashx?v=111&s=n_earningsbefore):
+  `EARNINGS_BEFORE`
+- [Earnings After](https://finviz.com/screener.ashx?v=111&s=n_earningsafter):
+  `EARNINGS_AFTER`
+- [Recent Insider Buying](https://finviz.com/screener.ashx?v=111&s=it_latestbuys):
+  `RECENT_INSIDER_BUYING`
+- [Recent Insider Selling](https://finviz.com/screener.ashx?v=111&s=it_latestsales):
+  `RECENT_INSIDER_SELLING`
+- [Major News](https://finviz.com/screener.ashx?v=111&s=n_majornews):
+  `MAJOR_NEWS`
+- [Horizontal S/R](https://finviz.com/screener.ashx?v=111&s=ta_p_horizontal):
+  `HORIZONTAL_S_R`
+- [TL Resistance](https://finviz.com/screener.ashx?v=111&s=ta_p_tlresistance):
+  `TL_RESISTANCE`
+- [TL Support](https://finviz.com/screener.ashx?v=111&s=ta_p_tlsupport):
+  `TL_SUPPORT`
+- [Wedge Up](https://finviz.com/screener.ashx?v=111&s=ta_p_wedgeup): `WEDGE_UP`
+- [Wedge Down](https://finviz.com/screener.ashx?v=111&s=ta_p_wedgedown):
+  `WEDGE_DOWN`
+- [Triangle Ascending](https://finviz.com/screener.ashx?v=111&s=ta_p_wedgeresistance):
+  `TRIANGLE_ASCENDING`
+- [Triangle Descending](https://finviz.com/screener.ashx?v=111&s=ta_p_wedgesupport):
+  `TRIANGLE_DESCENDING`
+- [Wedge](https://finviz.com/screener.ashx?v=111&s=ta_p_wedge): `WEDGE`
+- [Channel Up](https://finviz.com/screener.ashx?v=111&s=ta_p_channelup):
+  `CHANNEL_UP`
+- [Channel Down](https://finviz.com/screener.ashx?v=111&s=ta_p_channeldown):
+  `CHANNEL_DOWN`
+- [Channel](https://finviz.com/screener.ashx?v=111&s=ta_p_channel): `CHANNEL`
+- [Double Top](https://finviz.com/screener.ashx?v=111&s=ta_p_doubletop):
+  `DOUBLE_TOP`
+- [Double Bottom](https://finviz.com/screener.ashx?v=111&s=ta_p_doublebottom):
+  `DOUBLE_BOTTOM`
+- [Multiple Top](https://finviz.com/screener.ashx?v=111&s=ta_p_multipletop):
+  `MULTIPLE_TOP`
+- [Multiple Bottom](https://finviz.com/screener.ashx?v=111&s=ta_p_multiplebottom):
+  `MULTIPLE_BOTTOM`
+- [Head & Shoulders](https://finviz.com/screener.ashx?v=111&s=ta_p_headandshoulders):
+  `HEAD_SHOULDERS`
+- [Head & Shoulders Inverse](https://finviz.com/screener.ashx?v=111&s=ta_p_headandshouldersinv):
+  `HEAD_SHOULDERS_INVERSE`
 
 ## API
 
-Full API docs can be found at
-[https://nielse63.github.io/stonksjs](https://nielse63.github.io/stonksjs/modules/_stonksjs_stock_screener.html)
-
-<!-- references -->
-
-<!-- prettier-ignore-start -->
-[HIGH_YIELD_DIVIDENDS]: https://www.msn.com/en-us/money/listdetails/Highest%205year%20Dividend%20Growth/fl-4210ebac6782?ocid=hpmsn&cvid=09ce823c382944c2929477b2bac8205c&ei=21
-[BULLISH]: https://www.msn.com/en-us/money/listdetails/Stocks%20Analysts%20are%20Bullish%20On/fl-938eb9e4f4d5?ocid=hpmsn&cvid=09ce823c382944c2929477b2bac8205c&ei=25
-[52_WEEK_HIGHS]: https://www.msn.com/en-us/money/listdetails/52week%20High/fl-332e27279f36?ocid=hpmsn&cvid=09ce823c382944c2929477b2bac8205c&ei=38
-[52_WEEK_LOWS]: https://www.msn.com/en-us/money/listdetails/52week%20Low/fl-4c3298bcd920?ocid=hpmsn&cvid=09ce823c382944c2929477b2bac8205c&ei=47
-[HIGH_REVENUE_GROWTH]: https://www.msn.com/en-us/money/listdetails/High%20Revenue%20Growth/fl-944c649152e8?ocid=hpmsn&cvid=09ce823c382944c2929477b2bac8205c&ei=88
-[GROWTH_STOCKS]: https://www.msn.com/en-us/money/listdetails/Growth%20Stocks/fl-b2340b8c101f?ocid=hpmsn&cvid=09ce823c382944c2929477b2bac8205c&ei=128
-<!-- prettier-ignore-end -->
+Full API docs can be found at [`docs/modules`](./docs/modules.md)

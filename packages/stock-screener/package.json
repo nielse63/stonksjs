@@ -1,7 +1,7 @@
 {
   "name": "@stonksjs/stock-screener",
   "version": "2.0.4",
-  "description": "Pre-defined industry standard stock screeners from MSN Money",
+  "description": "Pre-defined industry standard stock screeners from Finviz",
   "author": "Erik Nielsen <erik@312development.com>",
   "homepage": "https://nielse63.github.io/stonksjs/tree/main/packages/stock-screener#readme",
   "license": "ISC",
@@ -34,16 +34,19 @@
     "start": "node examples/index.js",
     "build:esm": "tsc -p ./tsconfig.esm.json",
     "build:cjs": "tsc -p ./tsconfig.cjs.json",
-    "build": "npm run build:esm && npm run build:cjs"
+    "build": "rm -rf dist && npm run build:esm && npm run build:cjs",
+    "docs": "typedoc --options typedoc.json"
   },
   "bugs": {
     "url": "https://github.com/nielse63/stonksjs/issues"
   },
   "dependencies": {
+    "@stonksjs/finviz": "file:../finviz",
     "axios": "^1.4.0",
     "lodash": "^4.17.20"
   },
   "devDependencies": {
+    "typedoc": "^0.24.8",
     "typescript": "5.0.4"
   }
 }
