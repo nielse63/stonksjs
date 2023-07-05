@@ -2,6 +2,10 @@
 import finviz, { Screener } from '@stonksjs/finviz';
 
 export class StockScreener {
+  /**
+   * Returns a list of available stock screeners from Finviz
+   * @returns {Promise<Screener[]>} List of available stock screeners
+   */
   async getFilters(): Promise<Screener[]> {
     return finviz.getScreenersList();
   }
