@@ -43,7 +43,7 @@
     "build:esm": "tsc -p ./tsconfig.esm.json",
     "build:cjs": "tsc -p ./tsconfig.cjs.json",
     "build": "rm -rf dist && npm run build:esm && npm run build:cjs",
-    "docs": "typedoc --options typedoc.json --tsconfig tsconfig.json"
+    "docs": "typedoc --options typedoc.json"
   },
   "bugs": {
     "url": "https://github.com/nielse63/stonksjs/issues"

@@ -1,6 +1,6 @@
 {
   "extends": "./tsconfig.json",
-  "exclude": ["**/__tests__/**"],
+  "exclude": ["**/__tests__/**", "**/__fixtures__/**"],
   "compilerOptions": {
     "lib": ["ES6", "DOM"],
     "target": "ES6",

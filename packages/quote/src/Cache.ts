@@ -1,5 +1,5 @@
 /* eslint-disable class-methods-use-this */
-import { Quote } from '@stonksjs/finviz';
+import { type Quote } from './types';
 
 export class Cache {
   static __cache: Map<string, Quote>;
@@ -22,7 +22,7 @@ export class Cache {
     return Cache.__cache.get(key);
   }
 
-  set(key: string, value: unknown): Map<string, Quote> {
+  set(key: string, value: Quote): Map<string, Quote> {
     return Cache.__cache.set(key, value);
   }
 }

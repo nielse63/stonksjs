@@ -1,8 +1,7 @@
 {
-  "extends": ["../../config/typedoc.js"],
+  "extends": ["../../config/typedoc.packages.json"],
   "basePath": "./",
   "entryPoints": ["./src"],
-  "entryPointStrategy": "expand",
   "out": "./docs",
-  "plugin": ["typedoc-plugin-markdown"]
+  "tsconfig": "./tsconfig.json"
 }

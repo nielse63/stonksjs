@@ -1,6 +1,6 @@
 # @stonksjs/stock-screener
 
-> Pre-defined industry standard stock screeners from MSN Money
+> Pre-defined industry standard stock screeners from Finviz
 
 ![npm (scoped)](https://img.shields.io/npm/v/@stonksjs/stock-screener?color=brightgreen&style=flat-square)
 
