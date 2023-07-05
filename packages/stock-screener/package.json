@@ -1,6 +1,6 @@
 {
   "name": "@stonksjs/stock-screener",
-  "version": "2.0.4",
+  "version": "3.0.0",
   "description": "Pre-defined industry standard stock screeners from Finviz",
   "author": "Erik Nielsen <erik@312development.com>",
   "homepage": "https://nielse63.github.io/stonksjs/tree/main/packages/stock-screener#readme",
