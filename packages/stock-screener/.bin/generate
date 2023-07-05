@@ -44,4 +44,17 @@ export default StockScreener;
   );
 };
 
-createClass().catch(console.error);
+const getFiltersMarkdown = async () => {
+  const results = await finviz.getScreenersList();
+  results.forEach(({ name, url }) => {
+    const id = snakeCase(name).toUpperCase();
+    console.log(`- [${name}](${url}): \`${id}\``);
+  });
+};
+
+const main = async () => {
+  // await createClass()
+  // await getFiltersMarkdown();
+};
+
+main().catch(console.error);

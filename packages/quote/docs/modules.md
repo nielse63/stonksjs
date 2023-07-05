@@ -14,6 +14,10 @@ quote
 
 - [default](modules.md#default)
 
+### Classes
+
+- [Quote](classes/Quote.md)
+
 ### Variables
 
 - [quote](modules.md#quote)
@@ -29,11 +33,11 @@ Renames and re-exports [quote](modules.md#quote)
 
 ### quote
 
-• `Const` **quote**: `Quote`
+• `Const` **quote**: [`Quote`](classes/Quote.md)
 
 #### Defined in
 
-[src/index.ts:8](https://github.com/nielse63/stonksjs/blob/main/packages/quote/src/index.ts#L8)
+[src/index.ts:9](https://github.com/nielse63/stonksjs/blob/main/packages/quote/src/index.ts#L9)
 
 ---
 
@@ -43,4 +47,4 @@ Renames and re-exports [quote](modules.md#quote)
 
 #### Defined in
 
-[src/index.ts:9](https://github.com/nielse63/stonksjs/blob/main/packages/quote/src/index.ts#L9)
+[src/index.ts:10](https://github.com/nielse63/stonksjs/blob/main/packages/quote/src/index.ts#L10)

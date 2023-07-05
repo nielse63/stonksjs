@@ -38,7 +38,8 @@ export class StockScreener {
     TOP_GAINERS: 'Top Gainers',
   };
 
-  static async getFilters(): Promise<Screener[]> {
+  // eslint-disable-next-line class-methods-use-this
+  async getFilters(): Promise<Screener[]> {
     return finviz.getScreenersList();
   }
 

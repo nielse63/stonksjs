@@ -39,21 +39,71 @@
 
 <a id="md:installation" class="tsd-anchor"></a><h2><a href="#md:installation">Installation</a></h2><pre><code class="language-bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span><span class="hl-1"> </span><span class="hl-4">--save</span><span class="hl-1"> </span><span class="hl-2">@stonksjs/stock-screener</span>
 </code><button>Copy</button></pre>
-<a id="md:usage" class="tsd-anchor"></a><h2><a href="#md:usage">Usage</a></h2><pre><code class="language-js"><span class="hl-6">import</span><span class="hl-1"> </span><span class="hl-7">stockScreener</span><span class="hl-1"> </span><span class="hl-6">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@stonksjs/stock-screener&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-3">// get an array of all available filters (see below)</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">filters</span><span class="hl-1"> = </span><span class="hl-7">stockScreener</span><span class="hl-1">.</span><span class="hl-7">filters</span><span class="hl-1">;</span><br/><br/><span class="hl-3">// get the symbols found on a high-yield dividend screener</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">symbols</span><span class="hl-1"> = </span><span class="hl-6">await</span><span class="hl-1"> </span><span class="hl-0">stockScreener</span><span class="hl-1">(</span><span class="hl-7">filters</span><span class="hl-1">.</span><span class="hl-5">HIGH_YIELD_DIVIDENDS</span><span class="hl-1">);</span>
+<a id="md:usage" class="tsd-anchor"></a><h2><a href="#md:usage">Usage</a></h2><pre><code class="language-js"><span class="hl-5">import</span><span class="hl-1"> </span><span class="hl-6">stockScreener</span><span class="hl-1"> </span><span class="hl-5">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@stonksjs/stock-screener&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-3">// the object of key/value pairs of finviz stock screeners</span><br/><span class="hl-4">const</span><span class="hl-1"> { </span><span class="hl-7">filters</span><span class="hl-1"> } = </span><span class="hl-6">stockScreener</span><span class="hl-1">;</span><br/><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-0">log</span><span class="hl-1">(</span><span class="hl-6">filters</span><span class="hl-1">);</span><br/><br/><span class="hl-3">// get the latest available filters</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-7">filters</span><span class="hl-1"> = </span><span class="hl-5">await</span><span class="hl-1"> </span><span class="hl-6">stockScreener</span><span class="hl-1">.</span><span class="hl-0">getFilters</span><span class="hl-1">();</span><br/><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-0">log</span><span class="hl-1">(</span><span class="hl-6">filters</span><span class="hl-1">);</span><br/><br/><span class="hl-3">// get results from &quot;Top Gainers&quot; screener</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-7">symbols</span><span class="hl-1"> = </span><span class="hl-5">await</span><span class="hl-1"> </span><span class="hl-6">stockScreener</span><span class="hl-1">.</span><span class="hl-0">getTopGainers</span><span class="hl-1">();</span><br/><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-0">log</span><span class="hl-1">(</span><span class="hl-6">symbols</span><span class="hl-1">);</span>
 </code><button>Copy</button></pre>
 <a id="md:available-screener-filters" class="tsd-anchor"></a><h3><a href="#md:available-screener-filters">Available Screener Filters</a></h3><ul>
-<li><a href="https://www.msn.com/en-us/money/listdetails/Highest%205year%20Dividend%20Growth/fl-4210ebac6782?ocid=hpmsn&cvid=09ce823c382944c2929477b2bac8205c&ei=21"><code>HIGH_YIELD_DIVIDENDS</code></a></li>
-<li><a href="https://www.msn.com/en-us/money/listdetails/Stocks%20Analysts%20are%20Bullish%20On/fl-938eb9e4f4d5?ocid=hpmsn&cvid=09ce823c382944c2929477b2bac8205c&ei=25"><code>BULLISH</code></a></li>
-<li><a href="https://www.msn.com/en-us/money/listdetails/52week%20High/fl-332e27279f36?ocid=hpmsn&cvid=09ce823c382944c2929477b2bac8205c&ei=38"><code>52_WEEK_HIGHS</code></a></li>
-<li><a href="https://www.msn.com/en-us/money/listdetails/52week%20Low/fl-4c3298bcd920?ocid=hpmsn&cvid=09ce823c382944c2929477b2bac8205c&ei=47"><code>52_WEEK_LOWS</code></a></li>
-<li><a href="https://www.msn.com/en-us/money/listdetails/High%20Revenue%20Growth/fl-944c649152e8?ocid=hpmsn&cvid=09ce823c382944c2929477b2bac8205c&ei=88"><code>HIGH_REVENUE_GROWTH</code></a></li>
-<li><a href="https://www.msn.com/en-us/money/listdetails/Growth%20Stocks/fl-b2340b8c101f?ocid=hpmsn&cvid=09ce823c382944c2929477b2bac8205c&ei=128"><code>GROWTH_STOCKS</code></a></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=ta_topgainers">Top Gainers</a>:
+<code>TOP_GAINERS</code></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=ta_toplosers">Top Losers</a>:
+<code>TOP_LOSERS</code></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=ta_newhigh">New High</a>: <code>NEW_HIGH</code></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=ta_newlow">New Low</a>: <code>NEW_LOW</code></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=ta_mostvolatile">Most Volatile</a>:
+<code>MOST_VOLATILE</code></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=ta_mostactive">Most Active</a>:
+<code>MOST_ACTIVE</code></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=ta_unusualvolume">Unusual Volume</a>:
+<code>UNUSUAL_VOLUME</code></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=ta_overbought">Overbought</a>:
+<code>OVERBOUGHT</code></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=ta_oversold">Oversold</a>: <code>OVERSOLD</code></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=n_downgrades">Downgrades</a>:
+<code>DOWNGRADES</code></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=n_upgrades">Upgrades</a>: <code>UPGRADES</code></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=n_earningsbefore">Earnings Before</a>:
+<code>EARNINGS_BEFORE</code></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=n_earningsafter">Earnings After</a>:
+<code>EARNINGS_AFTER</code></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=it_latestbuys">Recent Insider Buying</a>:
+<code>RECENT_INSIDER_BUYING</code></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=it_latestsales">Recent Insider Selling</a>:
+<code>RECENT_INSIDER_SELLING</code></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=n_majornews">Major News</a>:
+<code>MAJOR_NEWS</code></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=ta_p_horizontal">Horizontal S/R</a>:
+<code>HORIZONTAL_S_R</code></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=ta_p_tlresistance">TL Resistance</a>:
+<code>TL_RESISTANCE</code></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=ta_p_tlsupport">TL Support</a>:
+<code>TL_SUPPORT</code></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=ta_p_wedgeup">Wedge Up</a>: <code>WEDGE_UP</code></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=ta_p_wedgedown">Wedge Down</a>:
+<code>WEDGE_DOWN</code></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=ta_p_wedgeresistance">Triangle Ascending</a>:
+<code>TRIANGLE_ASCENDING</code></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=ta_p_wedgesupport">Triangle Descending</a>:
+<code>TRIANGLE_DESCENDING</code></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=ta_p_wedge">Wedge</a>: <code>WEDGE</code></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=ta_p_channelup">Channel Up</a>:
+<code>CHANNEL_UP</code></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=ta_p_channeldown">Channel Down</a>:
+<code>CHANNEL_DOWN</code></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=ta_p_channel">Channel</a>: <code>CHANNEL</code></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=ta_p_doubletop">Double Top</a>:
+<code>DOUBLE_TOP</code></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=ta_p_doublebottom">Double Bottom</a>:
+<code>DOUBLE_BOTTOM</code></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=ta_p_multipletop">Multiple Top</a>:
+<code>MULTIPLE_TOP</code></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=ta_p_multiplebottom">Multiple Bottom</a>:
+<code>MULTIPLE_BOTTOM</code></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=ta_p_headandshoulders">Head &amp; Shoulders</a>:
+<code>HEAD_SHOULDERS</code></li>
+<li><a href="https://finviz.com/screener.ashx?v=111&s=ta_p_headandshouldersinv">Head &amp; Shoulders Inverse</a>:
+<code>HEAD_SHOULDERS_INVERSE</code></li>
 </ul>
 <a id="md:api" class="tsd-anchor"></a><h2><a href="#md:api">API</a></h2><p>Full API docs can be found at <a href="./docs/modules.md"><code>docs/modules</code></a></p>
-<!-- references -->
-
-<!-- prettier-ignore-start -->
-<!-- prettier-ignore-end --></section>
+</section>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <h3 class="tsd-index-heading uppercase">Index</h3>

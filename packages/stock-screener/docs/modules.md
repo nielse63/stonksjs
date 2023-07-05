@@ -38,7 +38,7 @@ stock-screener
 
 #### Defined in
 
-src/types.d.ts:1
+[src/types.d.ts:1](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/types.d.ts#L1)
 
 ## Variables
 

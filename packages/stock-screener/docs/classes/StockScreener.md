@@ -108,7 +108,7 @@ StockScreener
 
 ### getFilters
 
-▸ `Static` **getFilters**(): `Promise`<[`Screener`](../modules.md#screener)[]\>
+▸ **getFilters**(): `Promise`<[`Screener`](../modules.md#screener)[]\>
 
 #### Returns
 
@@ -116,7 +116,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:41](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L41)
+[src/StockScreener.ts:42](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L42)
 
 ---
 
@@ -130,7 +130,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:45](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L45)
+[src/StockScreener.ts:46](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L46)
 
 ---
 
@@ -144,7 +144,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:49](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L49)
+[src/StockScreener.ts:50](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L50)
 
 ---
 
@@ -158,7 +158,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:53](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L53)
+[src/StockScreener.ts:54](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L54)
 
 ---
 
@@ -172,7 +172,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:57](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L57)
+[src/StockScreener.ts:58](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L58)
 
 ---
 
@@ -186,7 +186,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:61](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L61)
+[src/StockScreener.ts:62](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L62)
 
 ---
 
@@ -200,7 +200,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:65](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L65)
+[src/StockScreener.ts:66](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L66)
 
 ---
 
@@ -214,7 +214,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:69](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L69)
+[src/StockScreener.ts:70](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L70)
 
 ---
 
@@ -228,7 +228,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:73](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L73)
+[src/StockScreener.ts:74](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L74)
 
 ---
 
@@ -242,7 +242,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:77](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L77)
+[src/StockScreener.ts:78](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L78)
 
 ---
 
@@ -256,7 +256,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:81](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L81)
+[src/StockScreener.ts:82](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L82)
 
 ---
 
@@ -270,7 +270,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:85](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L85)
+[src/StockScreener.ts:86](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L86)
 
 ---
 
@@ -284,7 +284,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:89](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L89)
+[src/StockScreener.ts:90](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L90)
 
 ---
 
@@ -298,7 +298,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:93](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L93)
+[src/StockScreener.ts:94](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L94)
 
 ---
 
@@ -312,7 +312,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:97](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L97)
+[src/StockScreener.ts:98](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L98)
 
 ---
 
@@ -326,7 +326,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:101](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L101)
+[src/StockScreener.ts:102](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L102)
 
 ---
 
@@ -340,7 +340,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:105](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L105)
+[src/StockScreener.ts:106](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L106)
 
 ---
 
@@ -354,7 +354,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:109](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L109)
+[src/StockScreener.ts:110](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L110)
 
 ---
 
@@ -368,7 +368,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:113](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L113)
+[src/StockScreener.ts:114](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L114)
 
 ---
 
@@ -382,7 +382,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:117](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L117)
+[src/StockScreener.ts:118](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L118)
 
 ---
 
@@ -396,7 +396,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:121](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L121)
+[src/StockScreener.ts:122](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L122)
 
 ---
 
@@ -410,7 +410,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:125](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L125)
+[src/StockScreener.ts:126](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L126)
 
 ---
 
@@ -424,7 +424,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:129](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L129)
+[src/StockScreener.ts:130](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L130)
 
 ---
 
@@ -438,7 +438,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:133](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L133)
+[src/StockScreener.ts:134](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L134)
 
 ---
 
@@ -452,7 +452,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:137](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L137)
+[src/StockScreener.ts:138](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L138)
 
 ---
 
@@ -466,7 +466,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:141](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L141)
+[src/StockScreener.ts:142](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L142)
 
 ---
 
@@ -480,7 +480,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:145](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L145)
+[src/StockScreener.ts:146](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L146)
 
 ---
 
@@ -494,7 +494,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:149](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L149)
+[src/StockScreener.ts:150](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L150)
 
 ---
 
@@ -508,7 +508,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:153](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L153)
+[src/StockScreener.ts:154](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L154)
 
 ---
 
@@ -522,7 +522,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:157](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L157)
+[src/StockScreener.ts:158](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L158)
 
 ---
 
@@ -536,7 +536,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:161](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L161)
+[src/StockScreener.ts:162](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L162)
 
 ---
 
@@ -550,7 +550,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:165](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L165)
+[src/StockScreener.ts:166](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L166)
 
 ---
 
@@ -564,7 +564,7 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:169](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L169)
+[src/StockScreener.ts:170](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L170)
 
 ---
 
@@ -578,4 +578,4 @@ StockScreener
 
 #### Defined in
 
-[src/StockScreener.ts:173](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L173)
+[src/StockScreener.ts:174](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/src/StockScreener.ts#L174)

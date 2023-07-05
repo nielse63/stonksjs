@@ -23,5 +23,6 @@ module.exports = {
   includeVersion: false,
   gitRevision: 'main',
   sort: ['source-order'],
+  githubPages: true,
   // categorizeByGroup: false,
 };
