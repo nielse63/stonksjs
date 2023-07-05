@@ -101,4 +101,5 @@ console.log(symbols);
 
 ## API
 
-Full API docs can be found at [`docs/modules`](./docs/modules.md)
+Full API docs can be found at
+[`docs/modules`](https://github.com/nielse63/stonksjs/blob/main/packages/stock-screener/docs/modules.md)

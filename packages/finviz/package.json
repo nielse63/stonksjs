@@ -3,7 +3,7 @@
   "version": "3.0.0",
   "description": "Unofficial finviz API",
   "author": "Erik Nielsen <erik@312development.com>",
-  "homepage": "https://nielse63.github.io/stonksjs/tree/main/packages/finviz#readme",
+  "homepage": "https://github.com/nielse63/stonksjs/tree/main/packages/finviz#readme",
   "license": "ISC",
   "types": "./dist/cjs/types/index.d.ts",
   "main": "./dist/cjs/index.js",
