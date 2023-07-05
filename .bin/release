@@ -18,11 +18,8 @@ fi
 # git add .
 # git commit -m "$COMMIT_MESSAGE" --allow-empty
 
-npx auto-changelog
-npx prettier --write CHANGELOG.md
-git add CHANGELOG.md
-git commit -m 'chore(docs): auto-changelog'
-git push
-
 # follow prompts to release on npm and github
 npx lerna publish
+npm version from-git --allow-same-version
+version=$(git describe --abbrev=0)
+gh release create "$version" --generate-notes
