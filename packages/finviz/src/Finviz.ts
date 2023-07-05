@@ -10,6 +10,7 @@ class Finviz {
   api: AxiosInstance;
   quoteCache: Map<string, Quote>;
   screenerCache: Map<string, string[]>;
+  screenrerListCache: Set<Screener>;
 
   constructor() {
     this.api = axios.create({
@@ -17,6 +18,7 @@ class Finviz {
     });
     this.quoteCache = new Map();
     this.screenerCache = new Map();
+    this.screenrerListCache = new Set();
   }
 
   /**
@@ -91,6 +93,9 @@ class Finviz {
    * @returns {Screener[]} - array of available screeners
    */
   async getScreenersList(): Promise<Screener[]> {
+    if (this.screenrerListCache.size) {
+      return [...this.screenrerListCache];
+    }
     const { data: html } = await this.api.get(SCREENER_URL);
     const $ = load(html);
     const options = $('#signalSelect > option');
@@ -105,6 +110,7 @@ class Finviz {
       const id = query.split('_').pop() as string;
       output.push({ name, url, id });
     });
+    this.screenrerListCache = new Set(output);
     return output;
   }
 

@@ -4,6 +4,7 @@
  * @typicalname finviz
  */
 import Finviz from './Finviz';
+export { Quote, Screener } from './types';
 
 const finviz = new Finviz();
 

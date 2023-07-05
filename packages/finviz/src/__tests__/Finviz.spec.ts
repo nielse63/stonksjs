@@ -136,6 +136,17 @@ describe('Finviz', () => {
           expect(object).toContainAllKeys(['name', 'url', 'id']);
         });
       });
+
+      it('should return data from cache', async () => {
+        const spy = jest.spyOn(finviz.api, 'get');
+        expect(finviz.screenrerListCache.size).toEqual(0);
+        await finviz.getScreenersList();
+        expect(finviz.screenrerListCache.size).toBeGreaterThan(0);
+        expect(spy).toHaveBeenCalled();
+        spy.mockClear();
+        await finviz.getScreenersList();
+        expect(spy).not.toHaveBeenCalled();
+      });
     });
 
     describe('getUrlForScreener', () => {
