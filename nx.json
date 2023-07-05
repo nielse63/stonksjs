@@ -13,6 +13,9 @@
     },
     "build": {
       "dependsOn": ["^build"]
+    },
+    "docs": {
+      "dependsOn": ["^build"]
     }
   }
 }

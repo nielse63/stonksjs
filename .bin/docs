@@ -14,3 +14,4 @@ if [ -f "logo.svg" ]; then
 fi
 
 npx lerna run docs
+npx prettier --write docs/ packages/**/docs/**

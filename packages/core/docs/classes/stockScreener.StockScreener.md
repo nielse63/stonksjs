@@ -110,7 +110,7 @@
 
 ### getFilters
 
-▸ `Static` **getFilters**(): `Promise`<`Screener`[]\>
+▸ **getFilters**(): `Promise`<`Screener`[]\>
 
 #### Returns
 

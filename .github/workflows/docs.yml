@@ -14,20 +14,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: 16.x
-      - name: install dependencies
-        run: npm ci
-      - name: npm run docs
-        run: npm run docs
+      - name: Cache node modules
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules
+        with:
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - run: npm ci
+      - run: npm run build
+      - run: npm run docs
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
         with:
           author_name: actions-user
-          author_email: actions@github.com
+          author_email: erik@312development.com
           message: "chore(docs): generating documentaation"
-          add: "docs/"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
