@@ -1,6 +1,6 @@
 {
   "name": "@stonksjs/quote",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Detailed, real-time stock quote data",
   "author": "Erik Nielsen <erik@312development.com>",
   "homepage": "https://github.com/nielse63/stonksjs/tree/main/packages/quote#readme",
@@ -41,7 +41,7 @@
     "url": "https://github.com/nielse63/stonksjs/issues"
   },
   "dependencies": {
-    "@stonksjs/finviz": "^3.0.0"
+    "@stonksjs/finviz": "^3.0.1"
   },
   "devDependencies": {
     "typedoc": "^0.24.8",

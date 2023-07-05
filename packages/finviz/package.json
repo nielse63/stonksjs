@@ -1,6 +1,6 @@
 {
   "name": "@stonksjs/finviz",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Unofficial finviz API",
   "author": "Erik Nielsen <erik@312development.com>",
   "homepage": "https://github.com/nielse63/stonksjs/tree/main/packages/finviz#readme",
