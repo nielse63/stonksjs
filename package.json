@@ -24,7 +24,7 @@
     "finance"
   ],
   "engines": {
-    "node": ">=16.20.1"
+    "node": ">=16.20.2"
   },
   "scripts": {
     "prepare": "husky install",
