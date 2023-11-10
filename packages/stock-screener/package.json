@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@stonksjs/finviz": "file:../finviz",
-    "axios": "^1.4.0",
+    "axios": "^1.6.1",
     "lodash": "^4.17.20"
   },
   "devDependencies": {
