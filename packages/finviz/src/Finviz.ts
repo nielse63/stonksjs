@@ -15,6 +15,9 @@ class Finviz {
   constructor() {
     this.api = axios.create({
       baseURL: FINVIZ_URL,
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
+      },
     });
     this.quoteCache = new Map();
     this.screenerCache = new Map();
@@ -77,7 +80,7 @@ class Finviz {
    */
   static parseScreenerResponse(html: string): string[] {
     const $ = load(html);
-    const rows = $('.table-light > tbody > tr:not(:first-child)');
+    const rows = $('.styled-table-new > tbody > tr');
     const output: string[] = [];
     rows.each((_, row) => {
       const cell = $(row).find('> td:nth-child(2)');
