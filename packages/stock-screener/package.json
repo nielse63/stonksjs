@@ -43,7 +43,7 @@
   "dependencies": {
     "@stonksjs/finviz": "file:../finviz",
     "axios": "^1.4.0",
-    "lodash": "^4.17.20"
+    "lodash": "^4.17.23"
   },
   "devDependencies": {
     "typedoc": "^0.24.8",
